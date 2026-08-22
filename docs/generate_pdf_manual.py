@@ -7,6 +7,13 @@ from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether, HRFlowable, Preformatted
 )
 from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+
+# Register TrueType Unicode Fonts for crisp Sinhala & Latin text rendering
+FONT_DIR = "/mnt/d/Data/projects/Aswanna - Final_year_poject/Asvenna/docs/fonts"
+pdfmetrics.registerFont(TTFont('NotoSinhala', os.path.join(FONT_DIR, 'NotoSansSinhala-Regular.ttf')))
+pdfmetrics.registerFont(TTFont('NotoSinhala-Bold', os.path.join(FONT_DIR, 'NotoSansSinhala-Bold.ttf')))
 
 class NumberedCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
@@ -31,20 +38,20 @@ class NumberedCanvas(canvas.Canvas):
         self.saveState()
         
         # Running Header
-        self.setFont("Helvetica-Bold", 8)
+        self.setFont("NotoSinhala-Bold", 8)
         self.setFillColor(colors.HexColor("#1F6F5F"))
         self.drawString(40, 805, "ASVANNA (අස්වැන්න)")
-        self.setFont("Helvetica", 8)
+        self.setFont("NotoSinhala", 8)
         self.setFillColor(colors.HexColor("#64748B"))
-        self.drawString(135, 805, "— Master System Architecture, Codebase & QA Manual")
+        self.drawString(145, 805, "— Master System Architecture, Codebase & QA Manual")
         
-        self.setStrokeColor(colors.HexColor("#E2E8F0"))
+        self.setStrokeColor(colors.HexColor("#CBD5E1"))
         self.setLineWidth(0.75)
         self.line(40, 798, 555, 798)
         
         # Running Footer
         self.line(40, 42, 555, 42)
-        self.setFont("Helvetica", 8)
+        self.setFont("NotoSinhala", 8)
         self.setFillColor(colors.HexColor("#64748B"))
         self.drawString(40, 30, "Division of Information Technology, ITUM — Final Year Project 2026")
         page_text = f"Page {self._pageNumber} of {page_count}"
@@ -54,8 +61,6 @@ class NumberedCanvas(canvas.Canvas):
 
 def build_pdf():
     pdf_path = "/mnt/d/Data/projects/Aswanna - Final_year_poject/Asvenna/docs/ASVANNA_COMPLETE_SYSTEM_MANUAL.pdf"
-    
-    # Page width: 595.27 pt, usable width = 595.27 - 80 = 515.27 pt
     USABLE_W = 515
     
     doc = SimpleDocTemplate(
@@ -69,32 +74,30 @@ def build_pdf():
 
     styles = getSampleStyleSheet()
     
-    # Color Palette
+    # Theme Palette
     c_primary = colors.HexColor("#1F6F5F")
     c_secondary = colors.HexColor("#2FA084")
     c_dark = colors.HexColor("#0F172A")
     c_light_bg = colors.HexColor("#F8FAFC")
-    c_card_bg = colors.HexColor("#F1F5F9")
     c_border = colors.HexColor("#CBD5E1")
-    c_accent = colors.HexColor("#16A34A")
-    c_danger = colors.HexColor("#DC2626")
     c_singlish = colors.HexColor("#0369A1")
+    c_callout = colors.HexColor("#0F766E")
 
-    # Typography
-    t_title = ParagraphStyle('DocTitle', parent=styles['Heading1'], fontName='Helvetica-Bold', fontSize=24, leading=28, textColor=c_primary, alignment=1, spaceAfter=8)
-    t_sub = ParagraphStyle('DocSub', parent=styles['Normal'], fontName='Helvetica', fontSize=11, leading=15, textColor=colors.HexColor("#475569"), alignment=1, spaceAfter=20)
+    # Typography Styles Using TrueType NotoSinhala
+    t_title = ParagraphStyle('DocTitle', parent=styles['Heading1'], fontName='NotoSinhala-Bold', fontSize=22, leading=26, textColor=c_primary, alignment=1, spaceAfter=8)
+    t_sub = ParagraphStyle('DocSub', parent=styles['Normal'], fontName='NotoSinhala', fontSize=10.5, leading=15, textColor=colors.HexColor("#475569"), alignment=1, spaceAfter=18)
     
-    h1 = ParagraphStyle('H1', parent=styles['Heading1'], fontName='Helvetica-Bold', fontSize=15, leading=19, textColor=c_primary, spaceBefore=14, spaceAfter=8, keepWithNext=True)
-    h2 = ParagraphStyle('H2', parent=styles['Heading2'], fontName='Helvetica-Bold', fontSize=12, leading=16, textColor=c_secondary, spaceBefore=10, spaceAfter=6, keepWithNext=True)
-    h3 = ParagraphStyle('H3', parent=styles['Heading3'], fontName='Helvetica-Bold', fontSize=10, leading=13, textColor=c_dark, spaceBefore=8, spaceAfter=4, keepWithNext=True)
+    h1 = ParagraphStyle('H1', parent=styles['Heading1'], fontName='NotoSinhala-Bold', fontSize=14, leading=18, textColor=c_primary, spaceBefore=14, spaceAfter=8, keepWithNext=True)
+    h2 = ParagraphStyle('H2', parent=styles['Heading2'], fontName='NotoSinhala-Bold', fontSize=11.5, leading=15, textColor=c_secondary, spaceBefore=10, spaceAfter=6, keepWithNext=True)
+    h3 = ParagraphStyle('H3', parent=styles['Heading3'], fontName='NotoSinhala-Bold', fontSize=9.5, leading=13, textColor=c_dark, spaceBefore=8, spaceAfter=4, keepWithNext=True)
     
-    body = ParagraphStyle('Body', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=12.5, textColor=colors.HexColor("#1E293B"), spaceAfter=6)
-    body_bold = ParagraphStyle('BodyBold', parent=body, fontName='Helvetica-Bold')
+    body = ParagraphStyle('Body', parent=styles['Normal'], fontName='NotoSinhala', fontSize=8.5, leading=13, textColor=colors.HexColor("#1E293B"), spaceAfter=6)
+    body_bold = ParagraphStyle('BodyBold', parent=body, fontName='NotoSinhala-Bold')
     
-    singlish = ParagraphStyle('Singlish', parent=styles['Normal'], fontName='Helvetica', fontSize=8.5, leading=12.5, textColor=c_singlish, spaceAfter=6)
-    callout = ParagraphStyle('Callout', parent=styles['Normal'], fontName='Helvetica-Oblique', fontSize=8.5, leading=12, textColor=colors.HexColor("#0F766E"))
+    singlish = ParagraphStyle('Singlish', parent=styles['Normal'], fontName='NotoSinhala', fontSize=8.5, leading=13, textColor=c_singlish, spaceAfter=6)
+    callout = ParagraphStyle('Callout', parent=styles['Normal'], fontName='NotoSinhala', fontSize=8.5, leading=12.5, textColor=c_callout)
     code_inline = ParagraphStyle('CodeInline', parent=styles['Normal'], fontName='Courier', fontSize=7.5, leading=10, textColor=colors.HexColor("#0F172A"))
-    diagram_style = ParagraphStyle('Diagram', parent=styles['Normal'], fontName='Courier', fontSize=7, leading=9, textColor=colors.HexColor("#0F172A"))
+    diagram_style = ParagraphStyle('Diagram', parent=styles['Normal'], fontName='Courier', fontSize=7, leading=8.5, textColor=colors.HexColor("#0F172A"))
 
     story = []
 
@@ -118,17 +121,17 @@ def build_pdf():
             ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#E2E8F0")),
             ('BACKGROUND', (0,1), (-1,-1), colors.HexColor("#F8FAFC")),
             ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#94A3B8")),
-            ('PADDING', (0,0), (-1,-1), 6),
+            ('PADDING', (0,0), (-1,-1), 5),
         ]))
         return t
 
     # =========================================================================
     # PAGE 1: COVER PAGE
     # =========================================================================
-    story.append(Spacer(1, 20))
+    story.append(Spacer(1, 15))
     story.append(Paragraph("🌾 ASVANNA (අස්වැන්න)", t_title))
-    story.append(Paragraph("<b>The Zero-Waste Marketplace: Guided by Real-Time Data from Seed to Harvest Distribution</b><br/>Comprehensive System Architecture, Deep Codebase Reference, Group 15 Role Allocations & QA Manual", t_sub))
-    story.append(HRFlowable(width="100%", thickness=2.5, color=c_primary, spaceBefore=4, spaceAfter=16))
+    story.append(Paragraph("<b>The Zero-Waste Marketplace: Guided by Real-Time Data from Seed to Harvest Distribution</b><br/>Comprehensive System Architecture, Deep Codebase Reference, Group 15 Allocations & QA Manual", t_sub))
+    story.append(HRFlowable(width="100%", thickness=2.5, color=c_primary, spaceBefore=4, spaceAfter=14))
 
     cover_meta = [
         [Paragraph("<b>Academic Institution:</b>", body_bold), Paragraph("Division of Information Technology, Institute of Technology, University of Moratuwa (ITUM)", body)],
@@ -138,18 +141,18 @@ def build_pdf():
         [Paragraph("<b>Target Agricultural Sector:</b>", body_bold), Paragraph("Upcountry Perishable Vegetables (Leeks, Cabbage, Carrot, Beetroot, Potato, Knol Khol, Tomato, Bell Pepper)", body)],
     ]
     story.append(make_table(cover_meta, [140, 375]))
-    story.append(Spacer(1, 14))
+    story.append(Spacer(1, 12))
 
     story.append(Paragraph("<b>Group 15 — Team Members & Assigned Modules:</b>", body_bold))
     team_data = [
         [Paragraph("<b>#</b>", body_bold), Paragraph("<b>Student Name</b>", body_bold), Paragraph("<b>Student ID</b>", body_bold), Paragraph("<b>Assigned Engineering Module & Responsibility</b>", body_bold)],
         [Paragraph("1", body), Paragraph("W. N. A. Wedikkara", body), Paragraph("23IT0544", body), Paragraph("System Architecture, Auth (JWT/RBAC), PostgreSQL Schema, Predictive Risk Engine", body)],
-        [Paragraph("2", body), Paragraph("K. A. H. I. Lakshitha", body), Paragraph("23IT0503", body), Paragraph("Smart Crop Recommendation Engine, 4-Factor Weighted Agro-Suitability Scorer", body)],
+        [Paragraph("2", body), Paragraph("R. R. L. Geeganage (Ravindi)", body), Paragraph("23IT0476", body), Paragraph("Smart Crop Recommendation Engine, 4-Factor Weighted Agro-Suitability Scorer", body)],
         [Paragraph("3", body), Paragraph("G. W. T. Jayampathi", body), Paragraph("23IT0487", body), Paragraph("Divisional Officer Portal, Proxy Data Entry, Trilingual Localization, Broadcast Alerts", body)],
-        [Paragraph("4", body), Paragraph("R. R. L. Geeganage", body), Paragraph("23IT0476", body), Paragraph("Farmer Mobile App (Flutter), GPS Field Logging, Offline Storage Queue & Sync", body)],
+        [Paragraph("4", body), Paragraph("K. A. H. I. Lakshitha (Imal)", body), Paragraph("23IT0503", body), Paragraph("Farmer & Buyer Mobile App (Flutter), GPS Field Logging, Offline Storage Queue & Sync", body)],
         [Paragraph("5", body), Paragraph("K. H. M. Dewanga", body), Paragraph("23IT0467", body), Paragraph("Phase 2 Geo-Fenced 5 km Surplus Marketplace, Haversine Engine & Negotiation State Machine", body)],
     ]
-    t_team = Table(team_data, colWidths=[20, 115, 65, 315])
+    t_team = Table(team_data, colWidths=[20, 130, 65, 300])
     t_team.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), c_primary),
         ('TEXTCOLOR', (0,0), (-1,0), colors.white),
@@ -159,8 +162,8 @@ def build_pdf():
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
     ]))
     story.append(t_team)
-    story.append(Spacer(1, 12))
-    story.append(Paragraph("<i>Manual Guide: This document is crafted for non-technical stakeholders (farmers, agrarian officers) and technical academic evaluators. It contains plain English, Sinhala & Singlish explanations, system diagrams, and file-by-file code breakdowns.</i>", callout))
+    story.append(Spacer(1, 10))
+    story.append(Paragraph("<i>Manual Guide: This document is crafted for non-technical agricultural stakeholders (farmers, agrarian officers) and technical academic evaluators. It contains plain English, Sinhala & Singlish explanations, system diagrams, and file-by-file code breakdowns with zero text overlapping.</i>", callout))
     story.append(PageBreak())
 
     # =========================================================================
@@ -286,8 +289,8 @@ def build_pdf():
     story.append(Paragraph("<code>cd backend && npm run migrate && npm run seed && curl -X GET http://localhost:5000/api/v1/risk/crop/1</code>", code_inline))
     story.append(HRFlowable(width="100%", thickness=0.5, color=c_border, spaceBefore=6, spaceAfter=8))
 
-    # Member 2 Deep Dive
-    story.append(Paragraph("Member 2: K. A. H. I. Lakshitha (23IT0503)", h2))
+    # Member 2 Deep Dive (Ravindi - R. R. L. Geeganage)
+    story.append(Paragraph("Member 2: R. R. L. Geeganage (Ravindi - 23IT0476)", h2))
     story.append(Paragraph("<b>Assigned System Component:</b> Smart Crop Recommendation Engine & Multi-Factor Agro-Suitability Matrix.", body_bold))
     story.append(Paragraph(
         "<b>Core Implementation Details:</b><br/>"
@@ -322,9 +325,9 @@ def build_pdf():
     story.append(Paragraph("<b>Evaluator Verification:</b> Open <code>http://localhost:3000</code>, login with <code>0771234567 / asvanna123</code>, click '+ Proxy Data Entry' and test language switcher.", body))
     story.append(HRFlowable(width="100%", thickness=0.5, color=c_border, spaceBefore=6, spaceAfter=8))
 
-    # Member 4 Deep Dive
-    story.append(Paragraph("Member 4: R. R. L. Geeganage (23IT0476)", h2))
-    story.append(Paragraph("<b>Assigned System Component:</b> Cross-Platform Flutter Mobile Application, Automatic GPS Field Logger & Offline Queue.", body_bold))
+    # Member 4 Deep Dive (Imal - K. A. H. I. Lakshitha)
+    story.append(Paragraph("Member 4: K. A. H. I. Lakshitha (Imal - 23IT0503)", h2))
+    story.append(Paragraph("<b>Assigned System Component:</b> Cross-Platform Flutter Mobile Application, Automatic GPS Field Logger & Offline Storage Queue.", body_bold))
     story.append(Paragraph(
         "<b>Core Implementation Details:</b><br/>"
         "• Engineered Flutter mobile client (<code>mobile/lib/main.dart</code>, <code>farmer_home_screen.dart</code>, <code>log_planting_screen.dart</code>).<br/>"
@@ -417,7 +420,7 @@ def build_pdf():
         t_file.setStyle(TableStyle([
             ('GRID', (0,0), (-1,-1), 0.5, c_border),
             ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#E2E8F0")),
-            ('BACKGROUND', (0,1), (0,-1), c_light_bg),
+            ('BACKGROUND', (0,1), (-1,-1), c_light_bg),
             ('PADDING', (0,0), (-1,-1), 3.5),
             ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ]))
@@ -452,11 +455,11 @@ def build_pdf():
 
     story.append(Spacer(1, 10))
     story.append(HRFlowable(width="100%", thickness=1, color=c_primary, spaceBefore=8, spaceAfter=10))
-    story.append(Paragraph("<b>End of Master System Documentation</b> — Division of Information Technology, ITUM Final Year Project 2026.", ParagraphStyle('FooterNote', parent=body, alignment=1, fontName='Helvetica-Oblique', textColor=colors.HexColor("#64748B"))))
+    story.append(Paragraph("<b>End of Master System Documentation</b> — Division of Information Technology, ITUM Final Year Project 2026.", ParagraphStyle('FooterNote', parent=body, alignment=1, fontName='NotoSinhala', textColor=colors.HexColor("#64748B"))))
 
     # Build Document
     doc.build(story, canvasmaker=NumberedCanvas)
-    print(f"✅ Enhanced PDF System Manual generated successfully at: {pdf_path}")
+    print(f"✅ Enhanced Unicode PDF System Manual generated successfully at: {pdf_path}")
 
 if __name__ == "__main__":
     build_pdf()

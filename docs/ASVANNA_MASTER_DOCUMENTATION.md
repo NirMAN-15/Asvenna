@@ -153,9 +153,9 @@ The ASVANNA platform is engineered by a 5-member team from the Division of Infor
 | # | Student Full Name          | Reg. No  | Assigned Core Engineering Module                     |
 +---+----------------------------+----------+------------------------------------------------------+
 | 1 | W. N. A. Wedikkara         | 23IT0544 | Architecture, Auth/RBAC, DB & Predictive Risk Engine |
-| 2 | K. A. H. I. Lakshitha      | 23IT0503 | Smart Crop Recommendation & Agro-Suitability Engine  |
+| 2 | R. R. L. Geeganage (Ravindi)| 23IT0476 | Smart Crop Recommendation & Agro-Suitability Engine  |
 | 3 | G. W. T. Jayampathi        | 23IT0487 | Divisional Officer Web Portal, Proxy Entry & Alerts  |
-| 4 | R. R. L. Geeganage         | 23IT0476 | Farmer Flutter Mobile App, GPS Plots & Offline Queue |
+| 4 | K. A. H. I. Lakshitha (Imal)| 23IT0503 | Farmer Flutter Mobile App, GPS Plots & Offline Queue |
 | 5 | K. H. M. Dewanga           | 23IT0467 | 5 km Geo-Fenced Zero-Waste Surplus Marketplace       |
 +---+----------------------------+----------+------------------------------------------------------+
 ```
@@ -186,7 +186,7 @@ The ASVANNA platform is engineered by a 5-member team from the Division of Infor
 
 ---
 
-### 👤 Member 2: K. A. H. I. Lakshitha (23IT0503)
+### 👤 Member 2: R. R. L. Geeganage (Ravindi - 23IT0476)
 - **Role:** AI & Agronomic Recommendation Engineer
 - **Assigned Module:** Smart Crop Recommendation Engine, 4-Factor Weighted Multi-Criteria Composite Scoring, Agro-climatic and Soil Suitability Modeling.
 - **Key Files Authored:**
@@ -229,7 +229,7 @@ The ASVANNA platform is engineered by a 5-member team from the Division of Infor
 
 ---
 
-### 👤 Member 4: R. R. L. Geeganage (23IT0476)
+### 👤 Member 4: K. A. H. I. Lakshitha (Imal - 23IT0503)
 - **Role:** Mobile Application Lead & Offline-First Engineer
 - **Assigned Module:** Flutter Cross-Platform Mobile Application for Farmers, GPS-Tagged Cultivation Logging, Offline Storage Queue (SharedPreferences/SQLite), and Auto-Sync Engine.
 - **Key Files Authored:**
