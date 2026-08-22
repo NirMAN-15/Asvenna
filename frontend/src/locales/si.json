@@ -1,0 +1,21 @@
+{
+  "app_name": "අස්වැන්න (ASVANNA)",
+  "app_subtitle": "කෘෂිකාර්මික වෙළඳපල බුද්ධි තොරතුරු සහ ශුන්‍ය අපතේය වේදිකාව",
+  "dashboard": "පාලක පුවරුව",
+  "regional_monitoring": "වගා සිතියම",
+  "risk_analytics": "අවදානම් විශ්ලේෂණය",
+  "farmer_directory": "ගොවි නාමාවලිය",
+  "proxy_entry": "නියෝජිත දත්ත ඇතුළත් කිරීම",
+  "broadcasts": "අනතුරු ඇඟවීම් විකාශය",
+  "marketplace": "අතිරික්ත අස්වනු වෙළඳපල",
+  "settings": "සැකසුම්",
+  "logout": "පිටවීම",
+  "safe": "ආරක්ෂිතයි",
+  "warning": "අවදානමේ",
+  "over_planted": "අධික වගාව",
+  "total_farmers": "ලියාපදිංචි ගොවීන්",
+  "total_planted_acres": "වගා කළ බිම් ප්‍රමාණය (අක්කර)",
+  "risk_alerts": "ඉහළ අවදානම් නිවේදන",
+  "active_surplus": "ලබාගත හැකි අතිරික්තය (kg)",
+  "officer_jurisdiction": "බණ්ඩාරවෙල ගොවිජන සේවා බලප්‍රදේශය"
+}

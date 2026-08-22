@@ -1,0 +1,21 @@
+{
+  "app_name": "அஸ்வன்ன (ASVANNA)",
+  "app_subtitle": "விவசாய சந்தை நுண்ணறிவு மற்றும் பூஜ்ஜிய கழிவு தளம்",
+  "dashboard": "டாஷ்போர்டு",
+  "regional_monitoring": "பயிர்ச்செய்கை வரைபடம்",
+  "risk_analytics": "இடர் பகுப்பாய்வு",
+  "farmer_directory": "விவசாயிகள் விபரம்",
+  "proxy_entry": "பதிலாள் தரவு உள்ளீடு",
+  "broadcasts": "எச்சரிக்கை ஒளிபரப்பு",
+  "marketplace": "உபரி சந்தை",
+  "settings": "அமைப்புகள்",
+  "logout": "வெளியேறு",
+  "safe": "பாதுகாப்பானது",
+  "warning": "அபாயத்தில்",
+  "over_planted": "அதிகமாக பயிரிடப்பட்டது",
+  "total_farmers": "செயலில் உள்ள விவசாயிகள்",
+  "total_planted_acres": "பயிரிடப்பட்ட நிலம் (ஏக்கர்)",
+  "risk_alerts": "அதிக ஆபத்து எச்சரிக்கைகள்",
+  "active_surplus": "கிடைக்கக்கூடிய உபரி (கிலோ)",
+  "officer_jurisdiction": "பண்டாரவளை விவசாய சேவை பிரிவு"
+}

@@ -1,0 +1,21 @@
+{
+  "app_name": "ASVANNA",
+  "app_subtitle": "Agricultural Market Intelligence & Zero-Waste Platform",
+  "dashboard": "Dashboard",
+  "regional_monitoring": "Cultivation Map",
+  "risk_analytics": "Risk Analytics",
+  "farmer_directory": "Farmer Directory",
+  "proxy_entry": "Proxy Data Entry",
+  "broadcasts": "Broadcast Warnings",
+  "marketplace": "Surplus Marketplace",
+  "settings": "Settings",
+  "logout": "Sign Out",
+  "safe": "Safe",
+  "warning": "At Risk",
+  "over_planted": "Over-Planted",
+  "total_farmers": "Active Farmers",
+  "total_planted_acres": "Cultivated Land (Acres)",
+  "risk_alerts": "High-Risk Alerts",
+  "active_surplus": "Available Surplus (kg)",
+  "officer_jurisdiction": "Bandarawela Agrarian Division"
+}
