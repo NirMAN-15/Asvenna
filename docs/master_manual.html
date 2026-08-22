@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ASVANNA Master System Manual</title>
+<style>
+  @font-face {
+    font-family: 'NotoSansSinhala';
+    src: url('file:///mnt/d/Data/projects/Aswanna - Final_year_poject/Asvenna/docs/fonts/NotoSansSinhala-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NotoSansSinhala';
+    src: url('file:///mnt/d/Data/projects/Aswanna - Final_year_poject/Asvenna/docs/fonts/NotoSansSinhala-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+    @top-left {
+      content: "🌾 ASVANNA (අස්වැන්න) — Master System Manual & Technical Documentation";
+      font-family: 'NotoSansSinhala', sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      color: #1F6F5F;
+    }
+    @top-right {
+      content: "ITUM Final Year Project 2026";
+      font-family: 'NotoSansSinhala', sans-serif;
+      font-size: 8pt;
+      color: #64748B;
+    }
+    @bottom-left {
+      content: "Division of Information Technology, Institute of Technology, University of Moratuwa";
+      font-family: 'NotoSansSinhala', sans-serif;
+      font-size: 8pt;
+      color: #64748B;
+    }
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-family: 'NotoSansSinhala', sans-serif;
+      font-size: 8pt;
+      font-weight: bold;
+      color: #1F6F5F;
+    }
+  }
+
+  @page:first {
+    @top-left { content: normal; }
+    @top-right { content: normal; }
+  }
+
+  body {
+    font-family: 'NotoSansSinhala', sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.5;
+    color: #1E293B;
+    background-color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cover-page {
+    page-break-after: always;
+    text-align: center;
+    padding-top: 15px;
+  }
+
+  .cover-title {
+    font-size: 24pt;
+    font-weight: bold;
+    color: #1F6F5F;
+    margin-bottom: 6px;
+  }
+
+  .cover-subtitle {
+    font-size: 11pt;
+    color: #475569;
+    margin-bottom: 18px;
+    line-height: 1.4;
+  }
+
+  .hr-brand {
+    border: none;
+    border-top: 3px solid #1F6F5F;
+    margin: 15px 0 20px 0;
+  }
+
+  .meta-table, .team-table, .content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+    page-break-inside: avoid;
+  }
+
+  .meta-table th, .meta-table td,
+  .team-table th, .team-table td,
+  .content-table th, .content-table td {
+    border: 1px solid #CBD5E1;
+    padding: 6px 9px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 8.5pt;
+  }
+
+  .meta-table th, .team-table th, .content-table th {
+    background-color: #1F6F5F;
+    color: #FFFFFF;
+    font-weight: bold;
+  }
+
+  .meta-table td:first-child {
+    background-color: #F8FAFC;
+    font-weight: bold;
+    width: 28%;
+    color: #0F172A;
+  }
+
+  .team-table tr:nth-child(even), .content-table tr:nth-child(even) {
+    background-color: #F8FAFC;
+  }
+
+  h1 {
+    font-size: 14.5pt;
+    font-weight: bold;
+    color: #1F6F5F;
+    border-bottom: 2px solid #2FA084;
+    padding-bottom: 4px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    page-break-after: avoid;
+  }
+
+  h2 {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #0F766E;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 10pt;
+    font-weight: bold;
+    color: #0F172A;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    text-align: justify;
+  }
+
+  .callout {
+    background-color: #F0FDF4;
+    border-left: 4px solid #16A34A;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    page-break-inside: avoid;
+  }
+
+  .callout-sinhala {
+    background-color: #F0F9FF;
+    border-left: 4px solid #0284C7;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    color: #0369A1;
+    page-break-inside: avoid;
+  }
+
+  .callout-warning {
+    background-color: #FEF2F2;
+    border-left: 4px solid #DC2626;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    color: #991B1B;
+    page-break-inside: avoid;
+  }
+
+  .diagram-box {
+    background-color: #0F172A;
+    color: #38BDF8;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 7.5pt;
+    line-height: 1.25;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 10px 0;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+  }
+
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #F1F5F9;
+    color: #0F172A;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 8pt;
+  }
+
+  .member-card {
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    background-color: #FFFFFF;
+    page-break-inside: avoid;
+  }
+
+  .member-header {
+    background-color: #F1F5F9;
+    padding: 6px 10px;
+    margin: -10px -12px 8px -12px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid #CBD5E1;
+    font-weight: bold;
+    color: #1F6F5F;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 7.5pt;
+    font-weight: bold;
+    border-radius: 4px;
+  }
+  .badge-safe { background-color: #DCFCE7; color: #166534; }
+  .badge-warning { background-color: #FEF3C7; color: #92400E; }
+  .badge-danger { background-color: #FEE2E2; color: #991B1B; }
+
+  .page-break {
+    page-break-after: always;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+  <div class="cover-title">🌾 ASVANNA (අස්වැන්න)</div>
+  <div class="cover-subtitle">
+    <b>The Zero-Waste Marketplace: Guided by Real-Time Data from Seed to Harvest Distribution</b><br/>
+    Comprehensive System Architecture, Deep Codebase Reference, Group 15 Role Allocations & QA Manual
+  </div>
+  
+  <hr class="hr-brand" />
+
+  <table class="meta-table">
+    <tr>
+      <td>Academic Institution</td>
+      <td>Division of Information Technology, Institute of Technology, University of Moratuwa (ITUM)</td>
+    </tr>
+    <tr>
+      <td>Academic Program</td>
+      <td>National Diploma in Information Technology (NDIT) — Final Year Project (2025 / 2026)</td>
+    </tr>
+    <tr>
+      <td>Project Supervisor</td>
+      <td>Mrs. Uthpala Athukorala (Division of Information Technology, ITUM)</td>
+    </tr>
+    <tr>
+      <td>Target Geographic Pilot</td>
+      <td>Bandarawela Agrarian Services Division, Badulla District, Sri Lanka</td>
+    </tr>
+    <tr>
+      <td>Target Agricultural Sector</td>
+      <td>Upcountry Perishable Vegetables (Leeks, Cabbage, Carrot, Beetroot, Potato, Knol Khol, Tomato, Bell Pepper)</td>
+    </tr>
+  </table>
+
+  <h3 style="text-align: left; margin-top: 15px; margin-bottom: 8px;">👥 Group 15 — Team Members & Assigned Modules:</h3>
+  <table class="team-table">
+    <thead>
+      <tr>
+        <th style="width: 5%;">#</th>
+        <th style="width: 25%;">Student Full Name</th>
+        <th style="width: 15%;">Student ID</th>
+        <th style="width: 55%;">Assigned Core Engineering Module & Responsibility</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><b>W. N. A. Wedikkara</b></td>
+        <td><code>23IT0544</code></td>
+        <td>System Architecture, PostgreSQL 15 Relational Schema, JWT & RBAC Auth, Mathematical Predictive Risk Engine</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><b>R. R. L. Geeganage (Ravindi)</b></td>
+        <td><code>23IT0476</code></td>
+        <td>Smart Crop Recommendation Engine, 4-Factor Weighted Agro-Suitability Scorer, Soil & Climate Models</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><b>G. W. T. Jayampathi</b></td>
+        <td><code>23IT0487</code></td>
+        <td>Divisional Officer (DO) React Web Portal, Digital Inclusivity Proxy Data Entry, Trilingual UI, FCM & SMS Broadcast Alerts</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><b>K. A. H. I. Lakshitha (Imal)</b></td>
+        <td><code>23IT0503</code></td>
+        <td>Farmer & Buyer Mobile Application (Flutter), GPS Field Logging, Offline Storage Queue & Auto-Sync Engine</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><b>K. H. M. Dewanga</b></td>
+        <td><code>23IT0467</code></td>
+        <td>Phase 2 Geo-Fenced 5 km Surplus Marketplace, Haversine Trigonometric Distance Engine & 30-Minute Counter-Offer Machine</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout" style="text-align: left; margin-top: 15px;">
+    <b>📖 Dual-Audience Documentation Guide:</b> This manual is specifically structured for both non-technical agricultural stakeholders (farmers, agrarian officers, policymakers) and technical academic evaluators (software architects, university examiners). It features clear English alongside authentic Sinhala (සිංහල) and Singlish guides with zero text overlapping.
+  </div>
+</div>
+
+<!-- SECTION 1: NON-TECHNICAL & STAKEHOLDER GUIDE -->
+<h1>1. Plain-Language Executive Summary (For Non-IT Persons & Farmers)</h1>
+
+<p>
+In Sri Lanka's central hill country (Bandarawela, Welimada, Nuwara Eliya, Badulla), vegetable farming families suffer massive recurring financial losses. On average, <b>30% to 40% of their perishable crop output is wasted</b> annually, amounting to over <b>Rs. 180 Billion in national post-harvest loss</b>.
+</p>
+
+<p>
+The core driver of this crisis is <b>"Trend Planting" (වගා රැල්ල)</b>. When leeks or cabbage prices surge at wholesale economic centers (Dambulla, Manning Market, Keppetipola), hundreds of farmers simultaneously cultivate the exact same crop. Because these vegetables take 60–90 days to mature, thousands of tons reach harvest in the exact same week. This floods the market, causing prices to crash below harvesting and transport costs (e.g., Leeks crashing from Rs. 350/kg down to Rs. 20/kg).
+</p>
+
+<div class="callout-sinhala">
+  <b>🇱🇰 Sinhala & Singlish Simple Explanation (ගොවි මහතුන්ට සහ සාමාන්‍ය පරිශීලකයන්ට පැහැදිලි කිරීම):</b><br/>
+  <i>"ගොවි මහත්තුරු වෙළඳපොළේ අද තියෙන මිල බලලා හැමෝම එකම බෝගය (උදා: ලීක්ස්, ගෝවා) එකවර වගා කරනවා. මාස 3කට පස්සේ හැමෝගෙම අස්වැන්න එකම සතියේ වෙළඳපොළට ආවම මිල රුපියල් 20-30ට බහිනවා. මේකට තමයි වගා රැල්ල කියන්නේ. ASVANNA කියන්නේ මේ ප්‍රශ්නය මුලින්ම විසඳන ඩිජිටල් පද්ධතියක්."</i>
+  <br/><br/>
+  <b>පද්ධතිය ක්‍රියා කරන ප්‍රධාන පියවර 4:</b><br/>
+  1. <b>වගාවට පෙර පරීක්ෂාව:</b> ගොවියා බීජ දාන්න කලින් ඇප් එකෙන් බලනවා තමන්ගේ කලාපයේ ඒ බෝගය දැනටමත් කොච්චර වගා කරලා තියෙනවද කියලා.<br/>
+  2. <b>අධික වගා අනතුරු ඇඟවීම (Red Alert):</b> වගාව 85% ඉක්මවා ඇත්නම් (Over-Planted), පද්ධතිය රතු එළියක් දල්වා වැඩි ලාභයක් ලබාගත හැකි වෙනත් විකල්ප බෝග (බීට්රූට්, නෝකෝල්) නිර්දේශ කරයි.<br/>
+  3. <b>ඩිජිටල් සමානාත්මතාවය (Proxy Entry):</b> ස්මාර්ට්ෆෝන් නැති ගොවි මහතුන්ගේ දත්ත ගොවිජන සේවා නිලධාරියා (DO Officer) විසින් වෙබ් පද්ධතියට ඇතුළත් කරයි.<br/>
+  4. <b>ශුන්‍ය අපතේය වෙළඳපොළ (Zero-Waste Marketplace):</b> ඉතිරි වන අතිරික්ත අස්වැන්න කිලෝමීටර් 5ක් ඇතුළත හෝටල්, වෙළඳුන්ට කෙළින්ම විකුණා ගැනීමට සෘජු වෙළඳපොළක් සපයයි.
+</div>
+
+<div class="callout">
+  <b>🌟 Five Foundational Ecosystem Pillars:</b><br/>
+  • <b>Pillar 1: Regional Cultivation Monitoring:</b> GPS-tagged plotting of active cultivation across agrarian divisions.<br/>
+  • <b>Pillar 2: Predictive Risk Engine:</b> Evaluates supply density against national demand (CROPIX) with 3 tiers: <span class="badge badge-safe">SAFE &lt;70%</span>, <span class="badge badge-warning">AT-RISK 70–85%</span>, <span class="badge badge-danger">OVER-PLANTED &gt;85%</span>.<br/>
+  • <b>Pillar 3: Smart Crop Recommendations:</b> 4-factor composite weighting (Market Gap 35%, Soil 25%, Weather 20%, Historical Price 20%).<br/>
+  • <b>Pillar 4: Geo-Fenced Marketplace:</b> 5 km radius direct trade connecting farmers with local caterers, hoteliers, and bulk buyers.<br/>
+  • <b>Pillar 5: Trilingual Accessibility:</b> Native Sinhala (සිංහල), Tamil (தமிழ்), and English localization across mobile and web interfaces.
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 2: ARCHITECTURE & PROCESS FLOWCHARTS -->
+<h1>2. System Architecture & Visual Process Diagrams</h1>
+
+<p>The ASVANNA ecosystem utilizes a decoupled, resilient multi-tier architecture built for high availability and offline rural resilience:</p>
+
+<div class="diagram-box">
++-----------------------------------------------------------------------------------+
+|                            PRESENTATION TIER (CLIENTS)                            |
+| +--------------------------------------+   +------------------------------------+ |
+| |  Farmer & Buyer Mobile App (Flutter) |   | Divisional Officer Portal (React)  | |
+| |  - GPS Cultivation Plot Logger       |   | - Live Cultivation Map & Density   | |
+| |  - Over-Planting Push Alerts (FCM)   |   | - Officer Proxy Data Entry Form    | |
+| |  - Offline Local Storage Queue       |   | - Multi-Channel Warning Broadcast  | |
+| |  - 5 km Surplus Produce Feed         |   | - Trilingual UI (EN / SI / TA)     | |
+| +--------------------------------------+   +------------------------------------+ |
++-----------------------------------------------------------------------------------+
+                                         │ HTTPS REST API (JSON)
++-----------------------------------------------------------------------------------+
+|                            APPLICATION & LOGIC TIER                               |
+| +-------------------------------------------------------------------------------+ |
+| | Node.js 18 / Express.js REST API Server (Port 5000)                           | |
+| |  +--------------------------------------------------------------------------+ | |
+| |  | PREDICTIVE RISK ENGINE      │ Supply Density vs CROPIX Demand Benchmark  | | |
+| |  | SMART RECOMMENDATION ENGINE │ 4-Factor Composite Agro-Scoring Matrix     | | |
+| |  | GEOFENCING SERVICE          │ Haversine 5 km Radius Matching Engine      | | |
+| |  | NOTIFICATION SERVICE        │ Firebase Cloud Messaging + SMS Fallback    | | |
+| |  +--------------------------------------------------------------------------+ | |
+| +-------------------------------------------------------------------------------+ |
++-----------------------------------------------------------------------------------+
+                      │ SQL Queries                │ Realtime Sync
++-----------------------------------------------------------------------------------+
+|                               DATA PERSISTENCE TIER                               |
+| +-------------------------------------+   +-------------------------------------+ |
+| | PostgreSQL 15 Relational Database   |   | Firebase Realtime Database (Cloud)  | |
+| | - 10 Relational Tables with Indexes |   | - Live produce listing stream       | |
+| +-------------------------------------+   +-------------------------------------+ |
++-----------------------------------------------------------------------------------+
+</div>
+
+<h2>Predictive Risk Engine Decision Flowchart</h2>
+<div class="diagram-box">
+[Farmer logs planting: Crop=Leeks, Land=1.5 Acres]
+                    │
+                    ▼
+[Calculate Expected Supply: 1.5 ac * 8,500 kg/ac = 12,750 kg]
+                    │
+                    ▼
+[Query CROPIX Regional Demand Benchmark: e.g., 95,000 kg]
+                    │
+                    ▼
+[Calculate Saturation Ratio: (Total Plotted Regional Supply / Demand) * 100]
+                    │
+      ┌─────────────┴─────────────┐
+      │                           │
+  Ratio < 70%                Ratio >= 70%
+      │                           │
+      ▼                           ▼
+ [SAFE 🟢]                 Is Ratio > 85%?
+                           │             │
+                         YES             NO
+                          │               │
+                          ▼               ▼
+                [OVER-PLANTED 🔴]      [AT-RISK 🟡]
+                          │
+                          ▼
+        * Trigger Push & SMS Warning Broadcast
+        * Recommend Alternative Crops (Beetroot, Knol Khol)
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 3: GROUP 15 MEMBER ALLOCATION & EVALUATION GUIDE -->
+<h1>3. Group 15 — 5 Team Members' Technical Deep Dives & QA Guide</h1>
+
+<!-- MEMBER 1 -->
+<div class="member-card">
+  <div class="member-header">
+    <span>Member 1: W. N. A. Wedikkara (23IT0544)</span>
+    <span>Lead Architect & Risk Algorithm Designer</span>
+  </div>
+  <p><b>Assigned Subsystem:</b> System Architecture, PostgreSQL 15 Relational Schema, JWT Role-Based Access Control, and Predictive Risk Engine.</p>
+  <p><b>Authored Source Files:</b> <code>backend/src/services/riskEngineService.js</code>, <code>backend/src/controllers/riskEngineController.js</code>, <code>backend/src/routes/riskRoutes.js</code>, <code>backend/src/database/schema.sql</code>, <code>backend/src/database/migrate.js</code>, <code>backend/src/database/seed.js</code>, <code>backend/src/middlewares/authMiddleware.js</code>, <code>backend/src/config/database.js</code>, <code>backend/src/controllers/authController.js</code></p>
+  <p><b>Mathematical Model:</b><br/>
+  <code>Estimated_Supply = SUM(Planted_Acres * Avg_Yield_Per_Acre_Kg)</code><br/>
+  <code>Risk_Percentage = (Estimated_Supply / CROPIX_Regional_Quota_Kg) * 100</code><br/>
+  • <span class="badge badge-safe">SAFE &lt; 70%</span> | <span class="badge badge-warning">WARNING 70% - 85%</span> | <span class="badge badge-danger">OVER-PLANTED &gt; 85%</span>
+  </p>
+  <p><b>Examiner Testing Walkthrough:</b><br/>
+  1. Initialize DB: <code>cd backend && npm run migrate && npm run seed</code><br/>
+  2. Test Unit Math: <code>node backend/test/test_all_endpoints.js</code> (verifies 4/4 assertions)<br/>
+  3. Query Leeks Risk: <code>curl -H "Authorization: Bearer &lt;TOKEN&gt;" http://localhost:5000/api/v1/risk/crop/1</code>
+  </p>
+</div>
+
+<!-- MEMBER 2 (RAVINDI) -->
+<div class="member-card">
+  <div class="member-header">
+    <span>Member 2: R. R. L. Geeganage (Ravindi - 23IT0476)</span>
+    <span>Agro-AI & Smart Recommendation Engineer</span>
+  </div>
+  <p><b>Assigned Subsystem:</b> Smart Crop Recommendation Engine, 4-Factor Weighted Agro-Suitability Matrix, Soil & Climate Models.</p>
+  <p><b>Authored Source Files:</b> <code>backend/src/services/recommendationService.js</code>, <code>backend/src/controllers/recommendationController.js</code>, <code>backend/src/routes/recommendationRoutes.js</code>, <code>frontend/src/pages/RiskAnalytics.jsx</code></p>
+  <p><b>4-Factor Weighted Composite Formula:</b><br/>
+  <code>Composite_Score = (0.35 * MarketGap) + (0.25 * SoilSuitability) + (0.20 * WeatherFit) + (0.20 * PriceStability)</code><br/>
+  • Automatically excludes crops currently flagged as <code>OVER_PLANTED</code>.<br/>
+  • Ranks top 5 alternatives descending with Sinhala, Tamil, and English rationales.
+  </p>
+  <p><b>Examiner Testing Walkthrough:</b><br/>
+  Query alternative recommendations when Leeks (cropId 1) is over-planted:<br/>
+  <code>curl -H "Authorization: Bearer &lt;TOKEN&gt;" "http://localhost:5000/api/v1/recommendations?district=Badulla&cropId=1"</code><br/>
+  <i>Expected Output: Beetroot (92%), Knol Khol (88%), Carrot (84%) with agro-suitability rationale.</i>
+  </p>
+</div>
+
+<!-- MEMBER 3 -->
+<div class="member-card">
+  <div class="member-header">
+    <span>Member 3: G. W. T. Jayampathi (23IT0487)</span>
+    <span>Frontend Lead & Digital Inclusivity Engineer</span>
+  </div>
+  <p><b>Assigned Subsystem:</b> Divisional Officer (DO) React Web Portal, Digital Inclusivity Proxy Data Entry, Trilingual UI, FCM & SMS Broadcast Alerts.</p>
+  <p><b>Authored Source Files:</b> <code>frontend/src/pages/Dashboard.jsx</code>, <code>frontend/src/pages/RegionalMonitoring.jsx</code>, <code>frontend/src/pages/FarmerDirectory.jsx</code>, <code>frontend/src/pages/Broadcasts.jsx</code>, <code>frontend/src/components/ProxyDataModal.jsx</code>, <code>frontend/src/components/BroadcastModal.jsx</code>, <code>frontend/src/context/LanguageContext.jsx</code>, <code>frontend/src/locales/*</code>, <code>backend/src/controllers/officerController.js</code>, <code>backend/src/controllers/broadcastController.js</code>, <code>backend/src/services/notificationService.js</code></p>
+  <p><b>Examiner Testing Walkthrough:</b><br/>
+  1. Open Web Portal: <code>cd frontend && npm run dev</code> -> <code>http://localhost:3000</code><br/>
+  2. Sign in with Officer account: <code>0771234567 / asvanna123</code><br/>
+  3. Click <b>"+ Proxy Data Entry"</b> and submit a planting record on behalf of an offline farmer.<br/>
+  4. Click <b>"Broadcast Warnings"</b> to dispatch an emergency notification to registered farmers.
+  </p>
+</div>
+
+<!-- MEMBER 4 (IMAL) -->
+<div class="member-card">
+  <div class="member-header">
+    <span>Member 4: K. A. H. I. Lakshitha (Imal - 23IT0503)</span>
+    <span>Mobile Application Lead & Offline Queue Engineer</span>
+  </div>
+  <p><b>Assigned Subsystem:</b> Farmer & Buyer Mobile Application (Flutter), GPS Field Logging, Offline Storage Queue & Auto-Sync Engine.</p>
+  <p><b>Authored Source Files:</b> <code>mobile/lib/main.dart</code>, <code>mobile/lib/core/services/location_service.dart</code>, <code>mobile/lib/core/services/offline_storage_service.dart</code>, <code>mobile/lib/core/network/api_client.dart</code>, <code>mobile/lib/core/theme/app_theme.dart</code>, <code>mobile/lib/features/auth/login_screen.dart</code>, <code>mobile/lib/features/home/farmer_home_screen.dart</code>, <code>mobile/lib/features/planting/log_planting_screen.dart</code>, <code>mobile/lib/features/recommendations/smart_crop_recommendation_screen.dart</code>, <code>mobile/lib/l10n/*</code></p>
+  <p><b>Examiner Testing Walkthrough:</b><br/>
+  1. Launch Mobile App: <code>cd mobile && flutter run</code><br/>
+  2. Open <b>"Log Planting"</b> to verify automatic GPS location capture with Bandarawela coordinates.<br/>
+  3. Turn on Airplane mode on emulator, submit a plot to verify local SharedPreferences queue retention, and reconnect network to observe automated synchronization.
+  </p>
+</div>
+
+<!-- MEMBER 5 -->
+<div class="member-card">
+  <div class="member-header">
+    <span>Member 5: K. H. M. Dewanga (23IT0467)</span>
+    <span>Geospatial & Marketplace Negotiation Engineer</span>
+  </div>
+  <p><b>Assigned Subsystem:</b> Phase 2 Geo-Fenced 5 km Surplus Marketplace, Haversine Distance Engine & 30-Minute Counter-Offer State Machine.</p>
+  <p><b>Authored Source Files:</b> <code>backend/src/services/geofencingService.js</code>, <code>backend/src/services/marketplaceService.js</code>, <code>backend/src/controllers/marketplaceController.js</code>, <code>backend/src/routes/marketplaceRoutes.js</code>, <code>backend/src/utils/haversine.js</code>, <code>frontend/src/pages/MarketplaceSurplus.jsx</code>, <code>mobile/lib/features/marketplace/*</code></p>
+  <p><b>Examiner Testing Walkthrough:</b><br/>
+  1. Publish Surplus Produce: <code>POST /api/v1/marketplace/list</code> (e.g. 450 kg Leeks @ Rs. 240/kg)<br/>
+  2. Search Nearby within 5 km: <code>curl -H "Authorization: Bearer &lt;TOKEN&gt;" "http://localhost:5000/api/v1/marketplace/search-nearby?lat=6.8258&lng=80.9982&radius_km=5.0"</code><br/>
+  3. Submit Buyer Offer: <code>POST /api/v1/marketplace/orders</code> with 30-minute negotiation deadline.
+  </p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 4: EXHAUSTIVE FILE-BY-FILE CODEBASE CATALOG -->
+<h1>4. Comprehensive File-by-File Codebase Directory</h1>
+<p>Every file in the ASVANNA repository is cataloged below, explaining its core function, dependencies, required configurations, and test verification command:</p>
+
+<table class="content-table">
+  <thead>
+    <tr>
+      <th style="width: 28%;">File Path & Title</th>
+      <th style="width: 32%;">Primary Purpose & Logic</th>
+      <th style="width: 20%;">Connected Files</th>
+      <th style="width: 20%;">Verification Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>backend/src/server.js</code><br/><b>Server Entry</b></td>
+      <td>Bootstraps Express HTTP server on Port 5000 and handles graceful SIGTERM termination.</td>
+      <td><code>app.js</code>, <code>config.js</code></td>
+      <td><code>npm start</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/app.js</code><br/><b>Express Setup</b></td>
+      <td>Mounts security middleware (Helmet, CORS), JSON body parsers, Morgan logging, and API v1 routes.</td>
+      <td><code>routes/*</code>, <code>errorHandler.js</code></td>
+      <td><code>GET /health</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/config/config.js</code><br/><b>Config Hub</b></td>
+      <td>Centralizes environment variables (.env) for PostgreSQL, JWT, Risk Thresholds, and Firebase.</td>
+      <td><code>dotenv</code></td>
+      <td><code>node src/config/config.js</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/config/database.js</code><br/><b>DB Pool</b></td>
+      <td>Creates PostgreSQL connection pool via 'pg'. Handles idle errors and query logging.</td>
+      <td><code>pg</code>, <code>config.js</code></td>
+      <td><code>npm run migrate</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/config/firebase.js</code><br/><b>Firebase SDK</b></td>
+      <td>Initializes Firebase Admin SDK for Realtime Database sync and FCM push notifications with fallback mode.</td>
+      <td><code>firebase-admin</code></td>
+      <td><code>node src/config/firebase.js</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/database/schema.sql</code><br/><b>SQL DDL</b></td>
+      <td>Defines 10 normalized tables (users, master crops, planting_records, cropix_benchmarks, risk, etc.).</td>
+      <td>PostgreSQL 15</td>
+      <td><code>psql -d asvanna_db -f schema.sql</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/database/migrate.js</code><br/><b>Migration Runner</b></td>
+      <td>Executes schema.sql to establish tables, foreign keys, and indexes in PostgreSQL.</td>
+      <td><code>fs</code>, <code>database.js</code></td>
+      <td><code>npm run migrate</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/database/seed.js</code><br/><b>Master Seeder</b></td>
+      <td>Seeds 8 upcountry crops, 5 demo accounts (Officer, Farmer, Buyer, Admin), and CROPIX demand quotas.</td>
+      <td><code>bcryptjs</code>, <code>database.js</code></td>
+      <td><code>npm run seed</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/middlewares/authMiddleware.js</code><br/><b>JWT & RBAC</b></td>
+      <td>Validates Bearer tokens and enforces role access control (FARMER, OFFICER, BUYER, ADMIN).</td>
+      <td><code>jsonwebtoken</code></td>
+      <td><code>curl with Bearer Token</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/utils/haversine.js</code><br/><b>Haversine Distance</b></td>
+      <td>Calculates great-circle distance (km) between two GPS points using trigonometric formula.</td>
+      <td>Math library</td>
+      <td><code>node test/test_all_endpoints.js</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/services/riskEngineService.js</code><br/><b>Predictive Risk Engine</b></td>
+      <td>Calculates regional supply density, compares against CROPIX quotas, and evaluates 3-tier risk.</td>
+      <td><code>database.js</code>, <code>config.js</code></td>
+      <td><code>GET /api/v1/risk/crop/1</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/services/recommendationService.js</code><br/><b>Smart Crop Recommender</b></td>
+      <td>Computes 4-factor composite recommendation scores (Market Gap, Soil, Weather, Price).</td>
+      <td><code>riskEngineService.js</code></td>
+      <td><code>GET /api/v1/recommendations</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/services/geofencingService.js</code><br/><b>Geofencing Engine</b></td>
+      <td>Filters and sorts surplus produce listings within a 5 km - 20 km geographic radius.</td>
+      <td><code>haversine.js</code></td>
+      <td><code>GET /marketplace/search-nearby</code></td>
+    </tr>
+    <tr>
+      <td><code>backend/src/services/notificationService.js</code><br/><b>Alert Dispatcher</b></td>
+      <td>Dispatches FCM multicast push notifications with simulated SMS fallback for offline farmers.</td>
+      <td><code>firebase.js</code></td>
+      <td><code>POST /api/v1/broadcasts</code></td>
+    </tr>
+    <tr>
+      <td><code>frontend/src/pages/Dashboard.jsx</code><br/><b>Officer Dashboard</b></td>
+      <td>Displays regional KPI cards, crop saturation progress bars, and quick action modals.</td>
+      <td>React, Lucide, API</td>
+      <td><code>http://localhost:3000</code></td>
+    </tr>
+    <tr>
+      <td><code>frontend/src/components/ProxyDataModal.jsx</code><br/><b>Proxy Entry Modal</b></td>
+      <td>Modal form for officers to input cultivation data for offline farmers without smartphones.</td>
+      <td><code>api.js</code></td>
+      <td>Click '+ Proxy Data Entry'</td>
+    </tr>
+    <tr>
+      <td><code>mobile/lib/main.dart</code><br/><b>Flutter Root</b></td>
+      <td>Initializes Flutter framework, sets up theme colors, and configures trilingual localization.</td>
+      <td>Flutter SDK</td>
+      <td><code>flutter run</code></td>
+    </tr>
+    <tr>
+      <td><code>mobile/lib/core/services/location_service.dart</code><br/><b>GPS Service</b></td>
+      <td>Queries device GPS coordinates via Geolocator with fallback to Bandarawela Agrarian Center.</td>
+      <td><code>geolocator</code></td>
+      <td>Trigger on mobile</td>
+    </tr>
+    <tr>
+      <td><code>mobile/lib/core/services/offline_storage_service.dart</code><br/><b>Offline Queue</b></td>
+      <td>Caches pending planting records locally in SharedPreferences when offline.</td>
+      <td><code>shared_preferences</code></td>
+      <td>Test in Airplane mode</td>
+    </tr>
+    <tr>
+      <td><code>docker-compose.yml</code><br/><b>Docker Orchestration</b></td>
+      <td>Single-command deployment for PostgreSQL 15, Node.js API server, and React Admin dashboard.</td>
+      <td>Docker Engine</td>
+      <td><code>docker-compose up --build -d</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- SECTION 5: MASTER QA & EVALUATION PLAYBOOK -->
+<h1>5. Master Testing & QA Verification Playbook</h1>
+
+<p>Follow this sequential playbook to test and verify every module of the ASVANNA ecosystem:</p>
+
+<table class="content-table">
+  <thead>
+    <tr>
+      <th style="width: 25%;">Execution Step</th>
+      <th style="width: 35%;">Terminal / Execution Command</th>
+      <th style="width: 40%;">Expected Verification Outcome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Step 1: Unit & Math Tests</b></td>
+      <td><code>node backend/test/test_all_endpoints.js</code></td>
+      <td>Executes 4 automated unit tests verifying Haversine calculations, 3-tier risk logic, and composite recommendation weight sums (4/4 PASS).</td>
+    </tr>
+    <tr>
+      <td><b>Step 2: DB Migration & Seed</b></td>
+      <td><code>cd backend && npm run migrate && npm run seed</code></td>
+      <td>Initializes 10 PostgreSQL tables, inserts 8 master upcountry crops, 5 demo accounts, and monthly CROPIX demand quotas.</td>
+    </tr>
+    <tr>
+      <td><b>Step 3: Backend REST API</b></td>
+      <td><code>cd backend && npm run dev</code></td>
+      <td>Starts server on http://localhost:5000. Verify health endpoint at <code>http://localhost:5000/health</code> (status: 'UP').</td>
+    </tr>
+    <tr>
+      <td><b>Step 4: Web Admin Portal</b></td>
+      <td><code>cd frontend && npm run dev</code></td>
+      <td>Starts React dashboard on http://localhost:3000. Login with Officer credentials (<code>0771234567 / asvanna123</code>).</td>
+    </tr>
+    <tr>
+      <td><b>Step 5: Flutter Mobile App</b></td>
+      <td><code>cd mobile && flutter pub get && flutter run</code></td>
+      <td>Launches the mobile app on an Android emulator or device for Farmer plot logging and Surplus marketplace browsing.</td>
+    </tr>
+    <tr>
+      <td><b>Step 6: Docker Orchestration</b></td>
+      <td><code>docker-compose up --build -d</code></td>
+      <td>Spins up the full multi-tier ecosystem (PostgreSQL, Backend API, Web Admin) in isolated Docker containers with a single command.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout" style="text-align: center; margin-top: 20px;">
+  <b>🌾 End of ASVANNA Master System Manual</b><br/>
+  Prepared by Group 15 for the Division of Information Technology, Institute of Technology, University of Moratuwa (ITUM) — 2026.
+</div>
+
+</body>
+</html>
