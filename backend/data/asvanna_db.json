@@ -1,0 +1,250 @@
+{
+  "users": [
+    {
+      "id": 1787788081234,
+      "phone": "0788597202",
+      "nic": "200322610371",
+      "password_hash": "$2a$10$qSAN5Nve1BQfH.OLM0GT5u8sOCYu9ZvC6CYKgeHf0OnK2oFQpGclu",
+      "role": "BUYER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela Central",
+      "address": "Bandarawela",
+      "is_verified": true,
+      "created_at": "2026-08-26T23:48:01.234Z"
+    },
+    {
+      "id": 1787787988633,
+      "phone": "Niman Achintha",
+      "nic": "200322610371",
+      "role": "OFFICER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela",
+      "address": "Bandarawela",
+      "is_verified": true,
+      "created_at": "2026-08-26T23:46:28.633Z"
+    },
+    {
+      "id": 1787787861102,
+      "phone": "0788597202",
+      "nic": "200322610371",
+      "role": "FARMER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela",
+      "address": "Bandarawela",
+      "is_verified": true,
+      "created_at": "2026-08-26T23:44:21.102Z"
+    },
+    {
+      "id": 1,
+      "full_name": "W. M. Bandara",
+      "phone": "0771234567",
+      "nic": "851234567V",
+      "password_hash": "$2a$10$wN1aP0/zB00vA5zLz.vV/uE221122334455",
+      "role": "OFFICER",
+      "district": "Badulla",
+      "division": "Bandarawela",
+      "language_preference": "si"
+    },
+    {
+      "id": 2,
+      "full_name": "Sunil Shantha",
+      "phone": "0712345678",
+      "nic": "782345678V",
+      "password_hash": "$2a$10$wN1aP0/zB00vA5zLz.vV/uE221122334455",
+      "role": "FARMER",
+      "district": "Badulla",
+      "division": "Bandarawela",
+      "land_size": 2.5,
+      "language_preference": "si"
+    },
+    {
+      "id": 3,
+      "full_name": "Bandarawela Traders",
+      "phone": "0572222222",
+      "nic": "903456789V",
+      "password_hash": "$2a$10$wN1aP0/zB00vA5zLz.vV/uE221122334455",
+      "role": "BUYER",
+      "district": "Badulla",
+      "division": "Bandarawela",
+      "language_preference": "en"
+    },
+    {
+      "id": 4,
+      "full_name": "System Admin",
+      "phone": "0770000000",
+      "nic": "990000000V",
+      "password_hash": "$2a$10$wN1aP0/zB00vA5zLz.vV/uE221122334455",
+      "role": "ADMIN",
+      "district": "Badulla",
+      "division": "Bandarawela",
+      "language_preference": "en"
+    }
+  ],
+  "crops": [
+    {
+      "id": 1,
+      "crop_code": "LEEKS",
+      "name_en": "Leeks",
+      "name_si": "ලීක්ස්",
+      "name_ta": "லீக்ஸ்",
+      "category": "Upcountry Vegetable",
+      "growth_duration_days": 90,
+      "avg_yield_per_acre_kg": 8000,
+      "standard_price_per_kg": 180
+    },
+    {
+      "id": 2,
+      "crop_code": "CABBAGE",
+      "name_en": "Cabbage",
+      "name_si": "ගෝවා",
+      "name_ta": "முட்டைக்கோஸ்",
+      "category": "Upcountry Vegetable",
+      "growth_duration_days": 75,
+      "avg_yield_per_acre_kg": 12000,
+      "standard_price_per_kg": 120
+    },
+    {
+      "id": 3,
+      "crop_code": "CARROT",
+      "name_en": "Carrot",
+      "name_si": "කැරට්",
+      "name_ta": "கேரட்",
+      "category": "Upcountry Vegetable",
+      "growth_duration_days": 85,
+      "avg_yield_per_acre_kg": 10000,
+      "standard_price_per_kg": 220
+    },
+    {
+      "id": 4,
+      "crop_code": "BEETROOT",
+      "name_en": "Beetroot",
+      "name_si": "බීට්රූට්",
+      "name_ta": "பீட்ரூට්",
+      "category": "Upcountry Vegetable",
+      "growth_duration_days": 70,
+      "avg_yield_per_acre_kg": 9000,
+      "standard_price_per_kg": 250
+    },
+    {
+      "id": 5,
+      "crop_code": "POTATO",
+      "name_en": "Potato",
+      "name_si": "අල",
+      "name_ta": "உருளைக்கிழங்கு",
+      "category": "Upcountry Vegetable",
+      "growth_duration_days": 100,
+      "avg_yield_per_acre_kg": 14000,
+      "standard_price_per_kg": 280
+    }
+  ],
+  "planting_records": [
+    {
+      "id": 1,
+      "farmer_id": 2,
+      "farmer_name": "Sunil Shantha",
+      "crop_id": 1,
+      "name_en": "Leeks",
+      "name_si": "ලීක්ස්",
+      "land_size_acres": 2,
+      "expected_yield_kg": 16000,
+      "planting_date": "2026-08-01",
+      "expected_harvest_date": "2026-11-01",
+      "latitude": 6.8322,
+      "longitude": 80.998,
+      "district": "Badulla",
+      "division": "Bandarawela",
+      "status": "PLANTED",
+      "entered_by_type": "FARMER"
+    },
+    {
+      "id": 2,
+      "farmer_id": 2,
+      "farmer_name": "Sunil Shantha",
+      "crop_id": 2,
+      "name_en": "Cabbage",
+      "name_si": "ගෝවා",
+      "land_size_acres": 3.5,
+      "expected_yield_kg": 42000,
+      "planting_date": "2026-08-10",
+      "expected_harvest_date": "2026-10-25",
+      "latitude": 6.835,
+      "longitude": 80.9995,
+      "district": "Badulla",
+      "division": "Bandarawela",
+      "status": "PLANTED",
+      "entered_by_type": "FARMER"
+    }
+  ],
+  "marketplace_listings": [
+    {
+      "id": 1,
+      "farmer_id": 2,
+      "farmer_name": "Sunil Shantha",
+      "farmer_phone": "0712345678",
+      "crop_id": 1,
+      "crop_name": "Leeks (ලීක්ස්)",
+      "quantity_kg": 500,
+      "price_per_kg": 180,
+      "available_from": "2026-08-25",
+      "available_to": "2026-09-05",
+      "latitude": 6.8322,
+      "longitude": 80.998,
+      "pickup_address": "Main St, Bandarawela",
+      "status": "AVAILABLE"
+    },
+    {
+      "id": 2,
+      "farmer_id": 2,
+      "farmer_name": "Sunil Shantha",
+      "farmer_phone": "0712345678",
+      "crop_id": 3,
+      "crop_name": "Carrot (කැරට්)",
+      "quantity_kg": 300,
+      "price_per_kg": 220,
+      "available_from": "2026-08-26",
+      "available_to": "2026-09-08",
+      "latitude": 6.834,
+      "longitude": 80.995,
+      "pickup_address": "Agrarian Hub, Bandarawela",
+      "status": "AVAILABLE"
+    }
+  ],
+  "marketplace_orders": [],
+  "broadcast_warnings": [
+    {
+      "id": 1787788011847,
+      "officer_id": 1787787988633,
+      "officer_name": "W. M. Bandara (DO Officer)",
+      "title_en": "Over-Planting Alert: Leeks",
+      "title_si": "අධික වගා අනතුරු ඇඟවීම: ලීක්ස්",
+      "title_ta": "அதிக நடவு எச்சரிக்கை: லீக்ஸ்",
+      "message_en": "Current regional leeks cultivation has exceeded 85% of market demand. Please consider alternative crops like Beetroot or Knol Khol.",
+      "message_si": "බණ්ඩාරවෙල කලාපයේ ලීක්ස් වගාව වෙළඳපල ඉල්ලුමෙන් 85% ඉක්මවා ඇත. කරුණාකර බීට්රූට් හෝ නෝකෝල් වගා කිරීමට සලකා බලන්න.",
+      "message_ta": "பண்டாரவளையில் லீக்ஸ் பயிர்ச்செய்கை 85% ஐ தாண்டியுள்ளது. தயவுசெய்து மாற்று பயிர்களை பரிசீலிக்கவும்.",
+      "severity": "HIGH",
+      "target_district": "Badulla",
+      "target_division": "Bandarawela",
+      "target_crop_id": null,
+      "sent_count": 142,
+      "created_at": "2026-08-26T23:46:51.847Z"
+    },
+    {
+      "id": 1,
+      "officer_id": 1,
+      "officer_name": "W. M. Bandara",
+      "title_en": "Emergency Saturation Warning: Leeks",
+      "title_si": "අධික වගා සීමාව පසුකිරීමේ අවවාදයයි: ලීක්ස්",
+      "title_ta": "அவசர எச்சரிக்கை: லீக்ஸ்",
+      "message_en": "Leek planting in Bandarawela region has reached 92% capacity. Avoid new leek sowing.",
+      "message_si": "බණ්ඩාරවෙල කලාපයේ ලීක්ස් වගාව 92% සීමාවට පැමිණ ඇත.",
+      "severity": "CRITICAL",
+      "target_district": "Badulla",
+      "target_division": "Bandarawela",
+      "sent_count": 142,
+      "created_at": "2026-08-26T23:01:56.946Z"
+    }
+  ]
+}

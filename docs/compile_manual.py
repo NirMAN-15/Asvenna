@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+import os
+import sys
+import subprocess
+import shutil
+
+def generate_manual():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    html_path = os.path.join(base_dir, "master_manual.html")
+    pdf_path = os.path.join(base_dir, "ASVANNA_COMPLETE_SYSTEM_MANUAL.pdf")
+
+    html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -726,3 +736,50 @@ Follow this sequential playbook to test and verify every module of the ASVANNA e
 
 </body>
 </html>
+"""
+
+    with open(html_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    print(f"[OK] Master HTML manual created at: {html_path}")
+
+    # Look for Chrome or Edge executable to render standard HarfBuzz-shaped Sinhala PDF
+    browser_exe = None
+    possible_paths = [
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+        shutil.which("chrome"),
+        shutil.which("msedge")
+    ]
+    for p in possible_paths:
+        if p and os.path.exists(p):
+            browser_exe = p
+            break
+
+    if browser_exe:
+        print(f"[INFO] Using browser engine for perfect Sinhala ligature shaping: {browser_exe}")
+        file_url = f"file:///{html_path.replace(os.sep, '/')}"
+        cmd = [
+            browser_exe,
+            "--headless=new",
+            "--disable-gpu",
+            "--no-pdf-header-footer",
+            f"--print-to-pdf={pdf_path}",
+            file_url
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True)
+        if os.path.exists(pdf_path) and os.path.getsize(pdf_path) > 1000:
+            print(f"[OK] Master PDF generated via Chromium engine with perfect Sinhala rendering: {pdf_path}")
+            print(f"[INFO] PDF File Size: {os.path.getsize(pdf_path)} bytes")
+            return
+        else:
+            print(f"[WARN] Chromium PDF printing returned: {res.stderr}")
+    
+    # Fallback to reportlab if browser printing not available
+    print("[INFO] Fallback to generate_pdf_manual.py")
+    import generate_pdf_manual
+    generate_pdf_manual.build_pdf()
+
+if __name__ == "__main__":
+    generate_manual()

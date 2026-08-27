@@ -1,10 +1,456 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+Sinhala:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Dark mode (default) */
+  --bg-primary: #0F1A14;
+  --bg-secondary: #1A2B22;
+  --bg-card: #1E3328;
+  --border-card: #2D4A3B;
+  --text-primary: #E8F5EE;
+  --text-muted: #8FA99A;
+  
+  --accent-officer: #10B981;
+  --accent-farmer: #22C55E;
+  --accent-buyer: #F59E0B;
+  --accent-danger: #EF4444;
+  
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.3);
+  --radius-card: 12px;
+  --radius-btn: 8px;
+}
+
+.light-mode {
+  /* Light mode */
+  --bg-primary: #F8FAF9;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --border-card: #E2E8E5;
+  --text-primary: #1A2B22;
+  --text-muted: #6B7C73;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* 1. Global reset & body styling */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Outfit', 'Noto Sans Sinhala', 'Noto Sans Tamil', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* 2. Highland Card */
+.highland-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  padding: 1.5rem;
+}
+
+.highland-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* 3. Highland Buttons */
+.highland-btn-primary {
+  background: linear-gradient(180deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.highland-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+/* 4. Secondary Button */
+.highland-btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--border-card);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.highland-btn-secondary:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--text-muted);
+}
+
+/* 5. Role-colored buttons */
+.highland-btn-officer {
+  background: var(--accent-officer);
+  color: #fff;
+  border-radius: var(--radius-btn);
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+.highland-btn-officer:hover { opacity: 0.9; }
+
+.highland-btn-farmer {
+  background: var(--accent-farmer);
+  color: #fff;
+  border-radius: var(--radius-btn);
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+.highland-btn-farmer:hover { opacity: 0.9; }
+
+.highland-btn-buyer {
+  background: var(--accent-buyer);
+  color: #fff;
+  border-radius: var(--radius-btn);
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+.highland-btn-buyer:hover { opacity: 0.9; }
+
+/* 6. Form Inputs */
+.highland-input {
+  width: 100%;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-card);
+  color: var(--text-primary);
+  padding: 0.625rem 1rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.highland-input:focus {
+  border-color: var(--accent-officer);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.highland-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* 7. Badges */
+.highland-badge-safe {
+  background-color: var(--accent-farmer);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.highland-badge-warning {
+  background-color: var(--accent-buyer);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.highland-badge-danger {
+  background-color: var(--accent-danger);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 8. Sidebar */
+.highland-sidebar {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-card);
+  height: 100vh;
+  /* Removed any blur or opacity */
+}
+
+/* 9. Navbar */
+.highland-navbar {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-card);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 10. Stat Card */
+.highland-stat-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-left: 4px solid var(--accent-officer);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+/* 11. Landing Hero */
+.landing-hero {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  padding: 4rem 2rem;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 12. Landing User Card */
+.landing-user-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.landing-user-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-officer);
+}
+
+/* 13. Auth Container */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-primary);
+  padding: 2rem;
+}
+
+/* 14. Auth Card */
+.auth-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+}
+
+/* 15. Auth Tabs */
+.auth-tab-active {
+  color: var(--text-primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-officer);
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.auth-tab-inactive {
+  color: var(--text-muted);
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.auth-tab-inactive:hover {
+  color: var(--text-primary);
+}
+
+/* 16. Role Badges */
+.role-badge-officer {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: var(--accent-officer);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.role-badge-farmer {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: var(--accent-farmer);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.role-badge-buyer {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: var(--accent-buyer);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* 17. Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-card);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* 18. Transition Utilities */
+.transition-fast {
+  transition: all 0.15s ease;
+}
+.transition-normal {
+  transition: all 0.3s ease;
+}
+.transition-slow {
+  transition: all 0.5s ease;
+}
+
+/* 19. Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* 20. App Layout */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background-color: var(--bg-primary);
+}
+
+/* 21. Backward-compatible aliases (old stich-* → highland-*) */
+.stich-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stich-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.stich-btn-primary {
+  background: linear-gradient(180deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.stich-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+/* 22. Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 23. Landing page grid */
+.landing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* 24. Responsive helpers */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+  .highland-sidebar {
+    width: 100% !important;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-card);
+  }
+  .landing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

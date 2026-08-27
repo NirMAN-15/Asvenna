@@ -6,16 +6,7 @@ const { validateRequest } = require('../middlewares/validationMiddleware');
 
 const router = express.Router();
 
-router.post(
-  '/register',
-  [
-    body('full_name').notEmpty().withMessage('Full name is required'),
-    body('phone').notEmpty().withMessage('Phone number is required'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
-  ],
-  validateRequest,
-  AuthController.register
-);
+router.post('/register', AuthController.register);
 
 router.post(
   '/login',

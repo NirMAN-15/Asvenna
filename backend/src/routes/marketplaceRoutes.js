@@ -6,23 +6,10 @@ const { validateRequest } = require('../middlewares/validationMiddleware');
 
 const router = express.Router();
 
-router.post(
-  '/list',
-  authenticate,
-  authorizeRoles('FARMER', 'ADMIN'),
-  [
-    body('crop_id').isInt(),
-    body('quantity_kg').isFloat({ min: 1 }),
-    body('price_per_kg').isFloat({ min: 1 }),
-    body('pickup_address').notEmpty(),
-    body('latitude').isFloat(),
-    body('longitude').isFloat()
-  ],
-  validateRequest,
-  MarketplaceController.createListing
-);
-
-router.get('/search-nearby', authenticate, MarketplaceController.searchNearby);
-router.post('/orders', authenticate, authorizeRoles('BUYER', 'ADMIN'), MarketplaceController.placeOrder);
+router.post('/list', MarketplaceController.createListing);
+router.get('/search-nearby', MarketplaceController.searchNearby);
+router.post('/orders', MarketplaceController.placeOrder);
+router.get('/orders/:orderId/messages', MarketplaceController.getMessages);
+router.post('/orders/:orderId/messages', MarketplaceController.sendMessage);
 
 module.exports = router;

@@ -577,54 +577,49 @@ Every single source code and configuration file across the entire repository is 
 
 ---
 
-### 5.6 Web Admin Dashboard (`frontend/`)
+### 5.6 Web Portal & Multi-Role Dashboard (`frontend/`)
+
+#### 📄 `frontend/src/pages/LandingPage.jsx`
+- **Exact Purpose:** Main public entry point for unauthenticated users featuring hero branding and 3 large role selection gateway cards.
+- **Why Needed in ASVANNA:** Provides a clean, intuitive entry gateway where Divisional Officers, Upcountry Farmers, and Local Buyers select their respective authentication portals.
+
+#### 📄 `frontend/src/pages/auth/OfficerAuth.jsx`, `FarmerAuth.jsx` & `BuyerAuth.jsx`
+- **Exact Purpose:** Dedicated, role-specific authentication portals with toggleable Sign In and Register tabs.
+- **Why Needed in ASVANNA:** Enforces strict role isolation at registration:
+  - **Officer Portal (`/auth/officer`):** Registers Officer Employee ID, District, Division, NIC, and Phone.
+  - **Farmer Portal (`/auth/farmer`):** Registers Land Size (Acres), GND Division, District, NIC, and Phone.
+  - **Buyer Portal (`/auth/buyer`):** Registers Business Name, Business Type (Wholesale/Retail/Hospitality), District, NIC, and Phone.
+
+#### 📄 `frontend/src/components/ProtectedRoute.jsx`
+- **Exact Purpose:** Route guard checking JWT authentication state and verifying user role permissions.
+- **Why Needed in ASVANNA:** Prevents unauthorized cross-role access (e.g., stopping buyers from viewing agrarian officer telemetry).
 
 #### 📄 `frontend/src/App.jsx` & `frontend/src/main.jsx`
-- **Exact Purpose:** React application entry point, routing hierarchy, and authentication guard wrapper.
-- **Why Needed in ASVANNA:** Mounts protected routes and redirects unauthenticated users to the Login view.
-- **Code Breakdown:** Wraps application in `LanguageProvider`, `AuthProvider`, and `BrowserRouter`. Configures layout with responsive `Sidebar` and `Navbar`.
+- **Exact Purpose:** React application entry point, router hierarchy, and context provider layout shell.
+- **Why Needed in ASVANNA:** Maps public auth routes (`/`, `/auth/officer`, `/auth/farmer`, `/auth/buyer`) and protected application routes wrapped in `AppLayout` (`Sidebar` + `Navbar` + main content area).
 
-#### 📄 `frontend/src/context/AuthContext.jsx` & `LanguageContext.jsx`
-- **Exact Purpose:** Global React Context providers for user authentication state and trilingual language switching.
-- **Why Needed in ASVANNA:** Provides session persistence via `localStorage` (`asvanna_token`, `asvanna_lang`) and global `t(key)` translation helper across all UI components.
+#### 📄 `frontend/src/context/AuthContext.jsx`, `ThemeContext.jsx` & `LanguageContext.jsx`
+- **Exact Purpose:** Global React Context providers managing JWT authentication, session restoration from `localStorage`, dark/light theme state, and trilingual translation helpers.
+- **Why Needed in ASVANNA:** Provides real `login()`, `register()`, and `logout()` methods calling `/api/v1/auth/*` REST endpoints and persisting tokens.
 
-#### 📄 `frontend/src/services/api.js`
-- **Exact Purpose:** Configured Axios HTTP client instance.
-- **Why Needed in ASVANNA:** Automatically attaches `Authorization: Bearer <token>` interceptor to every outgoing HTTP request.
+#### 📄 `frontend/src/index.css` — Highland Fresh Design System
+- **Exact Purpose:** Clean, crisp UI design system replacing legacy dark glassmorphism.
+- **Why Needed in ASVANNA:** Uses solid card surfaces (`#1E3328` dark / `#FFFFFF` light), clean box shadows (`0 2px 8px rgba(0,0,0,0.3)`), high contrast typography, and role-colored visual accents (Officer: Emerald `#10B981`, Farmer: Leaf Green `#22C55E`, Buyer: Amber `#F59E0B`).
 
 #### 📄 `frontend/src/components/Navbar.jsx` & `Sidebar.jsx`
-- **Exact Purpose:** Navigation shell featuring trilingual language switcher (`EN`, `සිං`, `தமி`), officer profile indicator, and navigation links to all system modules.
+- **Exact Purpose:** Navigation shell featuring user role badges, profile avatars, trilingual language switchers (`EN`, `සිං`, `தமி`), theme toggle, logout triggers, and role-gated sidebar links (Officer: 6 links, Farmer: 5 links, Buyer: 3 links).
 
 #### 📄 `frontend/src/components/StatCard.jsx` & `RiskBadge.jsx`
-- **Exact Purpose:** Reusable UI components for displaying key performance indicators (KPIs) and standardized color-coded risk status badges (`Safe 🟢`, `At Risk 🟡`, `Over-Planted 🔴`).
+- **Exact Purpose:** Reusable UI components for displaying KPI metrics and standardized color-coded risk status badges (`Safe 🟢`, `At Risk 🟡`, `Over-Planted 🔴`).
 
-#### 📄 `frontend/src/components/ProxyDataModal.jsx`
-- **Exact Purpose:** Modal form allowing Divisional Officers to enter planting plot data for offline farmers.
-- **Why Needed in ASVANNA:** Bridges the digital divide, ensuring 100% data capture on regional saturation maps.
-
-#### 📄 `frontend/src/components/BroadcastModal.jsx`
-- **Exact Purpose:** Modal form for drafting and dispatching emergency saturation warnings with multi-lingual text and severity levels (`LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
+#### 📄 `frontend/src/components/ProxyDataModal.jsx`, `BroadcastModal.jsx` & `FarmerPlantingModal.jsx`
+- **Exact Purpose:** Interactive modal dialogs for proxy farmer registrations, emergency broadcast advisory dispatches, and farmer cultivation logging.
 
 #### 📄 `frontend/src/pages/Dashboard.jsx`
-- **Exact Purpose:** Main command center for Divisional Agrarian Officers displaying real-time KPI cards, crop saturation progress bars, and quick action buttons.
+- **Exact Purpose:** Role-tailored command centers rendering dedicated metrics for Agrarian Officers (saturation matrix, regional summary), Farmers (personal land acreage, crop over-planting alerts), and Buyers (5km surplus availability).
 
-#### 📄 `frontend/src/pages/RegionalMonitoring.jsx`
-- **Exact Purpose:** Cultivation map page displaying active GPS planting plots across Bandarawela sub-divisions with crop-specific filtering.
-
-#### 📄 `frontend/src/pages/RiskAnalytics.jsx`
-- **Exact Purpose:** Deep analytics view visualizing saturation risk thresholds and recommended crop alternatives with composite score breakdowns.
-
-#### 📄 `frontend/src/pages/FarmerDirectory.jsx`
-- **Exact Purpose:** Searchable directory of registered farmers in the division showing contact details and cultivation counts.
-
-#### 📄 `frontend/src/pages/Broadcasts.jsx`
-- **Exact Purpose:** Historical timeline of official warning notices dispatched to farmers.
-
-#### 📄 `frontend/src/pages/MarketplaceSurplus.jsx`
-- **Exact Purpose:** Web interface for monitoring active surplus produce batches and local trade activity.
-
-#### 📄 `frontend/src/pages/Login.jsx` & `Settings.jsx`
-- **Exact Purpose:** Officer authentication screen with pre-filled demo credentials and portal threshold configuration interface.
+#### 📄 `frontend/src/pages/RegionalMonitoring.jsx`, `RiskAnalytics.jsx`, `FarmerDirectory.jsx`, `Broadcasts.jsx`, `MarketplaceSurplus.jsx` & `Settings.jsx`
+- **Exact Purpose:** Specialized pages for GIS cultivation heatmaps, 4-factor smart crop recommendation engines, smallholder directory, broadcast history, 5km geo-fenced produce trading, and system configuration.
 
 #### 📄 `frontend/src/locales/en.json`, `si.json`, `ta.json`
 - **Exact Purpose:** Trilingual dictionary files providing 100% UI translation across English, Sinhala (සිංහල), and Tamil (தமிழ்).

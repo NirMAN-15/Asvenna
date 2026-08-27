@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # PostgreSQL Database Service
+  # 1. PostgreSQL Database Service
   postgres:
     image: postgres:15-alpine
     container_name: asvanna-postgres
@@ -21,7 +21,7 @@ services:
       timeout: 5s
       retries: 5
 
-  # Express.js REST API Backend
+  # 2. Express.js REST API & Intelligence Engine
   backend:
     build:
       context: ./backend
@@ -44,13 +44,14 @@ services:
       JWT_EXPIRES_IN_OFFICER: 8h
       RISK_SAFE_THRESHOLD: 70
       RISK_WARNING_THRESHOLD: 85
+    command: sh -c "node src/database/migrate.js && node src/database/seed.js && node src/server.js"
     ports:
       - "5000:5000"
     volumes:
       - ./backend:/app
       - /app/node_modules
 
-  # React.js Admin Web Dashboard
+  # 3. React.js Multi-User Web Dashboard (Nginx)
   web-admin:
     build:
       context: ./frontend
@@ -60,7 +61,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "3000:3000"
+      - "3000:80"
     volumes:
       - ./frontend:/app
       - /app/node_modules

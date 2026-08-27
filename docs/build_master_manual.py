@@ -2,10 +2,11 @@ import os
 import weasyprint
 
 def generate_pdf():
-    html_file = "/mnt/d/Data/projects/Aswanna - Final_year_poject/Asvenna/docs/master_manual.html"
-    pdf_file = "/mnt/d/Data/projects/Aswanna - Final_year_poject/Asvenna/docs/ASVANNA_COMPLETE_SYSTEM_MANUAL.pdf"
-    font_regular = "/mnt/d/Data/projects/Aswanna - Final_year_poject/Asvenna/docs/fonts/NotoSansSinhala-Regular.ttf"
-    font_bold = "/mnt/d/Data/projects/Aswanna - Final_year_poject/Asvenna/docs/fonts/NotoSansSinhala-Bold.ttf"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    html_file = os.path.join(base_dir, "master_manual.html")
+    pdf_file = os.path.join(base_dir, "ASVANNA_COMPLETE_SYSTEM_MANUAL.pdf")
+    font_regular = os.path.join(base_dir, "fonts", "NotoSansSinhala-Regular.ttf").replace('\\', '/')
+    font_bold = os.path.join(base_dir, "fonts", "NotoSansSinhala-Bold.ttf").replace('\\', '/')
 
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -735,7 +736,7 @@ The core driver of this crisis is <b>"Trend Planting" (වගා රැල්ල
 
     print("📄 HTML Master Manual generated. Converting with WeasyPrint (HarfBuzz)...")
     weasyprint.HTML(html_file).write_pdf(pdf_file)
-    print(f"✅ PDF System Manual generated successfully at: {pdf_file}")
+    print(f"[OK] PDF System Manual generated successfully at: {pdf_file}")
 
 if __name__ == "__main__":
     generate_pdf()

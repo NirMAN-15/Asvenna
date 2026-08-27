@@ -62,13 +62,13 @@ Asvenna/
 
 ## ⚡ Quick Start with Docker
 
-You can launch the complete backend, PostgreSQL database, and Web Admin dashboard with a single command:
+You can launch the complete backend, PostgreSQL database, and Multi-Role Web Portal with a single command:
 
 ```bash
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
-- **Web Admin Dashboard**: [http://localhost:3000](http://localhost:3000)
+- **Multi-Role Web Portal**: [http://localhost:3000](http://localhost:3000) (Features landing page gateway with separate Officer, Farmer, and Buyer portals)
 - **Backend REST API**: [http://localhost:5000](http://localhost:5000)
 - **API Health Check**: [http://localhost:5000/health](http://localhost:5000/health)
 
@@ -86,7 +86,7 @@ npm run seed       # Seed Bandarawela pilot dataset & demo accounts
 npm run dev        # Run server on port 5000
 ```
 
-### 2. Divisional Officer Web Dashboard (`frontend/`)
+### 2. Multi-Role Web Portal (`frontend/`)
 ```bash
 cd frontend
 npm install
