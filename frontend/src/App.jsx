@@ -4,6 +4,7 @@ import { AuthContext } from './context/AuthContext';
 
 // Pages
 import LandingPage from './pages/LandingPage';
+import Login from './pages/Login';
 import OfficerAuth from './pages/auth/OfficerAuth';
 import FarmerAuth from './pages/auth/FarmerAuth';
 import BuyerAuth from './pages/auth/BuyerAuth';
@@ -62,6 +63,7 @@ function App() {
     <Routes>
       {/* Public routes */}
       <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <LandingPage />} />
+      <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login />} />
       <Route path="/auth/officer" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <OfficerAuth />} />
       <Route path="/auth/farmer" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <FarmerAuth />} />
       <Route path="/auth/buyer" element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <BuyerAuth />} />
