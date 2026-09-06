@@ -21,9 +21,9 @@ export default function RegionalMonitoring() {
         <div>
           <div className="flex items-center space-x-2">
             <MapPin className="w-6 h-6 text-emerald-400" />
-            <h1 className="text-2xl font-extrabold text-white tracking-wide">🗺️ Regional Cultivation Heatmap</h1>
+            <h1 className="text-2xl font-black text-white tracking-wide">🗺️ Regional Cultivation Heatmap</h1>
           </div>
-          <p className="text-xs text-emerald-400/80 mt-1">
+          <p className="text-xs font-bold text-emerald-300 mt-1">
             GPS-Tagged Active Planting Plots Across Bandarawela & Upcountry Agrarian Divisions
           </p>
         </div>
@@ -33,13 +33,13 @@ export default function RegionalMonitoring() {
           <select
             value={selectedCrop}
             onChange={(e) => setSelectedCrop(e.target.value)}
-            className="text-xs bg-transparent text-emerald-200 focus:outline-none font-semibold"
+            className="text-xs bg-transparent text-emerald-200 focus:outline-none font-bold"
           >
-            <option value="" className="bg-slate-900 text-white">All Crops</option>
-            <option value="Leeks" className="bg-slate-900 text-white">Leeks (ලීක්ස්)</option>
-            <option value="Cabbage" className="bg-slate-900 text-white">Cabbage (ගෝවා)</option>
-            <option value="Carrot" className="bg-slate-900 text-white">Carrot (කැරට්)</option>
-            <option value="Beetroot" className="bg-slate-900 text-white">Beetroot (බීට්රූට්)</option>
+            <option value="" className="bg-slate-900 text-white font-bold">All Crops</option>
+            <option value="Leeks" className="bg-slate-900 text-white font-bold">Leeks (ලීක්ස්)</option>
+            <option value="Cabbage" className="bg-slate-900 text-white font-bold">Cabbage (ගෝවා)</option>
+            <option value="Carrot" className="bg-slate-900 text-white font-bold">Carrot (කැරට්)</option>
+            <option value="Beetroot" className="bg-slate-900 text-white font-bold">Beetroot (බීට්රූට්)</option>
           </select>
         </div>
       </div>
@@ -47,11 +47,11 @@ export default function RegionalMonitoring() {
       {/* Interactive Map Visual Grid */}
       <div className="stich-card p-6 relative overflow-hidden bg-gradient-to-b from-emerald-950/90 to-slate-950">
         <div className="flex items-center justify-between border-b border-emerald-500/20 pb-4 mb-6">
-          <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400">
+          <div className="flex items-center space-x-2 text-xs font-black text-emerald-300">
             <Navigation className="w-4 h-4 text-emerald-400" />
             <span>Bandarawela GPS Grid (Latitude 6.8322° N, Longitude 80.9980° E)</span>
           </div>
-          <span className="text-[11px] text-emerald-400/70 bg-emerald-900/30 border border-emerald-500/20 px-2.5 py-1 rounded-lg">
+          <span className="text-xs font-bold text-emerald-300 bg-emerald-900/40 border border-emerald-500/30 px-2.5 py-1 rounded-lg">
             4 Active Regional Clusters
           </span>
         </div>
@@ -70,12 +70,12 @@ export default function RegionalMonitoring() {
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-extrabold text-white flex items-center gap-1">
+                <span className="text-xs font-black text-white flex items-center gap-1 tracking-wide">
                   <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                   {plot.name_en} ({plot.name_si})
                 </span>
                 <span
-                  className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
+                  className={`text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider ${
                     plot.status === 'OVER_PLANTED'
                       ? 'bg-red-500/20 text-red-400 border border-red-500/30'
                       : plot.status === 'WARNING'
@@ -83,14 +83,14 @@ export default function RegionalMonitoring() {
                       : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                   }`}
                 >
-                  {plot.status}
+                  {plot.status.replace('_', ' ')}
                 </span>
               </div>
-              <p className="text-xs text-emerald-200/90 font-semibold">{plot.farmer_name}</p>
-              <p className="text-[11px] text-emerald-400/70">{plot.division}</p>
-              <div className="mt-3 pt-2 border-t border-emerald-500/20 flex items-center justify-between text-[11px] text-emerald-300">
+              <p className="text-xs text-emerald-200 font-extrabold">{plot.farmer_name}</p>
+              <p className="text-xs text-emerald-400 font-bold mt-0.5">{plot.division}</p>
+              <div className="mt-3 pt-2 border-t border-emerald-500/20 flex items-center justify-between text-xs text-emerald-300 font-bold">
                 <span>Plot: {plot.land_size_acres} Acres</span>
-                <span className="font-mono text-emerald-400">{plot.lat}, {plot.lng}</span>
+                <span className="font-mono font-bold text-emerald-300">{plot.lat}, {plot.lng}</span>
               </div>
             </div>
           ))}
@@ -99,7 +99,7 @@ export default function RegionalMonitoring() {
 
       {/* Detailed Plot Log List */}
       <div className="stich-card p-6">
-        <h3 className="text-base font-extrabold text-white mb-4 flex items-center gap-2">
+        <h3 className="text-base font-black text-white mb-4 flex items-center gap-2">
           <Layers className="w-5 h-5 text-emerald-400" />
           <span>Recently Registered Regional Planting Records</span>
         </h3>
@@ -108,15 +108,15 @@ export default function RegionalMonitoring() {
             <div key={p.id} className="p-4 bg-emerald-950/40 rounded-xl border border-emerald-500/20 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-emerald-500/40 transition">
               <div>
                 <div className="flex items-center space-x-2">
-                  <h4 className="font-bold text-white text-sm">{p.farmer_name}</h4>
-                  <span className="text-xs text-emerald-400/70">({p.farmer_phone})</span>
+                  <h4 className="font-black text-white text-base tracking-wide">{p.farmer_name}</h4>
+                  <span className="text-xs font-black text-emerald-300">({p.farmer_phone})</span>
                 </div>
-                <p className="text-xs text-emerald-300/80 mt-1">
-                  Location: <span className="text-white font-medium">{p.division}</span> • Cultivated: <span className="text-white font-semibold">{p.land_size_acres} Acres</span> • Date: <span className="text-white font-mono">{p.planting_date}</span>
+                <p className="text-xs font-bold text-emerald-300 mt-1 leading-relaxed">
+                  Location: <strong className="text-white font-black">{p.division}</strong> • Cultivated: <strong className="text-white font-black">{p.land_size_acres} Acres</strong> • Date: <strong className="text-white font-mono font-bold">{p.planting_date}</strong>
                 </p>
               </div>
               <div className="flex items-center space-x-3">
-                <span className="px-3.5 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-extrabold rounded-xl text-xs">
+                <span className="px-3.5 py-1.5 bg-emerald-500/20 text-emerald-200 border border-emerald-500/40 font-black rounded-xl text-xs tracking-wider">
                   {p.name_en} ({p.name_si})
                 </span>
                 <ChevronRight className="w-4 h-4 text-emerald-400 hidden md:block" />
