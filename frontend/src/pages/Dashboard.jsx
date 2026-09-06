@@ -242,8 +242,15 @@ export default function Dashboard() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Option 1: Beetroot */}
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between">
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between overflow-hidden">
                 <div>
+                  <div className="h-32 w-full rounded-lg overflow-hidden mb-3 border border-white/10 shadow-inner bg-black/20">
+                    <img
+                      src="/crops/beetroot.jpg"
+                      alt="Beetroot (බීට්රූට්)"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-secondary-fixed font-bold text-xs uppercase tracking-wider">Option 1</span>
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary-fixed text-on-secondary-fixed">
@@ -264,8 +271,15 @@ export default function Dashboard() {
               </div>
 
               {/* Option 2: Carrots */}
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between">
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between overflow-hidden">
                 <div>
+                  <div className="h-32 w-full rounded-lg overflow-hidden mb-3 border border-white/10 shadow-inner bg-black/20">
+                    <img
+                      src="/crops/carrot.jpg"
+                      alt="Carrots (කැරට්)"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-secondary-fixed font-bold text-xs uppercase tracking-wider">Option 2</span>
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary-fixed text-on-secondary-fixed">
@@ -286,8 +300,15 @@ export default function Dashboard() {
               </div>
 
               {/* Option 3: Bush Beans */}
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between">
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between overflow-hidden">
                 <div>
+                  <div className="h-32 w-full rounded-lg overflow-hidden mb-3 border border-white/10 shadow-inner bg-black/20">
+                    <img
+                      src="/crops/bush_beans.jpg"
+                      alt="Bush Beans (බෝංචි)"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-secondary-fixed font-bold text-xs uppercase tracking-wider">Option 3</span>
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary-fixed text-on-secondary-fixed">
