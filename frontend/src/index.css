@@ -450,6 +450,7 @@ body {
 .app-layout {
   display: flex;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
@@ -457,8 +458,10 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   overflow: hidden;
   min-width: 0;
+  position: relative;
 }
 
 .app-content {

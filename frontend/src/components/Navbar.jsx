@@ -46,20 +46,29 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 right-0 left-0 h-20 bg-surface-bright shadow-sm flex justify-between items-center px-4 md:px-margin-desktop z-40 border-b border-outline-variant/30">
-      {/* Title & Division Info */}
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2">
-          <span className="font-headline text-headline-sm font-bold text-primary truncate max-w-[220px] sm:max-w-none">
-            {getRoleTitle()}
-          </span>
-          <span className="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-secondary-container text-on-secondary-fixed">
-            {role || 'VERIFIED'}
-          </span>
+    <header className="sticky top-0 right-0 left-0 h-20 bg-surface-bright/95 backdrop-blur-md shadow-sm flex justify-between items-center px-4 md:px-8 z-20 border-b border-outline-variant/30 flex-shrink-0">
+      {/* Title & Division Info with Mobile Logo */}
+      <div className="flex items-center gap-3 min-w-0">
+        <Link to="/dashboard" className="md:hidden flex-shrink-0">
+          <img
+            src="/logo.png"
+            alt="ASVANNA"
+            className="w-10 h-10 object-contain rounded-full shadow-sm filter drop-shadow-xs"
+          />
+        </Link>
+        <div className="flex flex-col min-w-0">
+          <div className="flex items-center gap-2">
+            <h2 className="font-headline text-lg md:text-xl font-bold text-primary truncate">
+              {getRoleTitle()}
+            </h2>
+            <span className="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-secondary-container text-on-secondary-fixed flex-shrink-0">
+              {role || 'VERIFIED'}
+            </span>
+          </div>
+          <p className="font-label-md text-xs text-on-surface-variant uppercase tracking-wider truncate">
+            {getOfficeSubtitle()}
+          </p>
         </div>
-        <span className="font-label-md text-xs text-on-surface-variant uppercase tracking-wider truncate">
-          {getOfficeSubtitle()}
-        </span>
       </div>
 
       {/* Right Controls: Timer, Language, Notifications, Avatar */}

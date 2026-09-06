@@ -67,60 +67,95 @@ export default function Dashboard() {
   // ----------------------------------------------------
   if (role === 'FARMER') {
     return (
-      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-6 space-y-8 animate-fadeIn font-body-md text-on-surface">
-        {/* Header Section */}
-        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h1 className="font-headline text-headline-lg md:text-3xl font-extrabold text-primary">
-              Ayubowan, {user?.full_name || 'Ramesh'}! (ආයුබෝවන්)
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8 animate-fadeIn font-body-md text-on-surface">
+        {/* Header Hero Section */}
+        <header className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 sm:p-8 shadow-card flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none -mr-16 -mt-16" />
+          
+          <div className="relative z-10 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/60 text-on-secondary-fixed text-xs font-bold uppercase tracking-wider mb-3 border border-secondary/20">
+              <span className="material-symbols-outlined text-sm">spa</span>
+              <span>2026 Yala Cultivation Cycle • Bandarawela Upcountry Zone</span>
+            </div>
+            <h1 className="font-headline text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary leading-tight">
+              Ayubowan, {user?.full_name || 'Ramesh Bandara'}! (ආයුබෝවන්)
             </h1>
-            <p className="text-on-surface-variant font-body-md mt-1">
-              Your farm cultivation status • Bandarawela Upcountry Agrarian Division
+            <p className="text-on-surface-variant font-body-md mt-2 leading-relaxed">
+              Real-time harvest telemetry, regional over-planting risk mitigation, and direct zero-waste marketplace access for your plot.
             </p>
+
+            {/* Quick Metrics Badges */}
+            <div className="flex flex-wrap items-center gap-3 mt-4 pt-2">
+              <div className="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-xl border border-outline-variant/30">
+                <span className="material-symbols-outlined text-primary text-lg">landscape</span>
+                <span className="text-xs text-on-surface-variant font-medium">Active Plot: <strong className="text-primary font-bold">2.5 Acres</strong></span>
+              </div>
+              <div className="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-xl border border-outline-variant/30">
+                <span className="material-symbols-outlined text-secondary text-lg">schedule</span>
+                <span className="text-xs text-on-surface-variant font-medium">Harvest Window: <strong className="text-secondary font-bold">24 Days</strong></span>
+              </div>
+              <div className="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-xl border border-outline-variant/30">
+                <span className="material-symbols-outlined text-primary text-lg">payments</span>
+                <span className="text-xs text-on-surface-variant font-medium">Est. Yield Value: <strong className="text-primary font-bold">LKR 420,000</strong></span>
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="relative z-10 flex flex-row lg:flex-col gap-3 flex-shrink-0">
             <button
               onClick={() => setIsFarmerModalOpen(true)}
-              className="bg-primary text-white px-5 py-3 rounded-xl font-label-md font-bold hover:bg-primary-container transition flex items-center gap-2 press-effect shadow-sm"
+              className="flex-1 lg:flex-none bg-primary text-white px-5 py-3.5 rounded-xl font-label-md font-bold hover:bg-primary-container transition flex items-center justify-center gap-2 shadow-sm active:scale-98"
             >
               <span className="material-symbols-outlined icon-fill">add_circle</span>
               <span>Register New Crop</span>
             </button>
             <Link
               to="/marketplace"
-              className="bg-secondary text-white px-5 py-3 rounded-xl font-label-md font-bold hover:bg-secondary/90 transition flex items-center gap-2 press-effect shadow-sm"
+              className="flex-1 lg:flex-none bg-secondary-container text-on-secondary-fixed px-5 py-3.5 rounded-xl font-label-md font-bold hover:bg-secondary-fixed transition flex items-center justify-center gap-2 border border-secondary-container/50 shadow-sm active:scale-98 text-center"
             >
               <span className="material-symbols-outlined">storefront</span>
-              <span>Sell Surplus</span>
+              <span>Sell Produce (5km)</span>
             </Link>
           </div>
         </header>
 
         {/* Status Badge Card: Risk Indicator (From Stitch Design) */}
         <section>
-          <div className="bg-surface-container-lowest border-l-4 border-error rounded-2xl shadow-card p-6 flex items-center justify-between touch-active border border-outline-variant/30">
-            <div className="flex items-center gap-5">
-              <div className="w-14 h-14 bg-error-container/40 flex items-center justify-center rounded-full flex-shrink-0">
+          <div className="bg-surface-container-lowest border-l-4 border-error rounded-2xl shadow-card p-6 md:p-7 touch-active border border-outline-variant/30 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="flex items-start sm:items-center gap-5">
+              <div className="w-14 h-14 bg-error-container/40 flex items-center justify-center rounded-2xl flex-shrink-0 border border-error/20">
                 <span className="material-symbols-outlined text-error text-3xl icon-fill">warning</span>
               </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  <h2 className="font-headline text-headline-sm font-bold text-on-surface">
-                    Leeks (ලීක්ස්) - 2.5 Acres
+              <div className="space-y-1.5">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <h2 className="font-headline text-lg sm:text-xl font-bold text-on-surface">
+                    Leeks (ලීක්ස්) - 2.5 Acres Plot
                   </h2>
-                  <span className="inline-flex items-center px-3 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-xs font-bold uppercase">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-xs font-extrabold uppercase tracking-wide">
                     Over-Planted Risk (92.5%)
                   </span>
                 </div>
-                <p className="text-on-surface-variant text-sm mt-1">
-                  Bandarawela regional supply has exceeded 90% benchmark. Market price drop projected at harvest.
+                <p className="text-on-surface-variant text-sm max-w-3xl leading-relaxed">
+                  Bandarawela regional supply has exceeded the 90% benchmark threshold. Market price drop of approximately 35–40% projected at harvest if harvesting concurrently.
                 </p>
+
+                {/* Visual Saturation Progress Bar */}
+                <div className="w-full max-w-md pt-2">
+                  <div className="flex justify-between text-xs font-semibold text-on-surface-variant mb-1">
+                    <span>Regional Quota Saturation</span>
+                    <span className="text-error font-bold">92.5% (Benchmark 90.0%)</span>
+                  </div>
+                  <div className="w-full h-3 bg-surface-container-high rounded-full overflow-hidden relative">
+                    <div className="h-full bg-gradient-to-r from-amber-400 to-error rounded-full transition-all duration-500" style={{ width: '92.5%' }} />
+                    <div className="absolute top-0 bottom-0 left-[90%] w-0.5 bg-on-surface/60" title="90% Quota Threshold" />
+                  </div>
+                </div>
               </div>
             </div>
+
             <Link
               to="/risk-analytics"
-              className="hidden sm:flex items-center gap-1 font-label-md text-sm font-bold text-secondary hover:underline"
+              className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-secondary-container/70 text-on-secondary-fixed font-label-md text-sm font-bold hover:bg-secondary-fixed transition border border-secondary/30 self-start lg:self-center whitespace-nowrap shadow-xs"
             >
               <span>View Alternatives</span>
               <span className="material-symbols-outlined text-base">chevron_right</span>
@@ -129,86 +164,184 @@ export default function Dashboard() {
         </section>
 
         {/* Action Button Grid (From Stitch Design) */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {/* Action 1 */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
+          {/* Action 1: Register New Crop */}
           <button
             onClick={() => setIsFarmerModalOpen(true)}
-            className="bg-primary text-on-primary flex flex-col items-center justify-center p-8 rounded-2xl shadow-card touch-active hover:bg-primary-container transition group"
+            className="bg-primary text-on-primary flex flex-col items-center justify-center p-7 sm:p-8 rounded-2xl shadow-card touch-active hover:bg-primary-container transition group text-center cursor-pointer border border-primary/20"
           >
-            <span className="material-symbols-outlined mb-2 text-4xl group-hover:scale-110 transition-transform icon-fill">
-              add_circle
+            <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <span className="material-symbols-outlined text-4xl group-hover:scale-105 transition-transform icon-fill text-white">
+                add_circle
+              </span>
+            </div>
+            <span className="font-headline text-lg font-bold text-center text-white">Register New Crop</span>
+            <span className="text-xs text-primary-fixed-dim mt-1.5 leading-relaxed">
+              Log GPS-tagged cultivation plot with offline synchronization
             </span>
-            <span className="font-label-md text-base font-bold text-center">Register New Crop</span>
-            <span className="text-xs text-primary-fixed-dim mt-1">Log GPS-tagged cultivation plot</span>
           </button>
 
-          {/* Action 2 */}
+          {/* Action 2: View Market Demand */}
           <Link
-            to="/risk-analytics"
-            className="bg-secondary-container text-on-secondary-container flex flex-col items-center justify-center p-8 rounded-2xl shadow-card touch-active hover:bg-secondary-fixed transition border border-outline-variant/40 group text-center"
+            to="/marketplace"
+            className="bg-secondary-container text-on-secondary-container flex flex-col items-center justify-center p-7 sm:p-8 rounded-2xl shadow-card touch-active hover:bg-secondary-fixed transition border border-outline-variant/40 group text-center"
           >
-            <span className="material-symbols-outlined mb-2 text-4xl text-primary group-hover:scale-110 transition-transform icon-fill">
-              trending_up
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <span className="material-symbols-outlined text-4xl text-primary icon-fill">
+                trending_up
+              </span>
+            </div>
+            <span className="font-headline text-lg font-bold text-on-secondary-fixed">View Market Demand</span>
+            <span className="text-xs text-on-secondary-container/80 mt-1.5 leading-relaxed">
+              CROPIX national benchmark comparison & local 5km buyers
             </span>
-            <span className="font-label-md text-base font-bold">View Market Demand</span>
-            <span className="text-xs text-on-secondary-container/80 mt-1">CROPIX national benchmark comparison</span>
           </Link>
 
-          {/* Action 3 */}
+          {/* Action 3: Government Advisories */}
           <Link
             to="/broadcasts"
-            className="bg-surface-container-high text-on-surface flex flex-col items-center justify-center p-8 rounded-2xl shadow-card touch-active hover:bg-surface-variant transition border border-outline-variant/40 group text-center"
+            className="bg-surface-container-high text-on-surface flex flex-col items-center justify-center p-7 sm:p-8 rounded-2xl shadow-card touch-active hover:bg-surface-variant transition border border-outline-variant/40 group text-center"
           >
-            <span className="material-symbols-outlined mb-2 text-4xl text-secondary group-hover:scale-110 transition-transform icon-fill">
-              campaign
+            <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+              <span className="material-symbols-outlined text-4xl text-secondary icon-fill">
+                campaign
+              </span>
+            </div>
+            <span className="font-headline text-lg font-bold text-primary">Government Advisories</span>
+            <span className="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+              3 active weather & pest advisories from Bandarawela Agrarian Office
             </span>
-            <span className="font-label-md text-base font-bold">Government Advisories</span>
-            <span className="text-xs text-on-surface-variant mt-1">3 active weather & pest advisories</span>
           </Link>
         </section>
 
         {/* Smart Crop Recommendation Card (From Stitch Design) */}
-        <section className="relative overflow-hidden rounded-2xl bg-primary-container p-8 text-on-primary shadow-xl">
-          <div className="absolute inset-0 opacity-15 pointer-events-none">
+        <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#004830] via-[#1E6145] to-[#042100] p-6 sm:p-8 text-on-primary shadow-xl border border-primary-container">
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
             <div
               className="w-full h-full"
               style={{
                 background:
-                  'radial-gradient(circle at 20% 30%, #92d5b1 0%, transparent 50%), radial-gradient(circle at 80% 70%, #acd199 0%, transparent 50%)',
+                  'radial-gradient(circle at 15% 20%, #92d5b1 0%, transparent 45%), radial-gradient(circle at 85% 75%, #c7eeb3 0%, transparent 45%)',
               }}
             />
           </div>
 
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-3">
-              <span className="material-symbols-outlined text-secondary-fixed text-2xl">psychology</span>
+              <span className="material-symbols-outlined text-secondary-fixed text-2xl icon-fill">psychology</span>
               <span className="text-xs uppercase tracking-widest font-extrabold text-secondary-fixed">
-                AI Predictive Recommendation
+                AI Smart Crop Recommendation Engine
               </span>
             </div>
-            <h3 className="font-headline text-headline-md font-bold text-white mb-2">
-              Recommended Alternatives for Bandarawela Soil: Beetroot & Radish
+            <h3 className="font-headline text-xl sm:text-2xl font-bold text-white mb-2 leading-tight">
+              Recommended Diversification Alternatives for Bandarawela Soil: Beetroot & Radish
             </h3>
-            <p className="text-primary-fixed-dim text-sm max-w-2xl leading-relaxed mb-6">
-              Current market saturation for Leeks is at 92.5%. Switching to Beetroot (බීට්රූට්) or Radish (රාබු) provides an estimated 40% higher profit margin and stabilizes local vegetable supply.
+            <p className="text-primary-fixed-dim text-sm max-w-3xl leading-relaxed mb-6">
+              Current regional market saturation for Leeks is at 92.5%. Switching to Beetroot (බීට්රූට්), Carrots (කැරට්), or Bush Beans (බෝංචි) provides an estimated 40% higher profit margin and prevents local supply glut.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl">
-                <span className="text-secondary-fixed font-bold text-xs uppercase">Option 1</span>
-                <p className="font-headline font-bold text-white text-lg">Beetroot (බීට්රූට්)</p>
-                <p className="text-xs text-white/80 mt-1">42.4% Regional Saturation • SAFE</p>
+              {/* Option 1: Beetroot */}
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-secondary-fixed font-bold text-xs uppercase tracking-wider">Option 1</span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary-fixed text-on-secondary-fixed">
+                      +42% Profit
+                    </span>
+                  </div>
+                  <h4 className="font-headline font-bold text-white text-lg">Beetroot (බීට්රූට්)</h4>
+                  <p className="text-xs text-white/80 mt-1">42.4% Regional Saturation • SAFE</p>
+                  <p className="text-[11px] text-primary-fixed-dim mt-2">Harvest Cycle: 70–85 Days</p>
+                </div>
+                <button
+                  onClick={() => setIsFarmerModalOpen(true)}
+                  className="mt-4 w-full py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  <span>Select Alternative</span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
               </div>
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl">
-                <span className="text-secondary-fixed font-bold text-xs uppercase">Option 2</span>
-                <p className="font-headline font-bold text-white text-lg">Carrots (කැරට්)</p>
-                <p className="text-xs text-white/80 mt-1">54.2% Regional Saturation • SAFE</p>
+
+              {/* Option 2: Carrots */}
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-secondary-fixed font-bold text-xs uppercase tracking-wider">Option 2</span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary-fixed text-on-secondary-fixed">
+                      +35% Profit
+                    </span>
+                  </div>
+                  <h4 className="font-headline font-bold text-white text-lg">Carrots (කැරට්)</h4>
+                  <p className="text-xs text-white/80 mt-1">54.2% Regional Saturation • SAFE</p>
+                  <p className="text-[11px] text-primary-fixed-dim mt-2">Harvest Cycle: 90–110 Days</p>
+                </div>
+                <button
+                  onClick={() => setIsFarmerModalOpen(true)}
+                  className="mt-4 w-full py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  <span>Select Alternative</span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
               </div>
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl">
-                <span className="text-secondary-fixed font-bold text-xs uppercase">Option 3</span>
-                <p className="font-headline font-bold text-white text-lg">Bush Beans (බෝංචි)</p>
-                <p className="text-xs text-white/80 mt-1">38.0% Regional Saturation • SAFE</p>
+
+              {/* Option 3: Bush Beans */}
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl hover:bg-white/15 transition flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-secondary-fixed font-bold text-xs uppercase tracking-wider">Option 3</span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-secondary-fixed text-on-secondary-fixed">
+                      +48% Profit
+                    </span>
+                  </div>
+                  <h4 className="font-headline font-bold text-white text-lg">Bush Beans (බෝංචි)</h4>
+                  <p className="text-xs text-white/80 mt-1">38.0% Regional Saturation • SAFE</p>
+                  <p className="text-[11px] text-primary-fixed-dim mt-2">Harvest Cycle: 60–70 Days</p>
+                </div>
+                <button
+                  onClick={() => setIsFarmerModalOpen(true)}
+                  className="mt-4 w-full py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  <span>Select Alternative</span>
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Real-time Field Telemetry & Weather Section */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 shadow-card flex items-center gap-4">
+            <div className="w-12 h-12 bg-secondary-container/60 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl">partly_cloudy_day</span>
+            </div>
+            <div>
+              <p className="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Bandarawela Weather</p>
+              <h4 className="font-headline text-lg font-bold text-primary">21°C • Mild Mist</h4>
+              <p className="text-[11px] text-on-surface-variant">Humidity: 74% • Optimal Soil Moisture</p>
+            </div>
+          </div>
+
+          <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 shadow-card flex items-center gap-4">
+            <div className="w-12 h-12 bg-primary-fixed rounded-xl flex items-center justify-center text-primary flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl">science</span>
+            </div>
+            <div>
+              <p className="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Soil Telemetry</p>
+              <h4 className="font-headline text-lg font-bold text-primary">pH 5.8 • Humic Loam</h4>
+              <p className="text-[11px] text-on-surface-variant">High organic carbon • Well drained</p>
+            </div>
+          </div>
+
+          <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 shadow-card flex items-center gap-4">
+            <div className="w-12 h-12 bg-secondary-container/60 rounded-xl flex items-center justify-center text-secondary flex-shrink-0">
+              <span className="material-symbols-outlined text-2xl">support_agent</span>
+            </div>
+            <div>
+              <p className="text-xs text-on-surface-variant font-medium uppercase tracking-wider">Agrarian Officer Contact</p>
+              <h4 className="font-headline text-lg font-bold text-primary">Hotline 1920</h4>
+              <p className="text-[11px] text-on-surface-variant">DO Office Bandarawela: 057-2222123</p>
             </div>
           </div>
         </section>

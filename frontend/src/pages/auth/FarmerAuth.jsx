@@ -71,7 +71,7 @@ export default function FarmerAuth() {
             <span className="material-symbols-outlined text-primary">arrow_back</span>
           </Link>
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary text-2xl">agriculture</span>
+            <img src="/logo.png" alt="ASVANNA" className="w-8 h-8 rounded-full shadow-sm" />
             <h1 className="font-headline text-headline-sm md:text-headline-md font-bold text-primary">
               ASVANNA
             </h1>

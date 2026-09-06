@@ -73,8 +73,8 @@ export default function BuyerAuth() {
             <Link to="/" className="inline-flex items-center mb-md transition hover:opacity-90">
               <img
                 alt="ASVANNA Logo"
-                className="h-20 w-auto object-contain filter drop-shadow-lg"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTl7q7RNLQEN1uP6-mBD6m0LyOjleFGmhL0-PSbZuZzVaYVWmJqo6YdglYJ-BnJf4UvUNr4XaABqxfjwrlKr3tgXp1pmFzQQRzbaolQmkp-esQzlNc8RxULCeOCugwMV-9_B2u9il8PxU4CZdp38K9bH9jkHFrMyTyLcWBtomJ1ctzaklLYiYvJkoUl3aPbhz4HNdZGvVS3P04vZs9C3BW21mOd2-3C-uWOMfKtY1Db98dAjO0FgAfnbNFdtudiriAGwY"
+                className="w-20 h-20 object-contain rounded-full shadow-lg filter drop-shadow-lg"
+                src="/logo.png"
               />
             </Link>
 

@@ -70,9 +70,12 @@ export default function OfficerAuth() {
       {/* Top Navigation Anchor (Stitch Design) */}
       <header className="bg-surface-bright shadow-sm h-20 w-full z-50 sticky top-0 border-b border-outline-variant/30">
         <div className="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-full">
-          <div className="flex items-center gap-4">
-            <Link to="/" className="text-headline-lg font-headline text-headline-lg font-extrabold text-primary hover:opacity-90 transition">
-              ASVANNA
+          <div className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-2.5 group">
+              <img src="/logo.png" alt="ASVANNA" className="w-9 h-9 rounded-full shadow-sm" />
+              <span className="font-headline text-headline-md font-extrabold text-primary group-hover:opacity-90 transition">
+                ASVANNA
+              </span>
             </Link>
             <div className="h-6 w-px bg-outline-variant hidden md:block" />
             <span className="text-label-md font-label-md text-on-surface-variant hidden md:block tracking-widest uppercase font-semibold">

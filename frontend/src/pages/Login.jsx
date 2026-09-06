@@ -89,8 +89,8 @@ export default function Login() {
           <Link to="/" className="inline-block transition-transform hover:scale-105">
             <img
               alt="ASVANNA Logo"
-              className="w-32 h-32 object-contain filter drop-shadow-xl"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTl7q7RNLQEN1uP6-mBD6m0LyOjleFGmhL0-PSbZuZzVaYVWmJqo6YdglYJ-BnJf4UvUNr4XaABqxfjwrlKr3tgXp1pmFzQQRzbaolQmkp-esQzlNc8RxULCeOCugwMV-9_B2u9il8PxU4CZdp38K9bH9jkHFrMyTyLcWBtomJ1ctzaklLYiYvJkoUl3aPbhz4HNdZGvVS3P04vZs9C3BW21mOd2-3C-uWOMfKtY1Db98dAjO0FgAfnbNFdtudiriAGwY"
+              className="w-28 h-28 object-contain rounded-full shadow-2xl filter drop-shadow-xl hover:scale-105 transition-transform"
+              src="/logo.png"
             />
           </Link>
           <h1 className="text-white text-headline-lg font-extrabold leading-tight drop-shadow-lg font-headline">
@@ -167,8 +167,8 @@ export default function Login() {
           <div className="w-full max-w-[460px] flex flex-col gap-6 bg-white p-6 md:p-8 rounded-2xl shadow-card border border-outline-variant/30">
             {/* Mobile / Header Branding */}
             <div className="flex flex-col items-center lg:items-start gap-2 text-center lg:text-left">
-              <div className="lg:hidden p-3 bg-primary-container text-on-primary-container rounded-xl shadow-sm mb-1">
-                <span className="material-symbols-outlined text-3xl">agriculture</span>
+              <div className="lg:hidden mb-2">
+                <img src="/logo.png" alt="ASVANNA Logo" className="w-16 h-16 object-contain rounded-full shadow-md" />
               </div>
               <h2 className="font-headline text-headline-lg text-primary font-extrabold tracking-tight">ASVANNA</h2>
               <p className="font-body-md text-body-md text-on-surface-variant">
