@@ -38,51 +38,68 @@ export default function Broadcasts() {
 
   return (
     <div className="space-y-6 animate-fadeIn">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 stich-card p-6 bg-gradient-to-r from-emerald-950/80 via-emerald-900/40 to-transparent">
+      {/* Header with Dark Letters */}
+      <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <div className="flex items-center space-x-2">
-            <Radio className="w-6 h-6 text-red-400 animate-pulse" />
-            <h1 className="text-2xl font-black text-white tracking-wide">📢 Regional Broadcast Warnings History</h1>
+          <div className="flex items-center space-x-2.5">
+            <div className="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center text-red-600 flex-shrink-0">
+              <Radio className="w-5 h-5 animate-pulse" />
+            </div>
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+              📢 Regional Broadcast Warnings History
+            </h1>
           </div>
-          <p className="text-xs font-bold text-emerald-300 mt-1">
+          <p className="text-sm font-bold text-slate-700 mt-2 max-w-2xl leading-relaxed">
             Official Agrarian Officer Notices Dispatched to Farmers via FCM Push + SMS Fallback
           </p>
         </div>
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white rounded-xl text-xs font-black shadow-lg shadow-red-900/40 transition tracking-wide"
+          className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-black shadow-md shadow-red-900/20 transition tracking-wide cursor-pointer"
         >
           <PlusCircle className="w-4 h-4" /> Issue New Directive
         </button>
       </div>
 
-      {/* Broadcast Cards */}
+      {/* Broadcast Cards with Dark Letters */}
       <div className="space-y-4">
         {broadcasts.map((b) => (
-          <div key={b.id} className="stich-card p-5 border-l-4 border-l-red-500 bg-gradient-to-r from-red-950/20 via-emerald-950/30 to-transparent">
-            <div className="flex justify-between items-start">
+          <div
+            key={b.id}
+            className="bg-surface-container-lowest border border-outline-variant/30 border-l-4 border-l-red-600 rounded-2xl p-6 shadow-card transition-all"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
               <div>
-                <h3 className="font-black text-white text-base sm:text-lg flex items-center space-x-2 tracking-wide">
-                  <ShieldAlert className="w-5 h-5 text-red-400 flex-shrink-0" />
+                <h3 className="font-black text-slate-900 text-base sm:text-lg flex items-center space-x-2 tracking-tight">
+                  <ShieldAlert className="w-5 h-5 text-red-600 flex-shrink-0" />
                   <span>{b.title_si} / {b.title_en}</span>
                 </h3>
-                <p className="text-xs font-bold text-emerald-300/90 mt-1">By {b.officer_name || 'DO Officer'} • {new Date(b.created_at).toLocaleString()}</p>
+                <p className="text-xs font-bold text-slate-600 mt-1.5 flex items-center gap-1.5">
+                  <span>By {b.officer_name || 'DO Officer'}</span>
+                  <span>•</span>
+                  <span>{new Date(b.created_at).toLocaleString()}</span>
+                </p>
               </div>
-              <span className="px-3 py-1 bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-black rounded-xl uppercase tracking-wider">
+              <span className="self-start px-3 py-1 bg-red-100 text-red-900 border border-red-200 text-xs font-black rounded-xl uppercase tracking-wider">
                 {b.severity} Severity
               </span>
             </div>
 
-            <p className="text-sm font-bold text-emerald-50 mt-3 bg-emerald-950/60 p-4 rounded-xl border border-emerald-500/20 leading-relaxed tracking-wide">
-              {b.message_si}
-            </p>
+            {/* Alert Message with Dark High-Contrast Letters */}
+            <div className="mt-3 bg-emerald-50/70 border border-emerald-200/80 p-4 rounded-xl">
+              <p className="text-sm font-bold text-slate-900 leading-relaxed tracking-wide">
+                {b.message_si}
+              </p>
+            </div>
 
-            <div className="mt-4 pt-3 border-t border-emerald-500/20 flex justify-between items-center text-xs text-emerald-300">
-              <span className="font-bold text-emerald-300">Target: {b.target_division || 'Bandarawela Division'}</span>
-              <span className="flex items-center gap-1.5 text-emerald-300 font-black bg-emerald-900/30 px-3 py-1 rounded-lg border border-emerald-500/20">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+            {/* Footer with Dark High-Contrast Letters */}
+            <div className="mt-4 pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+              <span className="font-extrabold text-slate-800">
+                Target: <span className="font-bold text-slate-700">{b.target_division || 'Bandarawela Division'}</span>
+              </span>
+              <span className="flex items-center gap-1.5 text-emerald-900 font-black bg-emerald-100/90 px-3 py-1.5 rounded-lg border border-emerald-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
                 Delivered to {b.sent_count || 142} Farmers (Push + SMS)
               </span>
             </div>
