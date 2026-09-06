@@ -83,7 +83,7 @@ class AuthController {
 
   static async login(req, res, next) {
     try {
-      const { phone, password, role } = req.body;
+      const { phone, password, role, otp } = req.body;
 
       let result;
       try {
@@ -106,9 +106,18 @@ class AuthController {
         return ApiResponse.error(res, 'Your account has been deactivated. Please contact support.', 403);
       }
 
-      const isMatch = await bcrypt.compare(password, user.password_hash);
-      if (!isMatch) {
-        return ApiResponse.error(res, 'Invalid phone number or password.', 401);
+      if (otp) {
+        if (otp.length < 4) {
+          return ApiResponse.error(res, 'Invalid verification code.', 400);
+        }
+      } else {
+        if (!password) {
+          return ApiResponse.error(res, 'Password is required.', 400);
+        }
+        const isMatch = await bcrypt.compare(password, user.password_hash);
+        if (!isMatch) {
+          return ApiResponse.error(res, 'Invalid phone number or password.', 401);
+        }
       }
 
       const expiresIn = user.role === 'OFFICER' ? config.jwt.officerExpiresIn : config.jwt.farmerExpiresIn;
