@@ -18,14 +18,16 @@ void main() {
       expect(leekRisk.alternativeRecommendations.isNotEmpty, isTrue);
     });
 
-    test('Beetroot and Carrots should have safe capacity room', () {
+    test('Beetroot and Green Beans should have safe capacity room, Carrots with caution', () {
       final risks = MockDataService.getRiskAnalyses();
       final beetRisk = risks['crop_beetroot'];
+      final beansRisk = risks['crop_beans'];
       final carrotRisk = risks['crop_carrot'];
 
       expect(beetRisk!.riskLevel, equals(CropRiskLevel.safe));
       expect(beetRisk.saturationPercentage, lessThan(80.0));
-      expect(carrotRisk!.riskLevel, equals(CropRiskLevel.safe));
+      expect(beansRisk!.riskLevel, equals(CropRiskLevel.safe));
+      expect(carrotRisk!.riskLevel, equals(CropRiskLevel.moderate));
     });
   });
 

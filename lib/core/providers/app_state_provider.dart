@@ -14,7 +14,7 @@ enum UserRole { unauthenticated, farmer, buyer }
 enum AppLanguage { english, sinhala, tamil }
 
 class AppStateProvider with ChangeNotifier {
-  UserRole _currentUserRole = UserRole.farmer;
+  UserRole _currentUserRole = UserRole.unauthenticated;
   AppLanguage _currentLanguage = AppLanguage.english;
 
   late FarmerProfile _farmerProfile;
@@ -243,6 +243,34 @@ class AppStateProvider with ChangeNotifier {
       weeklyPurchaseCapacityKg: weeklyCapacityKg,
     );
     _currentUserRole = UserRole.buyer;
+    notifyListeners();
+  }
+
+  bool login({
+    required String identifier,
+    required String password,
+    required UserRole role,
+    bool rememberSession = true,
+  }) {
+    // In demo environment, authenticates seamlessly
+    _currentUserRole = role;
+    notifyListeners();
+    return true;
+  }
+
+  bool loginWithOtp({
+    required String phoneOrNic,
+    required String otpCode,
+    required UserRole role,
+  }) {
+    // Verified OTP
+    _currentUserRole = role;
+    notifyListeners();
+    return true;
+  }
+
+  void logout() {
+    _currentUserRole = UserRole.unauthenticated;
     notifyListeners();
   }
 

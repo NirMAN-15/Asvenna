@@ -35,4 +35,35 @@ class AppColors {
   // Marketplace & Status
   static const Color badgeFresh = Color(0xFF00897B);
   static const Color badgeHarvest = Color(0xFFE65100);
+
+  // Asvanna Portal UI Specific Tokens (Screenshots)
+  static const Color asvannaDarkGreen = Color(0xFF144D34);
+  static const Color asvannaButtonGreen = Color(0xFF155437);
+  static const Color asvannaLightGreen = Color(0xFFC5E8B7);
+  static const Color asvannaLightGreenHover = Color(0xFFB8E0A7);
+  static const Color asvannaPillBg = Color(0xFFEDEFEF);
+  static const Color asvannaBorder = Color(0xFFD2DDD2);
+  static const Color asvannaPrefixBg = Color(0xFFECEFEC);
+  static const Color asvannaTextDark = Color(0xFF133B26);
+  static const Color asvannaTextSubtitle = Color(0xFF4C6B57);
+
+  // Modern Dashboard Redesign Tokens
+  static const Color dashHeaderTitle = Color(0xFF1F2937);
+  static const Color dashHeaderDate = Color(0xFF6B7280);
+  static const Color dashCardBg = Color(0xFFFFFFFF);
+  static const Color dashMetricMapBg = Color(0xFFE8F5E9);
+  static const Color dashMetricSproutBg = Color(0xFFE8F5E9);
+  static const Color dashMetricAlertBg = Color(0xFFFEE2E2);
+  static const Color dashAlertRed = Color(0xFFDC2626);
+  static const Color dashCautionAmber = Color(0xFFF59E0B);
+  static const Color dashCautionText = Color(0xFFD97706);
+  static const Color dashSafeGreen = Color(0xFF10B981);
+  static const Color dashSafeText = Color(0xFF059669);
+  static const Color dashPillRedBg = Color(0xFFFEE2E2);
+  static const Color dashPillAmberBg = Color(0xFFFEF3C7);
+  static const Color dashPillGreenBg = Color(0xFFD1FAE5);
+  static const Color dashAdvisoryBorder = Color(0xFFF59E0B);
+  static const Color dashAdvisoryBg = Color(0xFFFFFBEB);
+  static const Color dashAdvisoryBellBg = Color(0xFFFEF3C7);
+  static const Color dashAdvisoryBellIcon = Color(0xFFD97706);
 }

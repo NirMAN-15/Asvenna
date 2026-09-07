@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
 import 'core/providers/app_state_provider.dart';
-import 'features/auth/role_selection_screen.dart';
+import 'features/auth/login_screen.dart';
 import 'features/farmer/farmer_main_nav.dart';
 import 'features/buyer/buyer_main_nav.dart';
 
@@ -35,8 +35,7 @@ class AsvannaApp extends StatelessWidget {
             case UserRole.buyer:
               return const BuyerMainNav();
             case UserRole.unauthenticated:
-            default:
-              return const RoleSelectionScreen();
+              return const LoginScreen();
           }
         },
       ),

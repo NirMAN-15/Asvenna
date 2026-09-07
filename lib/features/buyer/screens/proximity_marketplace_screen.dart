@@ -6,7 +6,7 @@ import '../../../core/providers/app_state_provider.dart';
 import '../../../core/models/surplus_listing_model.dart';
 import '../../../core/localization/app_translations.dart';
 import 'surplus_detail_screen.dart';
-import '../../auth/role_selection_screen.dart';
+import '../../auth/login_screen.dart';
 import '../../farmer/widgets/presentation_demo_panel.dart';
 
 class ProximityMarketplaceScreen extends StatefulWidget {
@@ -62,12 +62,14 @@ class _ProximityMarketplaceScreenState extends State<ProximityMarketplaceScreen>
             },
           ),
           IconButton(
-            tooltip: 'Switch to Farmer View',
-            icon: const Icon(Icons.swap_horiz_rounded, color: AppColors.accent),
+            tooltip: 'Switch Account / Log Out',
+            icon: const Icon(Icons.logout_rounded, color: AppColors.accent),
             onPressed: () {
-              Navigator.pushReplacement(
+              appState.logout();
+              Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => const RoleSelectionScreen()),
+                MaterialPageRoute(builder: (_) => const LoginScreen(initialRole: UserRole.buyer)),
+                (route) => false,
               );
             },
           ),
