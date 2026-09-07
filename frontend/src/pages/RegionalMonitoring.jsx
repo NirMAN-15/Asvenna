@@ -16,110 +16,135 @@ export default function RegionalMonitoring() {
 
   return (
     <div className="space-y-6 animate-fadeIn">
-      {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 stich-card p-6 bg-gradient-to-r from-emerald-950/80 via-emerald-900/40 to-transparent">
+      {/* Page Header with Dark & Bold Letters */}
+      <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <div className="flex items-center space-x-2">
-            <MapPin className="w-6 h-6 text-emerald-400" />
-            <h1 className="text-2xl font-extrabold text-white tracking-wide">🗺️ Regional Cultivation Heatmap</h1>
+          <div className="flex items-center space-x-2.5">
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 flex-shrink-0">
+              <MapPin className="w-5 h-5 text-emerald-800" />
+            </div>
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+              🗺️ Regional Cultivation Heatmap
+            </h1>
           </div>
-          <p className="text-xs text-emerald-400/80 mt-1">
+          <p className="text-sm font-bold text-slate-700 mt-2 max-w-2xl leading-relaxed">
             GPS-Tagged Active Planting Plots Across Bandarawela & Upcountry Agrarian Divisions
           </p>
         </div>
 
-        <div className="flex items-center gap-2 bg-emerald-950/70 border border-emerald-500/30 px-3.5 py-2 rounded-xl">
-          <Filter className="w-4 h-4 text-emerald-400" />
+        <div className="flex items-center gap-2 bg-slate-100 border border-slate-300 px-3.5 py-2.5 rounded-xl shadow-xs focus-within:ring-2 focus-within:ring-primary/20">
+          <Filter className="w-4 h-4 text-slate-600" />
           <select
             value={selectedCrop}
             onChange={(e) => setSelectedCrop(e.target.value)}
-            className="text-xs bg-transparent text-emerald-200 focus:outline-none font-semibold"
+            className="text-xs bg-transparent text-slate-900 focus:outline-none font-black cursor-pointer"
           >
-            <option value="" className="bg-slate-900 text-white">All Crops</option>
-            <option value="Leeks" className="bg-slate-900 text-white">Leeks (ලීක්ස්)</option>
-            <option value="Cabbage" className="bg-slate-900 text-white">Cabbage (ගෝවා)</option>
-            <option value="Carrot" className="bg-slate-900 text-white">Carrot (කැරට්)</option>
-            <option value="Beetroot" className="bg-slate-900 text-white">Beetroot (බීට්රූට්)</option>
+            <option value="" className="text-slate-900 font-bold">All Crops</option>
+            <option value="Leeks" className="text-slate-900 font-bold">Leeks (ලීක්ස්)</option>
+            <option value="Cabbage" className="text-slate-900 font-bold">Cabbage (ගෝවා)</option>
+            <option value="Carrot" className="text-slate-900 font-bold">Carrot (කැරට්)</option>
+            <option value="Beetroot" className="text-slate-900 font-bold">Beetroot (බීට්රූට්)</option>
           </select>
         </div>
       </div>
 
-      {/* Interactive Map Visual Grid */}
-      <div className="stich-card p-6 relative overflow-hidden bg-gradient-to-b from-emerald-950/90 to-slate-950">
-        <div className="flex items-center justify-between border-b border-emerald-500/20 pb-4 mb-6">
-          <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400">
-            <Navigation className="w-4 h-4 text-emerald-400" />
+      {/* Interactive Map Visual Grid with Dark & Bold Letters */}
+      <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-card relative overflow-hidden">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+          <div className="flex items-center space-x-2 text-xs font-black text-slate-800">
+            <Navigation className="w-4 h-4 text-emerald-700" />
             <span>Bandarawela GPS Grid (Latitude 6.8322° N, Longitude 80.9980° E)</span>
           </div>
-          <span className="text-[11px] text-emerald-400/70 bg-emerald-900/30 border border-emerald-500/20 px-2.5 py-1 rounded-lg">
+          <span className="text-xs font-bold text-slate-700 bg-slate-100 border border-slate-300 px-3 py-1 rounded-lg">
             4 Active Regional Clusters
           </span>
         </div>
 
-        {/* Map Plot Pin Grid Cards */}
+        {/* Map Plot Pin Grid Cards with Dark & Bold Letters */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {filteredPlantings.map((plot) => (
             <div
               key={plot.id}
               className={`p-4 rounded-xl border transition-all ${
                 plot.status === 'OVER_PLANTED'
-                  ? 'bg-red-950/40 border-red-500/40 shadow-lg shadow-red-950/50'
+                  ? 'bg-red-50/90 border-red-200 shadow-xs'
                   : plot.status === 'WARNING'
-                  ? 'bg-amber-950/40 border-amber-500/40 shadow-lg shadow-amber-950/50'
-                  : 'bg-emerald-950/40 border-emerald-500/30 shadow-lg shadow-emerald-950/50'
+                  ? 'bg-amber-50/90 border-amber-200 shadow-xs'
+                  : 'bg-emerald-50/80 border-emerald-200 shadow-xs'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-extrabold text-white flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                <span className={`text-xs font-black flex items-center gap-1 tracking-tight ${
+                  plot.status === 'OVER_PLANTED'
+                    ? 'text-red-950'
+                    : plot.status === 'WARNING'
+                    ? 'text-amber-950'
+                    : 'text-emerald-950'
+                }`}>
+                  <MapPin className={`w-3.5 h-3.5 ${
+                    plot.status === 'OVER_PLANTED'
+                      ? 'text-red-700'
+                      : plot.status === 'WARNING'
+                      ? 'text-amber-700'
+                      : 'text-emerald-700'
+                  }`} />
                   {plot.name_en} ({plot.name_si})
                 </span>
                 <span
-                  className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
+                  className={`text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider ${
                     plot.status === 'OVER_PLANTED'
-                      ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                      ? 'bg-red-100 text-red-900 border border-red-200'
                       : plot.status === 'WARNING'
-                      ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                      : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                      ? 'bg-amber-100 text-amber-900 border border-amber-200'
+                      : 'bg-emerald-100 text-emerald-900 border border-emerald-200'
                   }`}
                 >
-                  {plot.status}
+                  {plot.status.replace('_', ' ')}
                 </span>
               </div>
-              <p className="text-xs text-emerald-200/90 font-semibold">{plot.farmer_name}</p>
-              <p className="text-[11px] text-emerald-400/70">{plot.division}</p>
-              <div className="mt-3 pt-2 border-t border-emerald-500/20 flex items-center justify-between text-[11px] text-emerald-300">
+              <p className="text-xs text-slate-900 font-black">{plot.farmer_name}</p>
+              <p className="text-xs text-slate-700 font-bold mt-0.5">{plot.division}</p>
+              <div className="mt-3 pt-2 border-t border-slate-200/80 flex items-center justify-between text-xs font-bold text-slate-800">
                 <span>Plot: {plot.land_size_acres} Acres</span>
-                <span className="font-mono text-emerald-400">{plot.lat}, {plot.lng}</span>
+                <span className={`font-mono font-black ${
+                  plot.status === 'OVER_PLANTED'
+                    ? 'text-red-950'
+                    : plot.status === 'WARNING'
+                    ? 'text-amber-950'
+                    : 'text-emerald-950'
+                }`}>{plot.lat}, {plot.lng}</span>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Detailed Plot Log List */}
-      <div className="stich-card p-6">
-        <h3 className="text-base font-extrabold text-white mb-4 flex items-center gap-2">
-          <Layers className="w-5 h-5 text-emerald-400" />
+      {/* Detailed Plot Log List with Dark & Bold Letters */}
+      <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-card">
+        <h3 className="text-base sm:text-lg font-black text-slate-900 mb-4 flex items-center gap-2">
+          <Layers className="w-5 h-5 text-emerald-700" />
           <span>Recently Registered Regional Planting Records</span>
         </h3>
         <div className="space-y-3">
           {filteredPlantings.map((p) => (
-            <div key={p.id} className="p-4 bg-emerald-950/40 rounded-xl border border-emerald-500/20 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-emerald-500/40 transition">
+            <div
+              key={p.id}
+              className="p-4 bg-slate-50/90 hover:bg-emerald-50/40 rounded-xl border border-slate-200 hover:border-emerald-300 flex flex-col md:flex-row md:items-center justify-between gap-3 transition shadow-xs"
+            >
               <div>
                 <div className="flex items-center space-x-2">
-                  <h4 className="font-bold text-white text-sm">{p.farmer_name}</h4>
-                  <span className="text-xs text-emerald-400/70">({p.farmer_phone})</span>
+                  <h4 className="font-black text-slate-900 text-base tracking-wide">{p.farmer_name}</h4>
+                  <span className="text-xs font-bold text-slate-600">({p.farmer_phone})</span>
                 </div>
-                <p className="text-xs text-emerald-300/80 mt-1">
-                  Location: <span className="text-white font-medium">{p.division}</span> • Cultivated: <span className="text-white font-semibold">{p.land_size_acres} Acres</span> • Date: <span className="text-white font-mono">{p.planting_date}</span>
+                <p className="text-xs font-bold text-slate-700 mt-1 leading-relaxed">
+                  Location: <strong className="text-slate-900 font-black">{p.division}</strong> • Cultivated: <strong className="text-slate-900 font-black">{p.land_size_acres} Acres</strong> • Date: <strong className="text-slate-900 font-mono font-bold">{p.planting_date}</strong>
                 </p>
               </div>
               <div className="flex items-center space-x-3">
-                <span className="px-3.5 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-extrabold rounded-xl text-xs">
+                <span className="px-3.5 py-1.5 bg-emerald-100 text-emerald-950 border border-emerald-300 font-black rounded-xl text-xs tracking-wider">
                   {p.name_en} ({p.name_si})
                 </span>
-                <ChevronRight className="w-4 h-4 text-emerald-400 hidden md:block" />
+                <ChevronRight className="w-4 h-4 text-emerald-700 hidden md:block" />
               </div>
             </div>
           ))}

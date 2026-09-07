@@ -46,17 +46,22 @@ export default function Sidebar() {
   const links = getRoleLinks();
 
   return (
-    <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant z-50">
-      {/* Brand Header */}
-      <div className="px-6 py-6 border-b border-outline-variant/30">
-        <NavLink to="/dashboard" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-sm">
-            <span className="material-symbols-outlined text-2xl">agriculture</span>
-          </div>
-          <div>
-            <h1 className="font-headline text-headline-sm font-extrabold text-primary leading-none">ASVANNA</h1>
-            <p className="text-on-surface-variant text-[11px] font-semibold tracking-wider uppercase mt-1">
-              Agricultural Management
+    <aside className="hidden md:flex flex-col h-screen w-64 flex-shrink-0 bg-surface-container-low border-r border-outline-variant z-30 select-none">
+      {/* Brand Header with Project Logo */}
+      <div className="px-5 py-5 border-b border-outline-variant/30">
+        <NavLink to="/dashboard" className="flex items-center gap-3 group">
+          <img
+            src="/logo.png"
+            alt="ASVANNA Logo"
+            className="w-11 h-11 object-contain rounded-full shadow-md filter drop-shadow-sm group-hover:scale-105 transition-transform"
+          />
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5">
+              <h1 className="font-headline text-lg font-extrabold text-primary leading-none tracking-tight">ASVANNA</h1>
+              <span className="text-[10px] font-bold text-secondary bg-secondary-container/60 px-1.5 py-0.2 rounded">SL</span>
+            </div>
+            <p className="text-on-surface-variant text-[11px] font-semibold tracking-wider uppercase mt-1 truncate">
+              Agri Intelligence
             </p>
           </div>
         </NavLink>

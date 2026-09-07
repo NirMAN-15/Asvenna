@@ -17,12 +17,18 @@ export default function LandingPage() {
 
       {/* Header / Nav (Anchor Component with Language Switcher) */}
       <header className="sticky top-0 w-full px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center z-50 bg-surface-bright/80 backdrop-blur-md border-b border-outline-variant/30">
-        <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-primary text-3xl">agriculture</span>
-          <span className="font-headline text-headline-sm font-extrabold text-primary tracking-tight">ASVANNA</span>
-          <span className="hidden sm:inline-block text-xs font-semibold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full border border-outline-variant/40 ml-1">
-            (අස්වැන්න)
-          </span>
+        <div className="flex items-center gap-3">
+          <img
+            src="/logo.png"
+            alt="ASVANNA Logo"
+            className="w-10 h-10 object-contain rounded-full shadow-md filter drop-shadow-sm hover:scale-105 transition-transform"
+          />
+          <div className="flex items-center gap-1.5">
+            <span className="font-headline text-headline-sm font-extrabold text-primary tracking-tight">ASVANNA</span>
+            <span className="hidden sm:inline-block text-xs font-semibold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full border border-outline-variant/40 ml-1">
+              (අස්වැන්න)
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">

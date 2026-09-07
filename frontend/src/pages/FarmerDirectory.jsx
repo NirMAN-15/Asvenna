@@ -33,32 +33,36 @@ export default function FarmerDirectory() {
 
   return (
     <div className="space-y-6 animate-fadeIn">
-      {/* Header & Quick Proxy Button */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 stich-card p-6 bg-gradient-to-r from-emerald-950/80 via-emerald-900/40 to-transparent">
+      {/* Header & Quick Proxy Button with Dark Green & Bold Letters */}
+      <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <div className="flex items-center space-x-2">
-            <Users className="w-6 h-6 text-emerald-400" />
-            <h1 className="text-2xl font-extrabold text-white tracking-wide">👨‍🌾 Bandarawela Farmer Directory</h1>
+          <div className="flex items-center space-x-2.5">
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 flex-shrink-0">
+              <Users className="w-5 h-5 text-emerald-800" />
+            </div>
+            <h1 className="text-2xl font-black text-emerald-950 tracking-tight">
+              👨‍🌾 Bandarawela Farmer Directory
+            </h1>
           </div>
-          <p className="text-xs text-emerald-400/80 mt-1">
+          <p className="text-sm font-bold text-emerald-900 mt-2 max-w-2xl leading-relaxed">
             Registered Smallholder Farmers & Agrarian Officer Proxy Log Directory
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <div className="relative">
-            <Search className="w-4 h-4 text-emerald-400 absolute left-3 top-2.5" />
+            <Search className="w-4 h-4 text-emerald-800 absolute left-3.5 top-3" />
             <input
               type="text"
               placeholder="Search by name, phone or NIC..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 pr-4 py-2 bg-emerald-950/80 border border-emerald-500/30 rounded-xl text-xs w-64 text-white placeholder-emerald-500 focus:outline-none focus:border-emerald-400 font-semibold"
+              className="pl-10 pr-4 py-2.5 bg-slate-100 border border-slate-300 rounded-xl text-xs w-64 text-emerald-950 placeholder-slate-500 focus:outline-none focus:border-emerald-600 font-bold"
             />
           </div>
           <button
             onClick={() => setIsProxyModalOpen(true)}
-            className="stich-btn-primary flex items-center gap-2 text-xs"
+            className="flex items-center gap-2 px-4 py-2.5 bg-primary hover:bg-emerald-800 text-white rounded-xl text-xs font-black shadow-md transition cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
             Proxy Record
@@ -66,37 +70,46 @@ export default function FarmerDirectory() {
         </div>
       </div>
 
-      {/* Directory Grid */}
+      {/* Directory Grid with Dark Green & Bold Letters */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {filteredFarmers.map((farmer) => (
-          <div key={farmer.id} className="stich-card p-5 border border-emerald-500/30 flex flex-col justify-between hover:border-emerald-400 transition-all">
+          <div
+            key={farmer.id}
+            className="bg-surface-container-lowest border border-outline-variant/40 hover:border-emerald-500/60 rounded-2xl p-5 shadow-card hover:shadow-md transition-all flex flex-col justify-between"
+          >
             <div>
               <div className="flex items-center space-x-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white flex items-center justify-center font-extrabold text-base shadow-md">
-                  {farmer.full_name.charAt(0)}
+                <div className="w-12 h-12 rounded-2xl bg-emerald-800 text-white flex items-center justify-center font-black text-lg shadow-sm border border-emerald-700/30 flex-shrink-0">
+                  {farmer.full_name ? farmer.full_name.charAt(0) : 'F'}
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-white text-sm">{farmer.full_name}</h3>
-                  <span className="text-[11px] text-emerald-400/80 font-mono">NIC: {farmer.nic || 'N/A'}</span>
+                  <h3 className="font-black text-emerald-950 text-base leading-tight">
+                    {farmer.full_name || 'Registered Farmer'}
+                  </h3>
+                  <span className="text-xs text-emerald-800 font-mono font-bold block mt-0.5">
+                    NIC: {farmer.nic || 'N/A'}
+                  </span>
                 </div>
               </div>
 
-              <div className="space-y-1.5 text-xs text-emerald-200">
-                <div className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="space-y-2 text-xs">
+                <div className="flex items-center gap-2 text-emerald-900 font-bold">
+                  <Phone className="w-3.5 h-3.5 text-emerald-800 flex-shrink-0" />
                   <span className="font-mono">{farmer.phone}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                <div className="flex items-center gap-2 text-emerald-900 font-bold">
+                  <MapPin className="w-3.5 h-3.5 text-emerald-800 flex-shrink-0" />
                   <span>{farmer.division}, {farmer.district}</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-emerald-500/20 flex justify-between items-center text-xs">
-              <span className="text-emerald-400 font-bold">{farmer.total_planting_entries || 1} Plantings</span>
-              <span className="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-[10px] font-bold flex items-center gap-1">
-                <ShieldCheck className="w-3 h-3" /> Verified
+            <div className="mt-4 pt-3 border-t border-slate-200 flex justify-between items-center text-xs">
+              <span className="text-emerald-950 font-black">
+                {farmer.total_planting_entries || 1} Plantings
+              </span>
+              <span className="px-3 py-1 bg-emerald-100 text-emerald-950 border border-emerald-300 rounded-full text-xs font-black flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-800" /> Verified
               </span>
             </div>
           </div>
