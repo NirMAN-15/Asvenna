@@ -19,7 +19,6 @@ export default function FarmerAuth() {
     division: 'Bandarawela',
     gnd_division: 'Wewathenna',
     land_size_acres: '2.5',
-    primary_crop: 'Leeks',
     password: '',
     confirm_password: '',
   });
@@ -277,25 +276,6 @@ export default function FarmerAuth() {
                   placeholder="2.5"
                   className="h-12 px-4 bg-surface border border-outline-variant rounded-lg font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition"
                 />
-              </div>
-
-              <div className="sm:col-span-2 flex flex-col gap-1.5">
-                <label className="font-label-md text-label-md text-on-surface font-medium" htmlFor="primary_crop">
-                  Primary Crop Season (ප්‍රධාන වගාව)
-                </label>
-                <select
-                  id="primary_crop"
-                  name="primary_crop"
-                  value={formData.primary_crop}
-                  onChange={handleChange}
-                  className="h-12 px-4 bg-surface border border-outline-variant rounded-lg font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition"
-                >
-                  <option value="Leeks">Leeks (ලීක්ස්) - High Risk Over-Planted Alert</option>
-                  <option value="Carrot">Carrot (කැරට්)</option>
-                  <option value="Cabbage">Cabbage (ගෝවා)</option>
-                  <option value="Beetroot">Beetroot (බීට්රූට්)</option>
-                  <option value="Paddy">Paddy / Rice (වී)</option>
-                </select>
               </div>
 
               <div className="flex flex-col gap-1.5">
