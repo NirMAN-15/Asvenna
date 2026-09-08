@@ -1,6 +1,20 @@
 {
   "users": [
     {
+      "id": 1788871432993,
+      "full_name": "Ravindi Ranthilini",
+      "phone": "0702658393",
+      "nic": "200239485768",
+      "password_hash": "$2a$10$gFMTFyG4ogH3rqvuYaQzb.Qi7ReX4mDbSBGaCUpeRswhyNJkqa5zK",
+      "role": "FARMER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela",
+      "address": "Wewathenna",
+      "is_verified": true,
+      "created_at": "2026-09-08T12:43:52.993Z"
+    },
+    {
       "id": 1788870246880,
       "full_name": "Ravindi Ranthilini",
       "phone": "0702658393",

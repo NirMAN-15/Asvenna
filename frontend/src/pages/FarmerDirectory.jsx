@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import API from '../services/api';
 import ProxyDataModal from '../components/ProxyDataModal';
 import { Search, Phone, MapPin, Users, PlusCircle, ShieldCheck } from 'lucide-react';
+import { LanguageContext } from '../context/LanguageContext';
 
 export default function FarmerDirectory() {
+  const { t } = useContext(LanguageContext);
   const [farmers, setFarmers] = useState([
     { id: 1, full_name: 'Sunil Shantha', phone: '0712345678', nic: '782345678V', district: 'Badulla', division: 'Bandarawela Central', total_planting_entries: 3, is_verified: true },
     { id: 2, full_name: 'K. G. Dharmasiri', phone: '0778899001', nic: '811234567V', district: 'Badulla', division: 'Welimada North', total_planting_entries: 2, is_verified: true },
@@ -41,11 +43,11 @@ export default function FarmerDirectory() {
               <Users className="w-5 h-5 text-emerald-800" />
             </div>
             <h1 className="text-2xl font-black text-emerald-950 tracking-tight">
-              👨‍🌾 Bandarawela Farmer Directory
+              {t('farmer_directory_title')}
             </h1>
           </div>
           <p className="text-sm font-bold text-emerald-900 mt-2 max-w-2xl leading-relaxed">
-            Registered Smallholder Farmers & Agrarian Officer Proxy Log Directory
+            {t('farmer_directory_subtitle')}
           </p>
         </div>
 
@@ -54,7 +56,7 @@ export default function FarmerDirectory() {
             <Search className="w-4 h-4 text-emerald-800 absolute left-3.5 top-3" />
             <input
               type="text"
-              placeholder="Search by name, phone or NIC..."
+              placeholder={t('search_farmers_placeholder')}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-10 pr-4 py-2.5 bg-slate-100 border border-slate-300 rounded-xl text-xs w-64 text-emerald-950 placeholder-slate-500 focus:outline-none focus:border-emerald-600 font-bold"
@@ -65,7 +67,7 @@ export default function FarmerDirectory() {
             className="flex items-center gap-2 px-4 py-2.5 bg-primary hover:bg-emerald-800 text-white rounded-xl text-xs font-black shadow-md transition cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
-            Proxy Record
+            {t('btn_proxy_record')}
           </button>
         </div>
       </div>
@@ -84,7 +86,7 @@ export default function FarmerDirectory() {
                 </div>
                 <div>
                   <h3 className="font-black text-emerald-950 text-base leading-tight">
-                    {farmer.full_name || 'Registered Farmer'}
+                    {farmer.full_name || t('registered_farmer')}
                   </h3>
                   <span className="text-xs text-emerald-800 font-mono font-bold block mt-0.5">
                     NIC: {farmer.nic || 'N/A'}
@@ -106,10 +108,10 @@ export default function FarmerDirectory() {
 
             <div className="mt-4 pt-3 border-t border-slate-200 flex justify-between items-center text-xs">
               <span className="text-emerald-950 font-black">
-                {farmer.total_planting_entries || 1} Plantings
+                {t('plantings_count', { count: farmer.total_planting_entries || 1 })}
               </span>
               <span className="px-3 py-1 bg-emerald-100 text-emerald-950 border border-emerald-300 rounded-full text-xs font-black flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-800" /> Verified
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-800" /> {t('verified_badge')}
               </span>
             </div>
           </div>

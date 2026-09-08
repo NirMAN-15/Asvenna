@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import API from '../services/api';
 import { X, Send, Radio, AlertCircle } from 'lucide-react';
+import { LanguageContext } from '../context/LanguageContext';
 
 export default function BroadcastModal({ isOpen, onClose, onBroadcastSent }) {
+  const { t } = useContext(LanguageContext);
   const [formData, setFormData] = useState({
     title_en: 'Over-Planting Alert: Leeks',
     title_si: 'අධික වගා අනතුරු ඇඟවීම: ලීක්ස්',
@@ -38,14 +40,14 @@ export default function BroadcastModal({ isOpen, onClose, onBroadcastSent }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
       <div className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer">
           <X className="w-6 h-6" />
         </button>
 
         <h2 className="text-xl font-bold text-gray-800 mb-1 flex items-center gap-2">
-          <Radio className="w-5 h-5 text-red-600 animate-pulse" /> Broadcast Regional Warning
+          <Radio className="w-5 h-5 text-red-600 animate-pulse" /> {t('broadcast_modal_title')}
         </h2>
-        <p className="text-xs text-gray-500 mb-4">Dispatches Push Notification (FCM) & SMS to all registered farmers.</p>
+        <p className="text-xs text-gray-500 mb-4">{t('broadcast_modal_desc')}</p>
 
         {error && <div className="mb-4 p-3 bg-red-50 text-red-700 text-xs rounded-lg flex items-center gap-2"><AlertCircle className="w-4 h-4" /> {error}</div>}
 
@@ -88,7 +90,7 @@ export default function BroadcastModal({ isOpen, onClose, onBroadcastSent }) {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">Severity Level</label>
+              <label className="block text-xs font-semibold text-gray-700 mb-1">{t('label_severity_level')}</label>
               <select
                 value={formData.severity}
                 onChange={(e) => setFormData({ ...formData, severity: e.target.value })}
@@ -101,7 +103,7 @@ export default function BroadcastModal({ isOpen, onClose, onBroadcastSent }) {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-700 mb-1">Target Division</label>
+              <label className="block text-xs font-semibold text-gray-700 mb-1">{t('label_target_division')}</label>
               <input
                 type="text"
                 value={formData.target_division}
@@ -115,16 +117,16 @@ export default function BroadcastModal({ isOpen, onClose, onBroadcastSent }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg"
+              className="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg cursor-pointer"
             >
-              Cancel
+              {t('btn_cancel')}
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-2 text-sm bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-sm flex items-center gap-2"
+              className="px-5 py-2 text-sm bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-sm flex items-center gap-2 cursor-pointer"
             >
-              <Send className="w-4 h-4" /> {loading ? 'Sending...' : 'Broadcast to All Farmers'}
+              <Send className="w-4 h-4" /> {loading ? 'Sending...' : t('btn_broadcast_farmers')}
             </button>
           </div>
         </form>

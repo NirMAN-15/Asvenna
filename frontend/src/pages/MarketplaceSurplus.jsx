@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import API from '../services/api';
+import { LanguageContext } from '../context/LanguageContext';
 
 export default function MarketplaceSurplus() {
+  const { lang, t } = useContext(LanguageContext);
   const [radiusKm, setRadiusKm] = useState(12);
   const [selectedCrop, setSelectedCrop] = useState('All');
   const [maxPrice, setMaxPrice] = useState(800);
@@ -16,11 +18,35 @@ export default function MarketplaceSurplus() {
   ]);
   const [newChatText, setNewChatText] = useState('');
 
+  const getCropDisplay = (cropKey) => {
+    switch (cropKey) {
+      case 'Carrot': return t('crop_carrots');
+      case 'Paddy': return t('crop_paddy');
+      case 'Chili': return lang === 'si' ? "නයි මිරිස්" : lang === 'ta' ? "மிளகாய்" : "Bird's Eye Chili";
+      case 'Onion': return lang === 'si' ? "රතු ළූණු" : lang === 'ta' ? "வெங்காயம்" : "Red Onions";
+      case 'Leeks': return t('crop_leeks');
+      case 'Potato': return t('crop_potato');
+      case 'Beetroot': return t('crop_beetroot');
+      case 'Cabbage': return t('crop_cabbage');
+      default: return cropKey;
+    }
+  };
+
+  const getBadgeDisplay = (badge) => {
+    switch (badge) {
+      case 'Organic': return t('badge_organic');
+      case 'Bulk': return t('badge_bulk');
+      case 'Premium Spice': return t('badge_premium_spice');
+      case 'Dry Harvest': return t('badge_dry_harvest');
+      case 'Fresh Harvest': return t('badge_fresh_harvest');
+      default: return badge;
+    }
+  };
+
   const listings = [
     {
       id: 1,
       farmName: 'Green Valley Farms',
-      crop: 'Carrots (කැරට්)',
       cropKey: 'Carrot',
       distance: 5.2,
       availableKg: 450,
@@ -37,7 +63,6 @@ export default function MarketplaceSurplus() {
     {
       id: 2,
       farmName: "Saman's Field",
-      crop: 'Nadu Paddy Bulk (වී)',
       cropKey: 'Paddy',
       distance: 2.8,
       availableKg: 1200,
@@ -54,7 +79,6 @@ export default function MarketplaceSurplus() {
     {
       id: 3,
       farmName: 'Hillside Organic',
-      crop: "Bird's Eye Chili (නයි මිරිස්)",
       cropKey: 'Chili',
       distance: 11.5,
       availableKg: 85,
@@ -71,7 +95,6 @@ export default function MarketplaceSurplus() {
     {
       id: 4,
       farmName: 'Central Depot Collective',
-      crop: 'Red Onions (රතු ළූණු Grade A)',
       cropKey: 'Onion',
       distance: 14.0,
       availableKg: 300,
@@ -88,7 +111,6 @@ export default function MarketplaceSurplus() {
     {
       id: 5,
       farmName: 'Bandarawela Leek Growers',
-      crop: 'Highland Leeks (ලීක්ස්)',
       cropKey: 'Leeks',
       distance: 3.4,
       availableKg: 650,
@@ -104,7 +126,15 @@ export default function MarketplaceSurplus() {
     },
   ];
 
-  const popularCrops = ['All', 'Paddy', 'Chili', 'Onion', 'Carrot', 'Leeks', 'Potato'];
+  const popularCrops = [
+    { key: 'All', label: t('crop_filter_all') },
+    { key: 'Paddy', label: t('crop_paddy') },
+    { key: 'Chili', label: t('crop_filter_chili') },
+    { key: 'Onion', label: t('crop_filter_onion') },
+    { key: 'Carrot', label: t('crop_carrots') },
+    { key: 'Leeks', label: t('crop_leeks') },
+    { key: 'Potato', label: t('crop_potato') },
+  ];
 
   // Filter listings based on radius, crop, and max price
   const filteredListings = listings.filter((item) => {
@@ -138,15 +168,15 @@ export default function MarketplaceSurplus() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <h1 className="font-headline text-headline-lg font-bold text-primary">
-            Local Buyer Marketplace
+            {t('marketplace_title')}
           </h1>
           <p className="text-on-surface-variant font-body-md">
-            Direct geo-fenced produce trade from upcountry farms (5km - 20km radius)
+            {t('marketplace_subtitle')}
           </p>
         </div>
         <div className="flex items-center gap-2 text-xs font-semibold bg-secondary-container text-on-secondary-fixed px-3 py-1.5 rounded-full self-start sm:self-center">
           <span className="material-symbols-outlined text-sm icon-fill">verified</span>
-          <span>Zero-Waste Direct Procurement</span>
+          <span>{t('zero_waste_procurement')}</span>
         </div>
       </div>
 
@@ -156,7 +186,7 @@ export default function MarketplaceSurplus() {
           {/* Radius Slider */}
           <div className="md:col-span-3 space-y-2">
             <div className="flex justify-between items-center text-xs font-bold text-on-surface-variant">
-              <span>Proximity Radius</span>
+              <span>{t('proximity_radius')}</span>
               <span className="text-primary text-sm font-extrabold font-headline">{radiusKm} km</span>
             </div>
             <input
@@ -176,20 +206,20 @@ export default function MarketplaceSurplus() {
           {/* Popular Crop Chips */}
           <div className="md:col-span-6 space-y-2">
             <label className="font-label-md text-xs font-bold text-on-surface-variant block">
-              Popular Crops
+              {t('popular_crops')}
             </label>
             <div className="flex flex-wrap gap-2">
               {popularCrops.map((crop) => (
                 <button
-                  key={crop}
-                  onClick={() => setSelectedCrop(crop)}
+                  key={crop.key}
+                  onClick={() => setSelectedCrop(crop.key)}
                   className={`px-3.5 py-1.5 rounded-full font-label-md text-xs font-semibold transition-all press-effect ${
-                    selectedCrop === crop
+                    selectedCrop === crop.key
                       ? 'bg-secondary-container text-on-secondary-fixed border border-secondary font-bold shadow-sm'
                       : 'bg-surface-container-low text-on-surface-variant border border-outline-variant hover:bg-secondary-container/50'
                   }`}
                 >
-                  {crop}
+                  {crop.label}
                 </button>
               ))}
             </div>
@@ -198,7 +228,7 @@ export default function MarketplaceSurplus() {
           {/* Price Range Slider */}
           <div className="md:col-span-3 space-y-2">
             <div className="flex justify-between items-center text-xs font-bold text-on-surface-variant">
-              <span>Max Price</span>
+              <span>{t('max_price')}</span>
               <span className="text-secondary text-sm font-extrabold font-headline">
                 LKR {maxPrice}/kg
               </span>
@@ -251,7 +281,7 @@ export default function MarketplaceSurplus() {
               <span className="material-symbols-outlined text-sm">agriculture</span>
             </div>
             <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-on-surface px-2.5 py-1 rounded-lg shadow-md text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-outline-variant">
-              Green Valley: Carrots (5.2km)
+              Green Valley: {getCropDisplay('Carrot')} (5.2km)
             </div>
           </div>
 
@@ -263,7 +293,7 @@ export default function MarketplaceSurplus() {
               <span className="material-symbols-outlined text-sm">local_shipping</span>
             </div>
             <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-on-surface px-2.5 py-1 rounded-lg shadow-md text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-outline-variant">
-              Saman's Farm: Paddy (2.8km)
+              Saman's Farm: {getCropDisplay('Paddy')} (2.8km)
             </div>
           </div>
 
@@ -275,7 +305,7 @@ export default function MarketplaceSurplus() {
               <span className="material-symbols-outlined text-sm">agriculture</span>
             </div>
             <div className="absolute -top-9 left-1/2 -translate-x-1/2 bg-white text-on-surface px-2.5 py-1 rounded-lg shadow-md text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-outline-variant">
-              Leek Growers: (3.4km)
+              Leek Growers: {getCropDisplay('Leeks')} (3.4km)
             </div>
           </div>
 
@@ -283,10 +313,10 @@ export default function MarketplaceSurplus() {
           <div className="relative m-4 p-3 bg-white/90 backdrop-blur-md rounded-xl border border-outline-variant shadow-sm flex justify-between items-center text-xs">
             <span className="font-bold text-primary flex items-center gap-1">
               <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
-              Bandarawela GPS Center (6.8258° N, 80.9982° E)
+              {t('gps_center')}
             </span>
             <span className="font-semibold text-on-surface-variant">
-              {filteredListings.length} Farms in {radiusKm}km Radius
+              {t('farms_in_radius', { count: filteredListings.length, radius: radiusKm })}
             </span>
           </div>
 
@@ -317,7 +347,7 @@ export default function MarketplaceSurplus() {
               className="bg-primary text-white px-4 py-2 rounded-full shadow-lg font-label-md text-xs font-bold flex items-center gap-1.5 press-effect hover:bg-primary-container transition"
             >
               <span className="material-symbols-outlined text-sm">my_location</span>
-              <span>Recenter Bandarawela</span>
+              <span>{t('recenter_bandarawela')}</span>
             </button>
           </div>
         </div>
@@ -328,8 +358,8 @@ export default function MarketplaceSurplus() {
             {filteredListings.length === 0 ? (
               <div className="bg-surface-container-lowest p-8 rounded-2xl text-center border border-outline-variant/30 text-on-surface-variant">
                 <span className="material-symbols-outlined text-4xl text-outline mb-2">search_off</span>
-                <p className="font-bold text-sm">No produce listings found matching criteria.</p>
-                <p className="text-xs mt-1">Try expanding the radius slider or resetting the crop filter.</p>
+                <p className="font-bold text-sm">{t('no_produce_found')}</p>
+                <p className="text-xs mt-1">{t('try_expanding_radius')}</p>
               </div>
             ) : (
               filteredListings.map((item) => (
@@ -342,11 +372,11 @@ export default function MarketplaceSurplus() {
                   <div className="w-1/3 relative h-36 rounded-xl overflow-hidden my-auto">
                     <img
                       src={item.image}
-                      alt={item.crop}
+                      alt={item.farmName}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute top-1.5 left-1.5 bg-primary/90 backdrop-blur-md text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                      {item.badge}
+                      {getBadgeDisplay(item.badge)}
                     </div>
                   </div>
 
@@ -361,19 +391,19 @@ export default function MarketplaceSurplus() {
                           {item.distance} km
                         </span>
                       </div>
-                      <p className="text-on-surface-variant text-xs font-semibold mt-0.5">{item.crop}</p>
+                      <p className="text-on-surface-variant text-xs font-semibold mt-0.5">{getCropDisplay(item.cropKey)}</p>
                       <p className="text-[11px] text-outline">{item.location}</p>
                     </div>
 
                     <div className="mt-2 flex justify-between items-end pt-2 border-t border-surface-variant">
                       <div>
-                        <div className="text-[10px] font-bold text-outline uppercase tracking-wider">Available</div>
+                        <div className="text-[10px] font-bold text-outline uppercase tracking-wider">{t('label_available')}</div>
                         <div className="font-headline text-base font-extrabold text-on-surface">
                           {item.availableKg} kg
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-[10px] font-bold text-outline uppercase tracking-wider">Wholesale</div>
+                        <div className="text-[10px] font-bold text-outline uppercase tracking-wider">{t('label_wholesale')}</div>
                         <div className="font-headline text-base font-extrabold text-secondary">
                           LKR {item.pricePerKg}/kg
                         </div>
@@ -384,7 +414,7 @@ export default function MarketplaceSurplus() {
                       type="button"
                       className="mt-3 w-full bg-primary text-white py-2 rounded-lg font-label-md text-xs font-bold hover:bg-primary-container transition group-active:scale-98"
                     >
-                      View Details & Order
+                      {t('view_details_order')}
                     </button>
                   </div>
                 </div>
@@ -402,7 +432,7 @@ export default function MarketplaceSurplus() {
               <div>
                 <h3 className="font-headline text-headline-sm font-bold">{selectedListing.farmName}</h3>
                 <p className="text-primary-fixed-dim text-xs">
-                  {selectedListing.crop} • {selectedListing.distance} km away • {selectedListing.location}
+                  {getCropDisplay(selectedListing.cropKey)} • {selectedListing.distance} km away • {selectedListing.location}
                 </p>
               </div>
               <button
@@ -419,24 +449,24 @@ export default function MarketplaceSurplus() {
                   <span className="material-symbols-outlined text-5xl text-primary icon-fill">
                     check_circle
                   </span>
-                  <h4 className="font-headline text-headline-sm font-bold">Order Placed Successfully!</h4>
+                  <h4 className="font-headline text-headline-sm font-bold">{t('order_placed_success')}</h4>
                   <p className="text-xs text-on-surface-variant">
-                    Farmer {selectedListing.farmer} has been notified. Dispatch arranged within {selectedListing.distance}km.
+                    {t('order_placed_sub', { farmer: selectedListing.farmer, dist: selectedListing.distance })}
                   </p>
                 </div>
               ) : (
                 <>
                   <div className="grid grid-cols-3 gap-3 text-center">
                     <div className="p-3 bg-surface-container rounded-xl">
-                      <span className="text-[10px] text-outline uppercase font-bold">Total Stock</span>
+                      <span className="text-[10px] text-outline uppercase font-bold">{t('total_stock')}</span>
                       <p className="font-bold text-primary text-base">{selectedListing.availableKg} kg</p>
                     </div>
                     <div className="p-3 bg-surface-container rounded-xl">
-                      <span className="text-[10px] text-outline uppercase font-bold">Unit Price</span>
+                      <span className="text-[10px] text-outline uppercase font-bold">{t('unit_price')}</span>
                       <p className="font-bold text-secondary text-base">LKR {selectedListing.pricePerKg}/kg</p>
                     </div>
                     <div className="p-3 bg-surface-container rounded-xl">
-                      <span className="text-[10px] text-outline uppercase font-bold">Direct Hotline</span>
+                      <span className="text-[10px] text-outline uppercase font-bold">{t('direct_hotline')}</span>
                       <p className="font-bold text-on-surface text-xs mt-1">{selectedListing.phone}</p>
                     </div>
                   </div>
@@ -444,9 +474,9 @@ export default function MarketplaceSurplus() {
                   {/* Order Quantity Selector */}
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs font-bold">
-                      <label htmlFor="order_qty">Purchase Quantity (kg)</label>
+                      <label htmlFor="order_qty">{t('purchase_quantity')}</label>
                       <span className="text-primary">
-                        Total: LKR {(orderQuantity * selectedListing.pricePerKg).toLocaleString()}
+                        {t('total_lkr', { amount: (orderQuantity * selectedListing.pricePerKg).toLocaleString() })}
                       </span>
                     </div>
                     <input
@@ -463,7 +493,7 @@ export default function MarketplaceSurplus() {
                   {/* Direct Chat / Communication snippet */}
                   <div className="space-y-2 pt-2 border-t border-outline-variant/30">
                     <span className="text-xs font-bold text-on-surface-variant flex items-center gap-1">
-                      <span className="material-symbols-outlined text-sm">chat</span> Direct Farmer Communication
+                      <span className="material-symbols-outlined text-sm">chat</span> {t('direct_chat_farmer')}
                     </span>
                     <div className="max-h-32 overflow-y-auto p-3 bg-surface-container-low rounded-xl space-y-2 text-xs">
                       {chatMessages.map((msg, idx) => (
@@ -486,14 +516,14 @@ export default function MarketplaceSurplus() {
                         type="text"
                         value={newChatText}
                         onChange={(e) => setNewChatText(e.target.value)}
-                        placeholder="Type message to farmer..."
+                        placeholder={t('type_message_placeholder')}
                         className="flex-1 h-10 px-3 border border-outline-variant rounded-lg text-xs bg-surface outline-none focus:border-primary"
                       />
                       <button
                         type="submit"
-                        className="px-4 h-10 bg-secondary text-white rounded-lg text-xs font-bold hover:bg-secondary/90 transition"
+                        className="px-4 h-10 bg-secondary text-white rounded-lg text-xs font-bold hover:bg-secondary/90 transition cursor-pointer"
                       >
-                        Send
+                        {t('btn_send')}
                       </button>
                     </form>
                   </div>
@@ -512,7 +542,7 @@ export default function MarketplaceSurplus() {
                       onClick={handlePlaceOrder}
                       className="flex-1 py-3 rounded-xl bg-primary text-white font-label-md text-xs font-bold hover:bg-primary-container shadow-sm press-effect"
                     >
-                      Confirm Direct Order
+                      {t('confirm_place_order', { qty: orderQuantity })}
                     </button>
                   </div>
                 </>
