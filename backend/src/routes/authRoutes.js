@@ -12,7 +12,12 @@ router.post(
   '/login',
   [
     body('phone').notEmpty().withMessage('Phone is required'),
-    body('password').notEmpty().withMessage('Password is required')
+    body().custom((value) => {
+      if (!value.password && !value.otp) {
+        throw new Error('Password or verification code is required');
+      }
+      return true;
+    })
   ],
   validateRequest,
   AuthController.login
