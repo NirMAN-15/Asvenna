@@ -1,6 +1,19 @@
 {
   "users": [
     {
+      "id": 1788696893641,
+      "phone": "0213213213",
+      "nic": "200451011175",
+      "password_hash": "$2a$10$hp1oK5MhBAASiDaSmrcLyunQf7SnJQvcJfMKnnRoWxl247yj6sdSu",
+      "role": "BUYER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela Central",
+      "address": "Bandarawela",
+      "is_verified": true,
+      "created_at": "2026-09-06T12:14:53.641Z"
+    },
+    {
       "id": 1787788081234,
       "phone": "0788597202",
       "nic": "200322610371",

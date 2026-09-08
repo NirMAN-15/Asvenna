@@ -65,7 +65,7 @@ Asvenna/
 You can launch the complete backend, PostgreSQL database, and Multi-Role Web Portal with a single command:
 
 ```bash
-docker compose up --build -d
+ 
 ```
 
 - **Multi-Role Web Portal**: [http://localhost:3000](http://localhost:3000) (Features landing page gateway with separate Officer, Farmer, and Buyer portals)
