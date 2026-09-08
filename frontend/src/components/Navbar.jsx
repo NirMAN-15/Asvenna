@@ -8,22 +8,6 @@ export default function Navbar() {
   const { lang, setLanguage, t } = useContext(LanguageContext);
   const navigate = useNavigate();
 
-  // 15-minute session timer simulation (from Stitch Officer Dashboard)
-  const [secondsLeft, setSecondsLeft] = useState(899); // 14:59
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSecondsLeft((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const formatTimer = () => {
-    const mins = Math.floor(secondsLeft / 60);
-    const secs = secondsLeft % 60;
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  };
-
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -39,10 +23,18 @@ export default function Navbar() {
 
   const getOfficeSubtitle = () => {
     const r = role?.toUpperCase();
-    if (r === 'OFFICER') return `${user?.division || 'Bandarawela'} District Agrarian Office`;
-    if (r === 'FARMER') return `${user?.division || 'Bandarawela'} • Upcountry Cultivation Division`;
-    if (r === 'BUYER') return `${user?.district || 'Badulla'} Commercial Surplus Procurement`;
-    return 'Bandarawela Agricultural Zone';
+    if (r === 'OFFICER') return t('officer_subtitle');
+    if (r === 'FARMER') return t('farmer_subtitle');
+    if (r === 'BUYER') return t('buyer_subtitle');
+    return t('app_subtitle');
+  };
+
+  const getRoleBadge = () => {
+    const r = role?.toUpperCase();
+    if (r === 'OFFICER') return t('role_officer');
+    if (r === 'FARMER') return t('role_farmer');
+    if (r === 'BUYER') return t('role_buyer');
+    return t('verified');
   };
 
   return (
@@ -62,7 +54,7 @@ export default function Navbar() {
               {getRoleTitle()}
             </h2>
             <span className="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-secondary-container text-on-secondary-fixed flex-shrink-0">
-              {role || 'VERIFIED'}
+              {getRoleBadge()}
             </span>
           </div>
           <p className="font-label-md text-xs text-on-surface-variant uppercase tracking-wider truncate">
@@ -71,17 +63,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Right Controls: Timer, Language, Notifications, Avatar */}
+      {/* Right Controls: Language Switcher, Notifications, Avatar */}
       <div className="flex items-center gap-3 md:gap-5">
-        {/* JWT Countdown Timer Pill (Stitch Anchor Component) */}
-        <div className="hidden sm:flex items-center bg-surface-container px-3.5 py-1.5 rounded-full border border-outline-variant shadow-sm">
-          <span className="material-symbols-outlined text-primary mr-1.5 text-base icon-fill">
-            timer
-          </span>
-          <span className="font-label-md font-bold text-primary text-xs tracking-wider">
-            {formatTimer()}
-          </span>
-        </div>
 
         {/* Language Switcher */}
         <div className="flex items-center bg-surface-container-low rounded-full px-2 py-1 border border-outline-variant text-xs shadow-sm">
@@ -135,7 +118,7 @@ export default function Navbar() {
           <button
             onClick={handleLogout}
             className="hidden lg:flex items-center text-xs text-on-surface-variant hover:text-error transition ml-1"
-            title="Sign Out"
+            title={t('logout')}
           >
             <span className="material-symbols-outlined text-lg">logout</span>
           </button>
