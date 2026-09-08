@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { LanguageContext } from '../context/LanguageContext';
 
 export default function Sidebar() {
   const { user, role, logout } = useContext(AuthContext);
+  const { t } = useContext(LanguageContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -15,31 +17,31 @@ export default function Sidebar() {
     const r = role?.toUpperCase();
     if (r === 'OFFICER') {
       return [
-        { path: '/dashboard', label: 'Field Overview', icon: 'agriculture' },
-        { path: '/monitoring', label: 'Regional Map', icon: 'map' },
-        { path: '/risk-analytics', label: 'Risk Analytics', icon: 'bar_chart' },
-        { path: '/farmers', label: 'Farmer Directory', icon: 'group' },
-        { path: '/broadcasts', label: 'Advisory Broadcasts', icon: 'campaign' },
-        { path: '/settings', label: 'Settings', icon: 'settings' },
+        { path: '/dashboard', label: t('nav_field_overview'), icon: 'agriculture' },
+        { path: '/monitoring', label: t('nav_regional_map'), icon: 'map' },
+        { path: '/risk-analytics', label: t('risk_analytics'), icon: 'bar_chart' },
+        { path: '/farmers', label: t('nav_farmer_directory'), icon: 'group' },
+        { path: '/broadcasts', label: t('nav_advisory_broadcasts'), icon: 'campaign' },
+        { path: '/settings', label: t('settings'), icon: 'settings' },
       ];
     } else if (r === 'FARMER') {
       return [
-        { path: '/dashboard', label: 'My Farm Overview', icon: 'agriculture' },
-        { path: '/risk-analytics', label: 'Crop Advisory', icon: 'psychology' },
-        { path: '/marketplace', label: 'Sell Surplus Produce', icon: 'storefront' },
-        { path: '/broadcasts', label: 'Officer Alerts', icon: 'notifications_active' },
-        { path: '/settings', label: 'Settings', icon: 'settings' },
+        { path: '/dashboard', label: t('nav_my_farm'), icon: 'agriculture' },
+        { path: '/risk-analytics', label: t('nav_crop_advisory'), icon: 'psychology' },
+        { path: '/marketplace', label: t('nav_sell_produce'), icon: 'storefront' },
+        { path: '/broadcasts', label: t('nav_officer_alerts'), icon: 'notifications_active' },
+        { path: '/settings', label: t('settings'), icon: 'settings' },
       ];
     } else if (r === 'BUYER') {
       return [
-        { path: '/dashboard', label: 'Procurement Dashboard', icon: 'dashboard' },
-        { path: '/marketplace', label: 'Surplus Marketplace', icon: 'shopping_cart' },
-        { path: '/settings', label: 'Settings', icon: 'settings' },
+        { path: '/dashboard', label: t('nav_procurement_dashboard'), icon: 'dashboard' },
+        { path: '/marketplace', label: t('nav_surplus_marketplace'), icon: 'shopping_cart' },
+        { path: '/settings', label: t('settings'), icon: 'settings' },
       ];
     }
     return [
-      { path: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
-      { path: '/marketplace', label: 'Marketplace', icon: 'shopping_cart' },
+      { path: '/dashboard', label: t('dashboard'), icon: 'dashboard' },
+      { path: '/marketplace', label: t('marketplace'), icon: 'shopping_cart' },
     ];
   };
 
@@ -104,7 +106,7 @@ export default function Sidebar() {
           className="text-on-surface-variant flex items-center px-4 py-2.5 hover:bg-surface-variant transition rounded-xl w-full text-left font-medium text-sm"
         >
           <span className="material-symbols-outlined mr-3 text-xl text-outline">help</span>
-          <span className="font-label-md">Help Center</span>
+          <span className="font-label-md">{t('help_center')}</span>
         </button>
 
         <button
@@ -112,7 +114,7 @@ export default function Sidebar() {
           className="text-error hover:bg-error-container/20 flex items-center px-4 py-2.5 transition rounded-xl w-full text-left font-semibold text-sm"
         >
           <span className="material-symbols-outlined mr-3 text-xl">logout</span>
-          <span className="font-label-md">Sign Out</span>
+          <span className="font-label-md">{t('logout')}</span>
         </button>
       </div>
     </aside>
