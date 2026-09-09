@@ -125,7 +125,7 @@ export default function LandingPage() {
                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
               </button>
               <button
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/login', { state: { role: 'FARMER' } })}
                 className="px-3 py-3 border border-outline-variant hover:bg-surface-container rounded-xl text-primary font-bold transition"
                 title="Sign in as Farmer"
               >
@@ -170,7 +170,7 @@ export default function LandingPage() {
                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
               </button>
               <button
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/login', { state: { role: 'BUYER' } })}
                 className="px-3 py-3 border border-outline-variant hover:bg-surface-container rounded-xl text-secondary font-bold transition"
                 title="Sign in as Buyer"
               >
@@ -215,7 +215,7 @@ export default function LandingPage() {
                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
               </button>
               <button
-                onClick={() => navigate('/login')}
+                onClick={() => navigate('/login', { state: { role: 'OFFICER' } })}
                 className="px-3 py-3 border border-outline-variant hover:bg-surface-container rounded-xl text-primary font-bold transition"
                 title="Sign in as Officer"
               >

@@ -1,6 +1,20 @@
 {
   "users": [
     {
+      "id": 1788893101075,
+      "full_name": "Tharaka",
+      "phone": "776420373",
+      "nic": "978456123",
+      "password_hash": "$2a$10$6gmAyZjUIhGnR.Lp4aYBIeaXl08RWR1dob6rDQP/w3/SWWvTfW.im",
+      "role": "FARMER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela",
+      "address": "Wewathenna",
+      "is_verified": true,
+      "created_at": "2026-09-08T18:45:01.075Z"
+    },
+    {
       "id": 1788873162935,
       "full_name": "Imal",
       "phone": "7778899445",
