@@ -14,6 +14,7 @@ import RiskAnalytics from './pages/RiskAnalytics';
 import FarmerDirectory from './pages/FarmerDirectory';
 import Broadcasts from './pages/Broadcasts';
 import MarketplaceSurplus from './pages/MarketplaceSurplus';
+import ProcurementHistory from './pages/ProcurementHistory';
 import Settings from './pages/Settings';
 
 // Components
@@ -36,6 +37,7 @@ function AppLayout() {
             <Route path="/farmers" element={<ProtectedRoute allowedRoles={['OFFICER']}><FarmerDirectory /></ProtectedRoute>} />
             <Route path="/broadcasts" element={<ProtectedRoute allowedRoles={['OFFICER','FARMER']}><Broadcasts /></ProtectedRoute>} />
             <Route path="/marketplace" element={<ProtectedRoute allowedRoles={['FARMER','BUYER']}><MarketplaceSurplus /></ProtectedRoute>} />
+            <Route path="/history" element={<ProtectedRoute allowedRoles={['OFFICER','FARMER','BUYER']}><ProcurementHistory /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute allowedRoles={['OFFICER','FARMER','BUYER']}><Settings /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>

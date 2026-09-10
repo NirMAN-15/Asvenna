@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post('/list', MarketplaceController.createListing);
 router.get('/search-nearby', MarketplaceController.searchNearby);
+router.get('/orders', MarketplaceController.getOrders);
 router.post('/orders', MarketplaceController.placeOrder);
 router.get('/orders/:orderId/messages', MarketplaceController.getMessages);
 router.post('/orders/:orderId/messages', MarketplaceController.sendMessage);

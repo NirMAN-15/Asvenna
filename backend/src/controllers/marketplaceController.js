@@ -70,32 +70,96 @@ class MarketplaceController {
     }
   }
 
+  static async getOrders(req, res, next) {
+    try {
+      const { role, userId } = req.query;
+      let orders = [];
+
+      if (db.query) {
+        try {
+          const result = await db.query('SELECT * FROM marketplace_orders');
+          if (result && result.rows && result.rows.length > 0) {
+            orders = result.rows;
+          }
+        } catch (e) {
+          // ignore error and fallback to fileDb
+        }
+      }
+
+      if (!orders || orders.length === 0) {
+        const fileDb = db.fileDb || { marketplace_orders: [] };
+        orders = fileDb.marketplace_orders || [];
+      }
+
+      return ApiResponse.success(res, orders);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   static async placeOrder(req, res, next) {
     try {
-      const { listing_id, requested_quantity_kg, offered_price_per_kg, notes } = req.body;
-      const userId = req.user ? req.user.id : 3;
+      const {
+        listing_id,
+        requested_quantity_kg,
+        offered_price_per_kg,
+        notes,
+        crop_name,
+        crop_key,
+        farmer_name,
+        farmer_phone,
+        farmer_location,
+        status,
+        date_received
+      } = req.body;
+      const userId = req.user ? req.user.id : 1788873169736;
+      const buyerName = req.user ? req.user.full_name : 'Miyuni Dewanga';
 
+      // Find listing info if available
+      let listingInfo = null;
+      if (db.fileDb && db.fileDb.marketplace_listings) {
+        listingInfo = db.fileDb.marketplace_listings.find(l => Number(l.id) === Number(listing_id));
+      }
+
+      const orderQty = Number(requested_quantity_kg) || 100;
+      const unitPrice = Number(offered_price_per_kg) || (listingInfo ? listingInfo.price_per_kg : 200);
+      const totalAmount = orderQty * unitPrice;
+      const now = new Date();
       const responseDeadline = new Date(Date.now() + 30 * 60 * 1000);
+
       const order = {
         id: Date.now(),
-        listing_id: Number(listing_id),
+        order_code: `ASV-ORD-${Math.floor(1000 + Math.random() * 9000)}`,
+        listing_id: Number(listing_id) || 1,
         buyer_id: userId,
-        requested_quantity_kg: Number(requested_quantity_kg),
-        offered_price_per_kg: Number(offered_price_per_kg),
-        status: 'PENDING',
+        buyer_name: buyerName,
+        crop_name: crop_name || (listingInfo ? listingInfo.crop_name : 'Highland Vegetable Produce'),
+        crop_key: crop_key || 'Carrot',
+        farmer_name: farmer_name || (listingInfo ? (listingInfo.farmer_name || 'Sunil Shantha') : 'Sunil Shantha'),
+        farmer_phone: farmer_phone || (listingInfo ? (listingInfo.farmer_phone || '0712345678') : '0712345678'),
+        farmer_location: farmer_location || (listingInfo ? (listingInfo.pickup_address || 'Bandarawela North') : 'Bandarawela North'),
+        requested_quantity_kg: orderQty,
+        quantity_kg: orderQty,
+        offered_price_per_kg: unitPrice,
+        price_per_kg: unitPrice,
+        total_price: totalAmount,
+        status: status || 'DELIVERED',
+        date_received: date_received || now.toISOString(),
         response_deadline: responseDeadline.toISOString(),
-        notes: notes || 'Direct order from local buyer'
+        created_at: now.toISOString(),
+        notes: notes || 'Direct procurement order via Zero-Waste Surplus Marketplace'
       };
 
       if (db.fileDb) {
+        if (!db.fileDb.marketplace_orders) db.fileDb.marketplace_orders = [];
         db.fileDb.marketplace_orders.unshift(order);
         if (db.saveDb) db.saveDb(db.fileDb);
       }
 
       // Push initial system chat message
-      realtimeStore.addChatMessage(listing_id, order.id, userId, 'Bandarawela Wholesale Buyer', 'BUYER', `Order placed for ${requested_quantity_kg}kg at Rs ${offered_price_per_kg}/kg.`);
+      realtimeStore.addChatMessage(listing_id, order.id, userId, buyerName, 'BUYER', `Order placed for ${orderQty}kg at Rs ${unitPrice}/kg (Total LKR ${totalAmount.toLocaleString()}).`);
 
-      return ApiResponse.success(res, order, 'Order offer submitted successfully (30-minute window)', 201);
+      return ApiResponse.success(res, order, 'Order confirmed and recorded to procurement history', 201);
     } catch (err) {
       next(err);
     }
