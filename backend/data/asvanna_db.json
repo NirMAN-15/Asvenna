@@ -1,6 +1,46 @@
 {
   "users": [
     {
+      "id": 1789159409719,
+      "full_name": "Wedikkarage Nirman Achintha Wedikkara",
+      "phone": "0788597202",
+      "nic": "Niman Achintha",
+      "password_hash": "$2a$10$YPXRNiOyhTLghJQFc8nYjORR4urU/uXHnxdn8RO4knbrrVjUijNaq",
+      "role": "BUYER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela Central",
+      "address": "Bandarawela",
+      "is_verified": true,
+      "created_at": "2026-09-11T20:43:29.719Z"
+    },
+    {
+      "id": 1789159147474,
+      "full_name": "test",
+      "phone": "123456789",
+      "nic": "123456789",
+      "role": "FARMER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela",
+      "address": "Wewathenna",
+      "is_verified": true,
+      "created_at": "2026-09-11T20:39:07.474Z"
+    },
+    {
+      "id": 1789158918974,
+      "full_name": "test1",
+      "phone": "0788597202",
+      "nic": "200322610371",
+      "role": "FARMER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela",
+      "address": "Wewathenna",
+      "is_verified": true,
+      "created_at": "2026-09-11T20:35:18.974Z"
+    },
+    {
       "id": 1789157657893,
       "full_name": "test1",
       "phone": "0788597202",
