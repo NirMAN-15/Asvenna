@@ -29,6 +29,7 @@ export default function Sidebar() {
         { path: '/dashboard', label: t('nav_my_farm'), icon: 'agriculture' },
         { path: '/risk-analytics', label: t('nav_crop_advisory'), icon: 'psychology' },
         { path: '/marketplace', label: t('nav_sell_produce'), icon: 'storefront' },
+        { path: '/history', label: t('nav_history'), icon: 'history' },
         { path: '/broadcasts', label: t('nav_officer_alerts'), icon: 'notifications_active' },
         { path: '/settings', label: t('settings'), icon: 'settings' },
       ];
@@ -36,12 +37,14 @@ export default function Sidebar() {
       return [
         { path: '/dashboard', label: t('nav_procurement_dashboard'), icon: 'dashboard' },
         { path: '/marketplace', label: t('nav_surplus_marketplace'), icon: 'shopping_cart' },
+        { path: '/history', label: t('nav_history'), icon: 'history' },
         { path: '/settings', label: t('settings'), icon: 'settings' },
       ];
     }
     return [
       { path: '/dashboard', label: t('dashboard'), icon: 'dashboard' },
       { path: '/marketplace', label: t('marketplace'), icon: 'shopping_cart' },
+      { path: '/history', label: t('nav_history'), icon: 'history' },
     ];
   };
 

@@ -51,3 +51,6 @@ firebase-service-account.json
 serviceAccountKey.json
 *.keystore
 *.jks
+
+# folder
+docs/member_guides
