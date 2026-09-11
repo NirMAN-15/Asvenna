@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import API from '../services/api';
+import { LanguageContext } from '../context/LanguageContext';
 import BroadcastModal from '../components/BroadcastModal';
-import { Radio, PlusCircle, AlertOctagon, CheckCircle2, ShieldAlert } from 'lucide-react';
+import { Radio, PlusCircle, CheckCircle2, ShieldAlert } from 'lucide-react';
 
 export default function Broadcasts() {
+  const { lang, t } = useContext(LanguageContext);
   const [broadcasts, setBroadcasts] = useState([
     {
       id: 1,
@@ -13,6 +15,7 @@ export default function Broadcasts() {
       title_ta: 'அவசர எச்சரிக்கை: லீக்ஸ்',
       message_en: 'Leek planting in Bandarawela region has reached 92% capacity. Avoid new leek sowing.',
       message_si: 'බණ්ඩාරවෙල කලාපයේ ලීක්ස් වගාව 92% සීමාවට පැමිණ ඇත. අලුතින් ලීක්ස් සිටුවීමෙන් වලකින්න.',
+      message_ta: 'பண்டாரவளை பிராந்தியத்தில் லீக்ஸ் நடவு 92% திறனை எட்டியுள்ளது. புதிய லீக்ஸ் விதைப்பதைத் தவிர்க்கவும்.',
       severity: 'CRITICAL',
       target_division: 'Bandarawela Division',
       sent_count: 142,
@@ -36,6 +39,18 @@ export default function Broadcasts() {
     fetchBroadcasts();
   }, []);
 
+  const getBroadcastTitle = (b) => {
+    if (lang === 'si') return b.title_si || b.title_en;
+    if (lang === 'ta') return b.title_ta || b.title_en;
+    return b.title_en;
+  };
+
+  const getBroadcastMessage = (b) => {
+    if (lang === 'si') return b.message_si || b.message_en;
+    if (lang === 'ta') return b.message_ta || b.message_en;
+    return b.message_en || b.message_si;
+  };
+
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Header with Dark Letters */}
@@ -46,11 +61,11 @@ export default function Broadcasts() {
               <Radio className="w-5 h-5 animate-pulse" />
             </div>
             <h1 className="text-2xl font-black text-slate-900 tracking-tight">
-              📢 Regional Broadcast Warnings History
+              {t('broadcast_history_title')}
             </h1>
           </div>
           <p className="text-sm font-bold text-slate-700 mt-2 max-w-2xl leading-relaxed">
-            Official Agrarian Officer Notices Dispatched to Farmers via FCM Push + SMS Fallback
+            {t('broadcast_history_desc')}
           </p>
         </div>
 
@@ -58,7 +73,7 @@ export default function Broadcasts() {
           onClick={() => setIsModalOpen(true)}
           className="flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-black shadow-md shadow-red-900/20 transition tracking-wide cursor-pointer"
         >
-          <PlusCircle className="w-4 h-4" /> Issue New Directive
+          <PlusCircle className="w-4 h-4" /> {t('btn_issue_directive')}
         </button>
       </div>
 
@@ -73,34 +88,34 @@ export default function Broadcasts() {
               <div>
                 <h3 className="font-black text-slate-900 text-base sm:text-lg flex items-center space-x-2 tracking-tight">
                   <ShieldAlert className="w-5 h-5 text-red-600 flex-shrink-0" />
-                  <span>{b.title_si} / {b.title_en}</span>
+                  <span>{getBroadcastTitle(b)}</span>
                 </h3>
                 <p className="text-xs font-bold text-slate-600 mt-1.5 flex items-center gap-1.5">
-                  <span>By {b.officer_name || 'DO Officer'}</span>
+                  <span>{t('by_officer', { name: b.officer_name || 'DO Officer' })}</span>
                   <span>•</span>
                   <span>{new Date(b.created_at).toLocaleString()}</span>
                 </p>
               </div>
               <span className="self-start px-3 py-1 bg-red-100 text-red-900 border border-red-200 text-xs font-black rounded-xl uppercase tracking-wider">
-                {b.severity} Severity
+                {b.severity === 'CRITICAL' ? t('severity_critical') : t('severity_high')}
               </span>
             </div>
 
             {/* Alert Message with Dark High-Contrast Letters */}
             <div className="mt-3 bg-emerald-50/70 border border-emerald-200/80 p-4 rounded-xl">
               <p className="text-sm font-bold text-slate-900 leading-relaxed tracking-wide">
-                {b.message_si}
+                {getBroadcastMessage(b)}
               </p>
             </div>
 
             {/* Footer with Dark High-Contrast Letters */}
             <div className="mt-4 pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
               <span className="font-extrabold text-slate-800">
-                Target: <span className="font-bold text-slate-700">{b.target_division || 'Bandarawela Division'}</span>
+                {t('label_target')}: <span className="font-bold text-slate-700">{b.target_division || 'Bandarawela Division'}</span>
               </span>
               <span className="flex items-center gap-1.5 text-emerald-900 font-black bg-emerald-100/90 px-3 py-1.5 rounded-lg border border-emerald-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />
-                Delivered to {b.sent_count || 142} Farmers (Push + SMS)
+                {t('delivered_farmers', { count: b.sent_count || 142 })}
               </span>
             </div>
           </div>

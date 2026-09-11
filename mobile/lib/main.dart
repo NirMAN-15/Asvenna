@@ -1,48 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'core/theme/app_theme.dart';
+import 'core/providers/app_state_provider.dart';
 import 'features/auth/login_screen.dart';
-import 'features/home/farmer_home_screen.dart';
+import 'features/farmer/farmer_main_nav.dart';
+import 'features/buyer/buyer_main_nav.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const AsvannaApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppStateProvider()),
+      ],
+      child: const AsvannaApp(),
+    ),
+  );
 }
 
-class AsvannaApp extends StatefulWidget {
+class AsvannaApp extends StatelessWidget {
   const AsvannaApp({super.key});
-
-  @override
-  State<AsvannaApp> createState() => _AsvannaAppState();
-}
-
-class _AsvannaAppState extends State<AsvannaApp> {
-  Locale _locale = const Locale('si'); // Default Sinhala
-
-  void setLocale(Locale locale) {
-    setState(() {
-      _locale = locale;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ASVANNA (අස්වැන්න)',
+      title: 'Asvanna - The Zero-Waste Marketplace',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      locale: _locale,
-      supportedLocales: const [
-        Locale('en', ''),
-        Locale('si', ''),
-        Locale('ta', ''),
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: const FarmerHomeScreen(),
+      home: Consumer<AppStateProvider>(
+        builder: (context, appState, child) {
+          switch (appState.currentUserRole) {
+            case UserRole.farmer:
+              return const FarmerMainNav();
+            case UserRole.buyer:
+              return const BuyerMainNav();
+            case UserRole.unauthenticated:
+              return const LoginScreen();
+          }
+        },
+      ),
     );
   }
 }

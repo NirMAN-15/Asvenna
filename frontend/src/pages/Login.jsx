@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { LanguageContext } from '../context/LanguageContext';
 
@@ -7,6 +7,7 @@ export default function Login() {
   const { login } = useContext(AuthContext);
   const { lang, setLanguage, t } = useContext(LanguageContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [role, setRole] = useState('OFFICER'); // 'FARMER', 'BUYER', 'OFFICER'
   const [identifier, setIdentifier] = useState('0771234567');
@@ -19,7 +20,6 @@ export default function Login() {
   const [otpCode, setOtpCode] = useState('');
   const [otpSuccess, setOtpSuccess] = useState(false);
 
-  // Demo accounts helper
   const handleRoleSelect = (newRole) => {
     setRole(newRole);
     setError('');
@@ -31,6 +31,12 @@ export default function Login() {
       setIdentifier('0572222222');
     }
   };
+
+  useEffect(() => {
+    if (location.state?.role) {
+      handleRoleSelect(location.state.role);
+    }
+  }, [location.state]);
 
   const handleSubmit = async (e) => {
     e?.preventDefault();

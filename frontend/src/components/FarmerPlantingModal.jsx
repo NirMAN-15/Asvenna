@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import API from '../services/api';
 import { Sprout, CheckCircle2, AlertTriangle, X } from 'lucide-react';
+import { LanguageContext } from '../context/LanguageContext';
 
 export default function FarmerPlantingModal({ isOpen, onClose, onPlantingAdded }) {
+  const { t } = useContext(LanguageContext);
   const [cropId, setCropId] = useState('1');
   const [landSizeAcres, setLandSizeAcres] = useState('2.0');
   const [plantingDate, setPlantingDate] = useState(new Date().toISOString().split('T')[0]);
@@ -53,11 +55,11 @@ export default function FarmerPlantingModal({ isOpen, onClose, onPlantingAdded }
           <div className="flex items-center space-x-2">
             <Sprout className="w-6 h-6 text-emerald-400" />
             <div>
-              <h3 className="font-extrabold text-white text-lg">🌱 Farmer Cultivation Logger</h3>
-              <p className="text-xs text-emerald-300/80">Record crop choice & acreage to balance regional supply</p>
+              <h3 className="font-extrabold text-white text-lg">{t('farmer_cultivation_logger_title')}</h3>
+              <p className="text-xs text-emerald-300/80">{t('farmer_cultivation_logger_desc')}</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-white p-1">
+          <button onClick={onClose} className="text-gray-400 hover:text-white p-1 cursor-pointer">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -71,7 +73,7 @@ export default function FarmerPlantingModal({ isOpen, onClose, onPlantingAdded }
           )}
 
           <div>
-            <label className="block text-xs font-bold text-emerald-300 mb-1">Select Crop Type</label>
+            <label className="block text-xs font-bold text-emerald-300 mb-1">{t('label_select_crop')}</label>
             <select
               value={cropId}
               onChange={(e) => setCropId(e.target.value)}
@@ -87,7 +89,7 @@ export default function FarmerPlantingModal({ isOpen, onClose, onPlantingAdded }
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-emerald-300 mb-1">Cultivated Land (Acres)</label>
+              <label className="block text-xs font-bold text-emerald-300 mb-1">{t('label_cultivated_land')}</label>
               <input
                 type="number"
                 step="0.1"
@@ -99,7 +101,7 @@ export default function FarmerPlantingModal({ isOpen, onClose, onPlantingAdded }
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-emerald-300 mb-1">Sowing / Planting Date</label>
+              <label className="block text-xs font-bold text-emerald-300 mb-1">{t('label_sowing_date')}</label>
               <input
                 type="date"
                 value={plantingDate}
@@ -111,7 +113,7 @@ export default function FarmerPlantingModal({ isOpen, onClose, onPlantingAdded }
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-emerald-300 mb-1">Agrarian Division</label>
+            <label className="block text-xs font-bold text-emerald-300 mb-1">{t('label_agrarian_division')}</label>
             <select
               value={division}
               onChange={(e) => setDivision(e.target.value)}
@@ -128,16 +130,16 @@ export default function FarmerPlantingModal({ isOpen, onClose, onPlantingAdded }
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-gray-300 rounded-xl text-xs font-semibold"
+              className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-gray-300 rounded-xl text-xs font-semibold cursor-pointer"
             >
-              Cancel
+              {t('btn_cancel')}
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="stich-btn-primary text-xs"
+              className="stich-btn-primary text-xs cursor-pointer"
             >
-              {submitting ? 'Submitting...' : 'Confirm Planting Log'}
+              {submitting ? 'Submitting...' : t('btn_confirm_planting')}
             </button>
           </div>
         </form>
