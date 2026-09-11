@@ -1,6 +1,20 @@
 {
   "users": [
     {
+      "id": 1789157657893,
+      "full_name": "test1",
+      "phone": "0788597202",
+      "nic": "200322610371",
+      "password_hash": "$2a$10$XKX8crczHyoKOkPYOpSW/ui34TyKjQaXPmdM9Ry0QjRLSQHwSCA9m",
+      "role": "FARMER",
+      "district": "Badulla",
+      "division": "Badulla",
+      "gnd_division": "Bandarawela",
+      "address": "Wewathenna",
+      "is_verified": true,
+      "created_at": "2026-09-11T20:14:17.893Z"
+    },
+    {
       "id": 1788873169736,
       "full_name": "Miyuni Dewanga",
       "phone": "0741699017",
